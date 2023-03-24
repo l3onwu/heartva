@@ -17,7 +17,6 @@ const Navbar = () => {
           align="center"
           color="#AC96B9"
           fontSize="14px"
-          fontWeight="bold"
         >
           <Text>Activites</Text>
           <Text>Stats</Text>
