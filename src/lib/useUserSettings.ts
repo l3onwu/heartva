@@ -10,6 +10,7 @@ export interface UserHookType {
   setUserObject: Function;
   activities: ActivityShortType[];
   setActivities: Function;
+  activitiesLoading: boolean;
   activitiesPage: number;
   setActivitiesPage: Function;
 }
@@ -19,6 +20,7 @@ export default function useUserSettings() {
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
   const [userObject, setUserObject] = useState<UserType | null>(null);
   const [activities, setActivities] = useState<ActivityShortType[]>([]);
+  const [activitiesLoading, setActivitiesLoading] = useState(true);
   const [activitiesPage, setActivitiesPage] = useState<Number>(1);
 
   // Refresh token
@@ -70,6 +72,7 @@ export default function useUserSettings() {
       try {
         const { data } = await axios(axiosRequestConfig);
         setActivities([...activities, ...data]);
+        setActivitiesLoading(false);
       } catch (err) {
         console.log(err);
       }
@@ -86,6 +89,7 @@ export default function useUserSettings() {
     setUserObject,
     activities,
     setActivities,
+    activitiesLoading,
     activitiesPage,
     setActivitiesPage,
   };

@@ -1,4 +1,5 @@
-import { Box, Text, Button } from "@chakra-ui/react";
+import { Box, Text, Button, Spinner } from "@chakra-ui/react";
+import { BarLoader, BeatLoader, SyncLoader } from "react-spinners";
 import { useGlobalContext } from "../lib/context";
 import { ActivityShortType } from "../lib/types";
 
@@ -8,20 +9,24 @@ const ActivityList = () => {
   // TSX
   return (
     <>
-      <Box width="90%">
-        {userHook?.activities?.map((activityObject: ActivityShortType) => {
-          return <ActivityBox activityObject={activityObject} />;
-        })}
-        <Button
-          colorScheme="white"
-          size="sm"
-          onClick={() => {
-            userHook?.setActivitiesPage(userHook?.activitiesPage + 1);
-          }}
-        >
-          Load more
-        </Button>
-      </Box>
+      {userHook?.activitiesLoading ? (
+        <Spinner color="pink" size="lg" />
+      ) : (
+        <Box width="90%">
+          {userHook?.activities?.map((activityObject: ActivityShortType) => {
+            return <ActivityBox activityObject={activityObject} />;
+          })}
+          <Button
+            colorScheme="white"
+            size="sm"
+            onClick={() => {
+              userHook?.setActivitiesPage(userHook?.activitiesPage + 1);
+            }}
+          >
+            Load more
+          </Button>
+        </Box>
+      )}
     </>
   );
 };
