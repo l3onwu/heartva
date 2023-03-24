@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { ActivityShortType, UserType } from "./types";
 
 export interface UserHookType {
+  firstLoad: boolean;
+  setFirstLoad: Function;
   userObject: UserType;
   setUserObject: Function;
   activities: ActivityShortType[];
@@ -14,6 +16,7 @@ export interface UserHookType {
 
 export default function useUserSettings() {
   // State
+  const [firstLoad, setFirstLoad] = useState<boolean>(true);
   const [userObject, setUserObject] = useState<UserType | null>(null);
   const [activities, setActivities] = useState<ActivityShortType[]>([]);
   const [activitiesPage, setActivitiesPage] = useState<Number>(1);
@@ -51,6 +54,7 @@ export default function useUserSettings() {
         // @ts-ignore
         setUserObject(savedUser);
       }
+      setFirstLoad(false);
     };
     getUser();
   }, []);
@@ -76,6 +80,8 @@ export default function useUserSettings() {
   }, [userObject, activitiesPage]);
 
   return {
+    firstLoad,
+    setFirstLoad,
     userObject,
     setUserObject,
     activities,
