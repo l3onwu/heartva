@@ -27,8 +27,9 @@ export default function useUserSettings() {
   useEffect(() => {
     if (userObject) {
       let now = new Date();
+      let nowSeconds = now.getTime() / 1000;
       // Check if token is expired, then refresh
-      if (userObject?.expires_at < now.getTime() / 1000) {
+      if (userObject?.expires_at < nowSeconds) {
         const refreshToken = async () => {
           let axiosRequestConfig = {
             method: "post",
@@ -46,7 +47,7 @@ export default function useUserSettings() {
         refreshToken();
       }
     }
-  }, []);
+  }, [userObject]);
 
   // Get user from localforage on load
   useEffect(() => {
@@ -75,6 +76,7 @@ export default function useUserSettings() {
         setActivitiesLoading(false);
       } catch (err) {
         console.log(err);
+        setActivitiesLoading(false);
       }
     };
     if (userObject) {
