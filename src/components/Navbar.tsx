@@ -1,4 +1,18 @@
-import { Flex, Text, Stack } from "@chakra-ui/react";
+import {
+  Flex,
+  Text,
+  Stack,
+  Button,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
+} from "@chakra-ui/react";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 
 const Navbar = () => {
   return (
@@ -10,17 +24,53 @@ const Navbar = () => {
           HEARTVA
         </Text>
 
-        {/* Navbuttons */}
+        {/* Navmenu Container */}
         <Stack
           direction="row"
-          spacing="30px"
+          spacing="-10px"
           align="center"
           color="#AC96B9"
           fontSize="14px"
         >
-          <Text>Activites</Text>
-          <Text>Stats</Text>
-          {/* <Text>Plan</Text> */}
+          {/* Navmenu Buttons */}
+          {/* Activities menu */}
+          <Menu>
+            <MenuButton
+              as={Button}
+              rightIcon={<ChevronDownIcon />}
+              fontSize="14px"
+              fontWeight="regular"
+              style={{ backgroundColor: "transparent" }}
+            >
+              Activites
+            </MenuButton>
+            <MenuList bgColor="black" borderColor="gray">
+              <MenuItem bgColor="black" _hover={{ backgroundColor: "#39142D" }}>
+                The Database
+              </MenuItem>
+              <MenuItem bgColor="black" _hover={{ backgroundColor: "#39142D" }}>
+                Map
+              </MenuItem>
+            </MenuList>
+          </Menu>
+
+          {/* Data menu */}
+          <Menu>
+            <MenuButton
+              as={Button}
+              rightIcon={<ChevronDownIcon />}
+              fontSize="14px"
+              fontWeight="regular"
+              style={{ backgroundColor: "transparent" }}
+            >
+              Data
+            </MenuButton>
+            <MenuList bgColor="black" borderColor="gray">
+              <MenuItem bgColor="black" _hover={{ backgroundColor: "#39142D" }}>
+                HR Graph
+              </MenuItem>
+            </MenuList>
+          </Menu>
         </Stack>
       </Flex>
     </Flex>
