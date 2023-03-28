@@ -1,13 +1,9 @@
-import Navbar from "../components/Navbar";
 import ActivityList from "../components/ActivityList";
 import { Box, Text, Flex } from "@chakra-ui/react";
 
 const Dashboard = () => {
   return (
-    <Box width="100%" height="100%" overflow="scroll" px="40px">
-      {/* Navbar */}
-      <Navbar />
-
+    <Box width="100%" height="100%" overflow="scroll">
       {/* Page heading */}
       <Text color="#9C88AA" fontWeight="bold" fontSize="40px" mb="30px">
         Latest activites

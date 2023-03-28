@@ -9,8 +9,13 @@ import {
   MenuItem,
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  // State
+  const navigate = useNavigate();
+
+  // TSX
   return (
     <Flex width="100%" height="60px" mb="10px" align="center">
       {/* Left */}
@@ -62,7 +67,13 @@ const Navbar = () => {
               Data
             </MenuButton>
             <MenuList bgColor="black" borderColor="gray">
-              <MenuItem bgColor="black" _hover={{ backgroundColor: "#39142D" }}>
+              <MenuItem
+                bgColor="black"
+                _hover={{ backgroundColor: "#39142D" }}
+                onClick={() => {
+                  navigate("/hrgraph");
+                }}
+              >
                 HR Graph
               </MenuItem>
             </MenuList>

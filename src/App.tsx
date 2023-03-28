@@ -1,7 +1,15 @@
 import { ChakraProvider, Box, theme } from "@chakra-ui/react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  BrowserRouter,
+  createBrowserRouter,
+  Route,
+  RouterProvider,
+  Routes,
+} from "react-router-dom";
+import Navbar from "./components/Navbar";
 import { GlobalContextProvider } from "./lib/context";
 import Home from "./views/Home";
+import HRGraphPage from "./views/HRGraphPage";
 import TokenExchange from "./views/TokenExchange";
 
 export const App = () => {
@@ -15,15 +23,45 @@ export const App = () => {
       path: "/",
       element: <Home />,
     },
+    {
+      path: "/hrgraph",
+      element: <HRGraphPage />,
+    },
   ]);
 
   return (
     <ChakraProvider theme={theme}>
       <GlobalContextProvider>
-        <Box width="100vw" height="100vh" className="background-gradient">
-          <RouterProvider router={router} />
-        </Box>
+        <BrowserRouter>
+          <Box
+            width="100%"
+            height="100vh"
+            className="background-gradient"
+            px="40px"
+          >
+            {/* Navbar */}
+            <Navbar />
+
+            {/* Routes */}
+            <Routes>
+              <Route path="/token-exchange" element={<TokenExchange />} />
+              <Route path="/hrgraph" element={<HRGraphPage />} />
+              <Route path="/" element={<Home />} />
+            </Routes>
+            {/* <RouterProvider router={router} /> */}
+          </Box>
+        </BrowserRouter>
       </GlobalContextProvider>
     </ChakraProvider>
   );
 };
+
+{
+  /* <Routes>
+          <Route exact path="/" element={<Home/>}/>
+          <Route exact path="/home" element={<Home/>}/>
+          <Route exact path="/upcoming/:user" element={<Upcoming/>}/>
+          <Route exact path="/record/:user" element={<Record/>}/>
+          <Route path="*" element={<NotFound/>}/>
+        </Routes> */
+}
