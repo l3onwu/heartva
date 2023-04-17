@@ -61,7 +61,12 @@ const ActivityBox = ({
       </Text>
 
       {/* Distance, pace, time */}
-      <Text color="gray" fontWeight="bold" fontSize="14px" mb="5px">
+      <Text
+        color="gray"
+        // fontWeight="bold"
+        fontSize="14px"
+        mb="5px"
+      >
         {Math.round(activityObject?.distance / 10) / 100} km -{" "}
         {Math.round(
           (activityObject?.moving_time /
@@ -81,7 +86,7 @@ const ActivityBox = ({
         <span
           style={{
             padding: 3,
-            fontWeight: "bold",
+            // fontWeight: "bold",
             color: "gray",
           }}
         >
