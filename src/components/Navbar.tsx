@@ -21,7 +21,14 @@ const Navbar = () => {
       {/* Left */}
       <Flex direction="row" align="center">
         {/* Logo */}
-        <Text className="logo-text" mr="50px">
+        <Text
+          className="logo-text"
+          mr="50px"
+          onClick={() => {
+            navigate("/");
+          }}
+          _hover={{ cursor: "pointer" }}
+        >
           HEARTVA
         </Text>
 
