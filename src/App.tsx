@@ -38,6 +38,8 @@ export const App = () => {
             height="100vh"
             className="background-gradient"
             px="40px"
+            overflow="scroll"
+            // pb="50px"
           >
             {/* Navbar */}
             <Navbar />
@@ -55,13 +57,3 @@ export const App = () => {
     </ChakraProvider>
   );
 };
-
-{
-  /* <Routes>
-          <Route exact path="/" element={<Home/>}/>
-          <Route exact path="/home" element={<Home/>}/>
-          <Route exact path="/upcoming/:user" element={<Upcoming/>}/>
-          <Route exact path="/record/:user" element={<Record/>}/>
-          <Route path="*" element={<NotFound/>}/>
-        </Routes> */
-}

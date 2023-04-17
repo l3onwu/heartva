@@ -3,7 +3,7 @@ import { Box, Text, Flex } from "@chakra-ui/react";
 
 const Dashboard = () => {
   return (
-    <Box width="100%" height="100%" overflow="scroll">
+    <Box width="100%" height="100%">
       {/* Page heading */}
       <Text color="#9C88AA" fontWeight="bold" fontSize="40px" mb="30px">
         Latest activites
