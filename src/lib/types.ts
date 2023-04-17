@@ -11,7 +11,7 @@ export interface ActivityShortType {
   kudos_count: number;
   name: string;
   distance: number;
-  average_heartrate: string;
+  average_heartrate: number;
   average_speed: number;
   moving_time: number;
   elapsed_time: number;
