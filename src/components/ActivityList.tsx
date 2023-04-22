@@ -42,21 +42,24 @@ const ActivityBox = ({
   return (
     <Box
       key={activityObject?.id}
-      py="7px"
+      // py="7px"
       px="10px"
-      // border="1px solid #444444"
-      // borderTop="1px solid #444444"
+      // border="0.5px solid gray"
+      // border="0.5px solid #9C88AA"
+      // borderTop="0.5px solid #9C88AA"
+      borderBottom="0.5px solid #333333"
+      // borderRadius="5px"
+      pt="10px"
+      pb="20px"
       // mb="20px"
-      pb="15px"
-      mb="15px"
-      borderRadius="7px"
-      bgColor="#23142D"
-      _hover={{ backgroundColor: "#39142D", cursor: "pointer" }}
+      // pb="15px"
+      // bgColor="#23142D"
       transition="background-color 100ms ease-in"
+      // _hover={{ backgroundColor: "#39142D", cursor: "pointer" }}
       // _hover={{ borderColor: "gray", cursor: "pointer" }}
     >
       {/* Activity title */}
-      <Text color="gray" fontWeight="bold" fontSize="16px" mb="5px">
+      <Text color="#9C88AA" fontWeight="bold" fontSize="16px" mb="5px">
         {activityObject?.name}{" "}
       </Text>
 

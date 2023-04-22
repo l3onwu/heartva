@@ -1,5 +1,7 @@
 .background-gradient {
-  background-image: linear-gradient(to bottom right, #020a20, #390b22);
+  /* background-color: black; */
+  background-color: #020a20;
+  /* background-image: linear-gradient(to bottom right, #020a20, #390b22); */
 }
 
 .logo-text {

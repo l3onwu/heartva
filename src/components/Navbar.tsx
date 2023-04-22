@@ -17,7 +17,18 @@ const Navbar = () => {
 
   // TSX
   return (
-    <Flex width="100%" height="60px" mb="10px" align="center">
+    <Flex
+      width="100%"
+      height="55px"
+      zIndex="10"
+      // mb="10px"
+      align="center"
+      // bgColor="#061230"
+      bgColor="#010A20"
+      px="40px"
+      position="fixed"
+      borderBottom="0.5px solid #333333"
+    >
       {/* Left */}
       <Flex direction="row" align="center">
         {/* Logo */}
@@ -35,7 +46,7 @@ const Navbar = () => {
         {/* Navmenu Container */}
         <Stack
           direction="row"
-          spacing="-10px"
+          // spacing="-10px"
           align="center"
           color="#AC96B9"
           fontSize="14px"
@@ -47,16 +58,25 @@ const Navbar = () => {
               as={Button}
               rightIcon={<ChevronDownIcon />}
               fontSize="14px"
-              fontWeight="regular"
+              fontWeight="bold"
+              size="xs"
+              // colorScheme="facebook"
               style={{ backgroundColor: "transparent" }}
+              // border="1px solid #9C88AA"
             >
               Activites
             </MenuButton>
-            <MenuList bgColor="black" borderColor="gray">
-              <MenuItem bgColor="black" _hover={{ backgroundColor: "#39142D" }}>
+            <MenuList bgColor="#020a20" borderColor="gray">
+              <MenuItem
+                bgColor="#020a20"
+                _hover={{ backgroundColor: "#39142D" }}
+              >
                 The Database
               </MenuItem>
-              <MenuItem bgColor="black" _hover={{ backgroundColor: "#39142D" }}>
+              <MenuItem
+                bgColor="#020a20"
+                _hover={{ backgroundColor: "#39142D" }}
+              >
                 Map
               </MenuItem>
             </MenuList>
@@ -68,14 +88,16 @@ const Navbar = () => {
               as={Button}
               rightIcon={<ChevronDownIcon />}
               fontSize="14px"
-              fontWeight="regular"
+              fontWeight="bold"
+              size="xs"
+              // border="1px solid #9C88AA"
               style={{ backgroundColor: "transparent" }}
             >
               Data
             </MenuButton>
-            <MenuList bgColor="black" borderColor="gray">
+            <MenuList bgColor="#020a20" borderColor="gray">
               <MenuItem
-                bgColor="black"
+                bgColor="#020a20"
                 _hover={{ backgroundColor: "#39142D" }}
                 onClick={() => {
                   navigate("/hrgraph");

@@ -67,7 +67,7 @@ export default function useUserSettings() {
     const getActivities = async () => {
       let axiosRequestConfig = {
         method: "get",
-        url: `https://www.strava.com/api/v3/athlete/activities?page=${activitiesPage}&per_page=5`,
+        url: `https://www.strava.com/api/v3/athlete/activities?page=${activitiesPage}&per_page=10`,
         headers: { Authorization: `Bearer ${userObject?.access_token}` },
       };
       try {

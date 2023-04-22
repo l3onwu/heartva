@@ -37,20 +37,22 @@ export const App = () => {
             width="100%"
             height="100vh"
             className="background-gradient"
-            px="40px"
+            // px="40px"
             overflow="scroll"
             // pb="50px"
           >
             {/* Navbar */}
             <Navbar />
 
-            {/* Routes */}
-            <Routes>
-              <Route path="/token-exchange" element={<TokenExchange />} />
-              <Route path="/hrgraph" element={<HRGraphPage />} />
-              <Route path="/" element={<Home />} />
-            </Routes>
-            {/* <RouterProvider router={router} /> */}
+            <Box width="100%" px="40px" pt="55px">
+              {/* Routes */}
+              <Routes>
+                <Route path="/token-exchange" element={<TokenExchange />} />
+                <Route path="/hrgraph" element={<HRGraphPage />} />
+                <Route path="/" element={<Home />} />
+              </Routes>
+              {/* <RouterProvider router={router} /> */}
+            </Box>
           </Box>
         </BrowserRouter>
       </GlobalContextProvider>

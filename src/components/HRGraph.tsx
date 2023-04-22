@@ -53,12 +53,14 @@ export default function HRGraph() {
       x: {
         // display: false,
         grid: {
+          // color: "#222222",
           color: "transparent",
         },
       },
       y: {
         grid: {
-          color: "transparent",
+          color: "#222222",
+          // color: "transparent",
         },
       },
     },
@@ -91,7 +93,7 @@ export default function HRGraph() {
         data: y,
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
-        pointRadius: 7,
+        pointRadius: 1,
         // tension: 0.2,
       },
       {
@@ -99,7 +101,7 @@ export default function HRGraph() {
         data: x,
         borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
-        pointRadius: 7,
+        pointRadius: 1,
       },
     ],
   };

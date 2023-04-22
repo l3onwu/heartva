@@ -5,7 +5,13 @@ const Dashboard = () => {
   return (
     <Box width="100%" height="100%">
       {/* Page heading */}
-      <Text color="#9C88AA" fontWeight="bold" fontSize="40px" mb="30px">
+      <Text
+        color="#9C88AA"
+        // fontFamily="Courier"
+        fontWeight="bold"
+        fontSize="30px"
+        mb="30px"
+      >
         Latest activites
       </Text>
 
@@ -17,14 +23,15 @@ const Dashboard = () => {
         </Box>
 
         {/* Right sidebar */}
-        <Box width="32%">
+        <Box width="38%">
           <Box
             bgColor="#23142D"
             position="sticky"
-            top="30px"
+            top="70px"
             height="500px"
             p="10px"
             borderRadius="7px"
+            // border="0.5px solid #9C88AA"
           >
             <Text color="#9C88AA">Personal bests</Text>
           </Box>
