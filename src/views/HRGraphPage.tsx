@@ -6,11 +6,11 @@ const HRGraphPage = () => {
   return (
     <Box width="100%">
       <Flex width="100%" justify="space-between">
-        <Box width="65%" height="calc(100vh - 150px)">
+        <Box width="65%" height="calc(100vh - 80px)" pt="40px">
           {/* Page heading */}
-          <Text color="#9C88AA" fontWeight="bold" fontSize="30px" mb="30px">
+          {/* <Text color="#9C88AA" fontWeight="bold" fontSize="30px" mb="30px">
             HR Graph
-          </Text>
+          </Text> */}
           <HRGraph />
         </Box>
         <Box
