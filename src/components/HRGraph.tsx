@@ -30,18 +30,13 @@ export default function HRGraph() {
         (Math.round((act?.moving_time / (act?.distance / 1000) / 60) * 100) /
           100) *
         20
-        // act?.average_heartrate
       );
     })
     ?.reverse();
 
   let y = userHook?.activities
     ?.map((act) => {
-      return (
-        // Math.round((act?.moving_time / (act?.distance / 1000) / 60) * 100) /
-        //   100 +
-        act?.average_heartrate
-      );
+      return act?.average_heartrate;
     })
     ?.reverse();
 
@@ -76,17 +71,11 @@ export default function HRGraph() {
   };
 
   const data = {
-    // labels: userHook?.activities
-    //   ?.map((act) => {
-    //     return act?.name;
-    //   })
-    //   ?.reverse(),
     labels: userHook?.activities
       ?.map((act) => {
         return act?.distance;
       })
       ?.reverse(),
-    // labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     datasets: [
       {
         label: "Heartrate",
@@ -94,7 +83,6 @@ export default function HRGraph() {
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
         pointRadius: 1,
-        // tension: 0.2,
       },
       {
         label: "Pace",

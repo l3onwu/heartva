@@ -1,5 +1,4 @@
 import { Box, Text, Button, Spinner, Stack } from "@chakra-ui/react";
-import { BarLoader, BeatLoader, SyncLoader } from "react-spinners";
 import { useGlobalContext } from "../lib/context";
 import { ActivityShortType } from "../lib/types";
 
@@ -45,21 +44,11 @@ const ActivityBox = ({
   return (
     <Box
       key={activityObject?.id}
-      // py="7px"
       px="10px"
-      // border="0.5px solid gray"
-      // border="0.5px solid #9C88AA"
-      // borderTop="0.5px solid #9C88AA"
       borderBottom="0.5px solid #333333"
-      // borderRadius="5px"
       pt="10px"
       pb="20px"
-      // mb="20px"
-      // pb="15px"
-      // bgColor="#23142D"
       transition="background-color 100ms ease-in"
-      // _hover={{ backgroundColor: "#39142D", cursor: "pointer" }}
-      // _hover={{ borderColor: "gray", cursor: "pointer" }}
     >
       {/* Activity title */}
       <Text color="#9C88AA" fontWeight="bold" fontSize="16px" mb="5px">
@@ -145,9 +134,7 @@ const ActivityBox2 = ({
     <Box
       key={activityObject?.id}
       pr="10px"
-      // py="3px"
       borderBottom="0.5px solid #333333"
-      // transition="background-color 100ms ease-in"
       _hover={{ backgroundColor: "#171f30", cursor: "pointer" }}
     >
       <Stack direction="row">
@@ -268,7 +255,6 @@ const ActivityBox2Header = ({}: {}) => {
           color="#9C88AA"
           fontWeight="bold"
           fontSize="14px"
-          // mb="5px"
           pr="5px"
           borderRight="0.5px solid #333333"
         >
@@ -281,7 +267,6 @@ const ActivityBox2Header = ({}: {}) => {
           color="#9C88AA"
           fontWeight="bold"
           fontSize="14px"
-          // mb="5px"
           pr="5px"
           borderRight="0.5px solid #333333"
         >

@@ -1,10 +1,5 @@
 import { ChakraProvider, Box, theme } from "@chakra-ui/react";
-import {
-  BrowserRouter,
-  createBrowserRouter,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { GlobalContextProvider } from "./lib/context";
 import Home from "./views/Home";

@@ -18,11 +18,7 @@ const Dashboard = () => {
       {/* Page contents */}
       <Flex direction="row" justify="space-between" pb="100px">
         {/* Left side */}
-        <Box
-          width="50%"
-          // height="calc(100vh - 80px)"
-          // overflow="scroll"
-        >
+        <Box width="50%">
           <ActivityList />
         </Box>
 
@@ -35,7 +31,6 @@ const Dashboard = () => {
             height="500px"
             p="10px"
             borderRadius="7px"
-            // border="0.5px solid #9C88AA"
           >
             <Text color="#9C88AA">Personal bests</Text>
           </Box>

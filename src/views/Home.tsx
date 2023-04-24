@@ -7,8 +7,6 @@ import HRGraphPage from "./HRGraphPage";
 const Home = () => {
   // Functions
   const { userHook } = useGlobalContext();
-  console.log(userHook?.firstLoad);
-  console.log(userHook?.userObject);
 
   // TSX
   return (
