@@ -24,10 +24,11 @@ const Navbar = () => {
       // mb="10px"
       align="center"
       // bgColor="#061230"
-      bgColor="#010A20"
+      bgColor="#020a20"
       px="40px"
       position="fixed"
       borderBottom="0.5px solid #333333"
+      // boxShadow="0px 1px 10px #222222"
     >
       {/* Left */}
       <Flex direction="row" align="center">

@@ -1,4 +1,4 @@
-import { Box, Text, Button, Spinner } from "@chakra-ui/react";
+import { Box, Text, Button, Spinner, Stack } from "@chakra-ui/react";
 import { BarLoader, BeatLoader, SyncLoader } from "react-spinners";
 import { useGlobalContext } from "../lib/context";
 import { ActivityShortType } from "../lib/types";
@@ -10,11 +10,14 @@ const ActivityList = () => {
   return (
     <>
       {userHook?.activitiesLoading ? (
-        <Spinner color="pink" size="lg" />
+        <Box pt="20px">
+          <Spinner color="pink" size="lg" />
+        </Box>
       ) : (
-        <Box width="90%">
+        <Box width="100%" borderRight="0.5px solid #333333">
+          <ActivityBox2Header />
           {userHook?.activities?.map((activityObject: ActivityShortType) => {
-            return <ActivityBox activityObject={activityObject} />;
+            return <ActivityBox2 activityObject={activityObject} />;
           })}
           <Button
             colorScheme="white"
@@ -97,6 +100,224 @@ const ActivityBox = ({
         </span>
         RE
       </Text>
+    </Box>
+  );
+};
+
+const ActivityBox2 = ({
+  activityObject,
+}: {
+  activityObject: ActivityShortType;
+}) => {
+  // Functions
+  // TODO Refactor these to helper functions
+  const clipText = (text: string, length: number): string => {
+    // If text is longer, use ...
+    let trailingDots = "";
+    if (text.length > length) {
+      trailingDots = "...";
+    }
+    return `${text.slice(0, length)}${trailingDots}`;
+  };
+
+  const calculatePaceFromDistanceAndTime = (
+    distance: number,
+    time: number
+  ): number => {
+    // Rounds to
+    return time / (distance / 1000);
+  };
+
+  const secondsToMinPace = (secondsPace: number): string => {
+    // Get full minutes
+    const fullMin = Math.floor(secondsPace / 60);
+    // Get remainder seconds, rounded to 2dp
+    const remainingSeconds = Math.round(secondsPace % 60);
+    // Add 0 if seconds is single digit
+    let extraDigit = "";
+    if (remainingSeconds < 10) extraDigit = "0";
+    // Format numbers
+    return `${fullMin}.${extraDigit}${remainingSeconds}`;
+  };
+
+  // TSX
+  return (
+    <Box
+      key={activityObject?.id}
+      pr="10px"
+      // py="3px"
+      borderBottom="0.5px solid #333333"
+      // transition="background-color 100ms ease-in"
+      _hover={{ backgroundColor: "#171f30", cursor: "pointer" }}
+    >
+      <Stack direction="row">
+        {/* Activity title */}
+        <Text
+          width="170px"
+          overflow="hidden"
+          // color="#9C88AA"
+          color="gray"
+          fontWeight="bold"
+          fontSize="14px"
+          pr="5px"
+          borderRight="0.5px solid #333333"
+        >
+          {clipText(activityObject?.name, 18)}
+        </Text>
+
+        {/* Pace */}
+        <Text
+          width="80px"
+          color="gray"
+          fontSize="14px"
+          // mb="5px"
+          pr="5px"
+          borderRight="0.5px solid #333333"
+        >
+          {secondsToMinPace(
+            calculatePaceFromDistanceAndTime(
+              activityObject.distance,
+              activityObject.moving_time
+            )
+          )}{" "}
+          /km
+        </Text>
+
+        {/* Distance*/}
+        <Text
+          width="80px"
+          color="gray"
+          fontSize="14px"
+          // mb="5px"
+          pr="5px"
+          borderRight="0.5px solid #333333"
+        >
+          {Math.round(activityObject?.distance / 10) / 100} km
+        </Text>
+
+        {/* Time */}
+        <Text
+          width="80px"
+          color="gray"
+          fontSize="14px"
+          // mb="5px"
+          pr="5px"
+          borderRight="0.5px solid #333333"
+        >
+          {Math.round(activityObject?.moving_time / 6) / 10} min
+        </Text>
+
+        {/* Heart rate and suffer score */}
+        <Text
+          width="80px"
+          color="gray"
+          fontSize="14px"
+          pr="5px"
+          borderRight="0.5px solid #333333"
+        >
+          {/* ❤️  */}
+          {activityObject?.average_heartrate}
+        </Text>
+
+        {/* Suffer score */}
+        <Text
+          width="60px"
+          color="gray"
+          fontSize="14px"
+          // pr="5px"
+          // borderRight="0.5px solid #333333"
+        >
+          {activityObject?.suffer_score}
+        </Text>
+      </Stack>
+    </Box>
+  );
+};
+
+const ActivityBox2Header = ({}: {}) => {
+  // TSX
+  return (
+    <Box
+      key={"title"}
+      pr="10px"
+      py="2px"
+      position="sticky"
+      top="0px"
+      // bgColor="#020a20"
+      bgColor="#020a20"
+      // borderBottom="0.5px solid #333333"
+      boxShadow="0px 1px 3px #333333"
+    >
+      <Stack direction="row">
+        {/* Activity title */}
+        <Text
+          width="170px"
+          overflow="hidden"
+          color="#9C88AA"
+          fontWeight="bold"
+          fontSize="14px"
+          pr="5px"
+          borderRight="0.5px solid #333333"
+        >
+          Title
+        </Text>
+
+        {/* Pace */}
+        <Text
+          width="80px"
+          color="#9C88AA"
+          fontWeight="bold"
+          fontSize="14px"
+          // mb="5px"
+          pr="5px"
+          borderRight="0.5px solid #333333"
+        >
+          Pace
+        </Text>
+
+        {/* Distance*/}
+        <Text
+          width="80px"
+          color="#9C88AA"
+          fontWeight="bold"
+          fontSize="14px"
+          // mb="5px"
+          pr="5px"
+          borderRight="0.5px solid #333333"
+        >
+          Distance
+        </Text>
+
+        {/* Time */}
+        <Text
+          width="80px"
+          color="#9C88AA"
+          fontWeight="bold"
+          fontSize="14px"
+          // mb="5px"
+          pr="5px"
+          borderRight="0.5px solid #333333"
+        >
+          Time
+        </Text>
+
+        {/* Heart rate and suffer score */}
+        <Text
+          width="80px"
+          color="#9C88AA"
+          fontWeight="bold"
+          fontSize="14px"
+          pr="5px"
+          borderRight="0.5px solid #333333"
+        >
+          Avg HR
+        </Text>
+
+        {/* Suffer score */}
+        <Text width="60px" color="#9C88AA" fontWeight="bold" fontSize="14px">
+          Effort
+        </Text>
+      </Stack>
     </Box>
   );
 };

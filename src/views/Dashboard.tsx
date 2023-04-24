@@ -3,9 +3,9 @@ import { Box, Text, Flex } from "@chakra-ui/react";
 
 const Dashboard = () => {
   return (
-    <Box width="100%" height="100%">
+    <Box width="100%">
       {/* Page heading */}
-      <Text
+      {/* <Text
         color="#9C88AA"
         // fontFamily="Courier"
         fontWeight="bold"
@@ -13,12 +13,16 @@ const Dashboard = () => {
         mb="30px"
       >
         Latest activites
-      </Text>
+      </Text> */}
 
       {/* Page contents */}
       <Flex direction="row" justify="space-between" pb="100px">
         {/* Left side */}
-        <Box width="63%">
+        <Box
+          width="50%"
+          // height="calc(100vh - 80px)"
+          // overflow="scroll"
+        >
           <ActivityList />
         </Box>
 

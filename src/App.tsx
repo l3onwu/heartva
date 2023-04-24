@@ -44,7 +44,7 @@ export const App = () => {
             {/* Navbar */}
             <Navbar />
 
-            <Box width="100%" px="40px" pt="55px">
+            <Box width="100%" px="40px" mt="55px">
               {/* Routes */}
               <Routes>
                 <Route path="/token-exchange" element={<TokenExchange />} />
