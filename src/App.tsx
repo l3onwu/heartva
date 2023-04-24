@@ -3,7 +3,6 @@ import {
   BrowserRouter,
   createBrowserRouter,
   Route,
-  RouterProvider,
   Routes,
 } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -14,20 +13,6 @@ import TokenExchange from "./views/TokenExchange";
 
 export const App = () => {
   // State
-  const router = createBrowserRouter([
-    {
-      path: "/token-exchange",
-      element: <TokenExchange />,
-    },
-    {
-      path: "/",
-      element: <Home />,
-    },
-    {
-      path: "/hrgraph",
-      element: <HRGraphPage />,
-    },
-  ]);
 
   return (
     <ChakraProvider theme={theme}>
@@ -37,9 +22,7 @@ export const App = () => {
             width="100%"
             height="100vh"
             className="background-gradient"
-            // px="40px"
             overflow="scroll"
-            // pb="50px"
           >
             {/* Navbar */}
             <Navbar />
@@ -48,10 +31,8 @@ export const App = () => {
               {/* Routes */}
               <Routes>
                 <Route path="/token-exchange" element={<TokenExchange />} />
-                <Route path="/hrgraph" element={<HRGraphPage />} />
                 <Route path="/" element={<Home />} />
               </Routes>
-              {/* <RouterProvider router={router} /> */}
             </Box>
           </Box>
         </BrowserRouter>
