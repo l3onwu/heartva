@@ -10,10 +10,22 @@ import {
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
+import localforage from "localforage";
+import { useGlobalContext } from "../lib/context";
 
 const Navbar = () => {
   // State
   const navigate = useNavigate();
+  const { userHook } = useGlobalContext();
+
+  // Functions
+  const signOutStrava = () => {
+    localforage.setItem("userObject", null);
+    userHook?.setUserObject(null);
+    userHook?.setFirstLoad(true);
+    userHook?.setActivities([]);
+    userHook?.setActivitiesPage(1);
+  };
 
   // TSX
   return (
@@ -21,16 +33,14 @@ const Navbar = () => {
       width="100%"
       height="55px"
       zIndex="10"
-      // mb="10px"
       align="center"
-      // bgColor="#061230"
       bgColor="#020a20"
       px="40px"
       position="fixed"
       borderBottom="0.5px solid #333333"
-      // boxShadow="0px 1px 10px #222222"
+      justify="space-between"
     >
-      {/* Left */}
+      {/* Left side */}
       <Flex direction="row" align="center">
         {/* Logo */}
         <Text
@@ -54,7 +64,7 @@ const Navbar = () => {
         >
           {/* Navmenu Buttons */}
           {/* Activities menu */}
-          <Menu>
+          {/* <Menu>
             <MenuButton
               as={Button}
               rightIcon={<ChevronDownIcon />}
@@ -81,10 +91,10 @@ const Navbar = () => {
                 Map
               </MenuItem>
             </MenuList>
-          </Menu>
+          </Menu> */}
 
           {/* Data menu */}
-          <Menu>
+          {/* <Menu>
             <MenuButton
               as={Button}
               rightIcon={<ChevronDownIcon />}
@@ -107,9 +117,22 @@ const Navbar = () => {
                 HR Graph
               </MenuItem>
             </MenuList>
-          </Menu>
+          </Menu> */}
         </Stack>
       </Flex>
+
+      {/* Right side */}
+      <Button
+        color="#AC96B9"
+        size="sm"
+        style={{ backgroundColor: "transparent" }}
+        _hover={{ color: "white" }}
+        onClick={() => {
+          signOutStrava();
+        }}
+      >
+        Sign out
+      </Button>
     </Flex>
   );
 };
