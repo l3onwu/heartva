@@ -17,13 +17,11 @@ const Navbar = () => {
   // State
   const navigate = useNavigate();
   const { userHook } = useGlobalContext();
-  console.log(userHook?.userObject);
 
   // Functions
   const signOutStrava = () => {
     localforage.setItem("userObject", null);
     userHook?.setUserObject(null);
-    userHook?.setFirstLoad(true);
     userHook?.setActivities([]);
     userHook?.setActivitiesPage(1);
   };

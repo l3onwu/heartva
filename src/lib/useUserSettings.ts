@@ -6,6 +6,8 @@ import { ActivityShortType, UserType } from "./types";
 export interface UserHookType {
   firstLoad: boolean;
   setFirstLoad: Function;
+  userLoading: boolean;
+  setUserLoading: Function;
   userObject: UserType;
   setUserObject: Function;
   activities: ActivityShortType[];
@@ -18,6 +20,7 @@ export interface UserHookType {
 export default function useUserSettings() {
   // State
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
+  const [userLoading, setUserLoading] = useState<boolean>(true);
   const [userObject, setUserObject] = useState<UserType | null>(null);
   const [activities, setActivities] = useState<ActivityShortType[]>([]);
   const [activitiesLoading, setActivitiesLoading] = useState(true);
@@ -87,6 +90,8 @@ export default function useUserSettings() {
   return {
     firstLoad,
     setFirstLoad,
+    userLoading,
+    setUserLoading,
     userObject,
     setUserObject,
     activities,

@@ -16,11 +16,17 @@ const ActivityList = () => {
         <Box width="100%" borderRight="0.5px solid #333333">
           <ActivityBox2Header />
           {userHook?.activities?.map((activityObject: ActivityShortType) => {
-            return <ActivityBox2 activityObject={activityObject} />;
+            return (
+              <ActivityBox2
+                activityObject={activityObject}
+                key={activityObject?.id}
+              />
+            );
           })}
           <Button
-            colorScheme="white"
-            size="sm"
+            colorScheme="blue"
+            mt="20px"
+            size="xs"
             onClick={() => {
               userHook?.setActivitiesPage(userHook?.activitiesPage + 1);
             }}
@@ -132,7 +138,6 @@ const ActivityBox2 = ({
   // TSX
   return (
     <Box
-      key={activityObject?.id}
       pr="10px"
       borderBottom="0.5px solid #333333"
       _hover={{ backgroundColor: "#171f30", cursor: "pointer" }}

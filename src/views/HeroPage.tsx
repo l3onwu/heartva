@@ -2,13 +2,7 @@ import { Stack, Heading, Link, Text, Box, Flex } from "@chakra-ui/react";
 
 const HeroPage = () => {
   return (
-    <Flex
-      width="100%"
-      height="calc(100vh - 200px)"
-      pt="100px"
-      justify="center"
-      // bgColor="red"
-    >
+    <Flex width="100%" height="calc(100vh - 200px)" pt="100px" justify="center">
       <Flex direction="column" pt="20px" align="center">
         <Text className="logo-text" mb="10px">
           HEARTVA
