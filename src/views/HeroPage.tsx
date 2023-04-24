@@ -1,15 +1,25 @@
-import { Stack, Heading, Link } from "@chakra-ui/react";
+import { Stack, Heading, Link, Text, Box, Flex } from "@chakra-ui/react";
 
 const HeroPage = () => {
   return (
-    <>
-      <Stack direction="column" p="20px">
-        <Heading fontSize="24px" color="gray">
-          Heartva | Heart data for Strava athletes
+    <Flex
+      width="100%"
+      height="calc(100vh - 200px)"
+      pt="100px"
+      justify="center"
+      // bgColor="red"
+    >
+      <Flex direction="column" pt="20px" align="center">
+        <Text className="logo-text" mb="10px">
+          HEARTVA
+        </Text>
+        <Heading fontSize="48px" color="white" mb="50px">
+          ❤️ Heart data for Strava athletes
         </Heading>
+
         <Link
           width="fit-content"
-          bgColor="#FC5201"
+          bgColor="#FF355D"
           color="white"
           py="5px"
           px="10px"
@@ -20,8 +30,8 @@ const HeroPage = () => {
         >
           Request Strava
         </Link>
-      </Stack>
-    </>
+      </Flex>
+    </Flex>
   );
 };
 

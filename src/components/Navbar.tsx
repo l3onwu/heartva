@@ -17,6 +17,7 @@ const Navbar = () => {
   // State
   const navigate = useNavigate();
   const { userHook } = useGlobalContext();
+  console.log(userHook?.userObject);
 
   // Functions
   const signOutStrava = () => {
@@ -122,17 +123,23 @@ const Navbar = () => {
       </Flex>
 
       {/* Right side */}
-      <Button
-        color="#AC96B9"
-        size="sm"
-        style={{ backgroundColor: "transparent" }}
-        _hover={{ color: "white" }}
-        onClick={() => {
-          signOutStrava();
-        }}
-      >
-        Sign out
-      </Button>
+      <Flex direction="column" align="center">
+        <Text color="#666666" fontSize="12px" fontWeight="regular" mb="-10px">
+          {userHook?.userObject?.athlete?.firstname}{" "}
+          {userHook?.userObject?.athlete?.lastname}
+        </Text>
+        <Button
+          color="#AC96B9"
+          size="sm"
+          style={{ backgroundColor: "transparent" }}
+          _hover={{ color: "white" }}
+          onClick={() => {
+            signOutStrava();
+          }}
+        >
+          Sign out
+        </Button>
+      </Flex>
     </Flex>
   );
 };

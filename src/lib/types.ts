@@ -4,6 +4,7 @@ export interface UserType {
   client_id: string;
   client_secret: string;
   expires_at: number;
+  athlete: any;
 }
 
 export interface ActivityShortType {
