@@ -139,6 +139,7 @@ const ActivityBox2 = ({
   return (
     <Box
       pr="10px"
+      py="5px"
       borderBottom="0.5px solid #333333"
       _hover={{ backgroundColor: "#171f30", cursor: "pointer" }}
     >
@@ -152,7 +153,8 @@ const ActivityBox2 = ({
           fontWeight="bold"
           fontSize="14px"
           pr="5px"
-          borderRight="0.5px solid #333333"
+
+          // borderRight="0.5px solid #333333"
         >
           {clipText(activityObject?.name, 18)}
         </Text>
@@ -164,7 +166,7 @@ const ActivityBox2 = ({
           fontSize="14px"
           // mb="5px"
           pr="5px"
-          borderRight="0.5px solid #333333"
+          // borderRight="0.5px solid #333333"
         >
           {secondsToMinPace(
             calculatePaceFromDistanceAndTime(
@@ -182,7 +184,7 @@ const ActivityBox2 = ({
           fontSize="14px"
           // mb="5px"
           pr="5px"
-          borderRight="0.5px solid #333333"
+          // borderRight="0.5px solid #333333"
         >
           {Math.round(activityObject?.distance / 10) / 100} km
         </Text>
@@ -194,7 +196,7 @@ const ActivityBox2 = ({
           fontSize="14px"
           // mb="5px"
           pr="5px"
-          borderRight="0.5px solid #333333"
+          // borderRight="0.5px solid #333333"
         >
           {Math.round(activityObject?.moving_time / 6) / 10} min
         </Text>
@@ -205,7 +207,7 @@ const ActivityBox2 = ({
           color="gray"
           fontSize="14px"
           pr="5px"
-          borderRight="0.5px solid #333333"
+          // borderRight="0.5px solid #333333"
         >
           {/* ❤️  */}
           {activityObject?.average_heartrate}
@@ -249,7 +251,7 @@ const ActivityBox2Header = ({}: {}) => {
           fontWeight="bold"
           fontSize="14px"
           pr="5px"
-          borderRight="0.5px solid #333333"
+          // borderRight="0.5px solid #333333"
         >
           Title
         </Text>
@@ -261,7 +263,7 @@ const ActivityBox2Header = ({}: {}) => {
           fontWeight="bold"
           fontSize="14px"
           pr="5px"
-          borderRight="0.5px solid #333333"
+          // borderRight="0.5px solid #333333"
         >
           Pace
         </Text>
@@ -273,7 +275,7 @@ const ActivityBox2Header = ({}: {}) => {
           fontWeight="bold"
           fontSize="14px"
           pr="5px"
-          borderRight="0.5px solid #333333"
+          // borderRight="0.5px solid #333333"
         >
           Distance
         </Text>
@@ -286,7 +288,7 @@ const ActivityBox2Header = ({}: {}) => {
           fontSize="14px"
           // mb="5px"
           pr="5px"
-          borderRight="0.5px solid #333333"
+          // borderRight="0.5px solid #333333"
         >
           Time
         </Text>
@@ -298,7 +300,7 @@ const ActivityBox2Header = ({}: {}) => {
           fontWeight="bold"
           fontSize="14px"
           pr="5px"
-          borderRight="0.5px solid #333333"
+          // borderRight="0.5px solid #333333"
         >
           Avg HR
         </Text>
