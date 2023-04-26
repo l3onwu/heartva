@@ -18,7 +18,7 @@ const HRGraphPage = () => {
         </Box>
 
         {/* Right side */}
-        <Box width="50%" height="calc(100vh - 80px)">
+        <Box width="50%" height="calc(100vh - 80px)" pr="40px">
           {/* Page heading */}
           {/* <Text color="#9C88AA" fontWeight="bold" fontSize="30px" mb="30px">
             HR Graph

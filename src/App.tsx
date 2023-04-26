@@ -22,7 +22,7 @@ export const App = () => {
           {/* Navbar */}
           {userHook?.userObject && <Navbar />}
 
-          <Box width="100%" px="40px" mt="55px">
+          <Box width="100%" mt="55px">
             {/* Routes */}
             <Routes>
               <Route path="/token-exchange" element={<TokenExchange />} />
