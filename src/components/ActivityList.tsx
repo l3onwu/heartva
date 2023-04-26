@@ -9,7 +9,7 @@ const ActivityList = () => {
   return (
     <>
       {userHook?.activitiesLoading ? (
-        <Box pt="20px">
+        <Box pt="20px" pl="40px">
           <Spinner color="pink" size="lg" />
         </Box>
       ) : (
@@ -26,6 +26,7 @@ const ActivityList = () => {
           <Button
             colorScheme="blue"
             mt="20px"
+            ml="40px"
             size="xs"
             onClick={() => {
               userHook?.setActivitiesPage(userHook?.activitiesPage + 1);
@@ -139,8 +140,9 @@ const ActivityBox2 = ({
   return (
     <Box
       pr="10px"
-      py="5px"
-      borderBottom="0.5px solid #333333"
+      py="8px"
+      pl="40px"
+      // borderBottom="0.5px solid #333333"
       _hover={{ backgroundColor: "#171f30", cursor: "pointer" }}
     >
       <Stack direction="row">
@@ -234,20 +236,21 @@ const ActivityBox2Header = ({}: {}) => {
     <Box
       key={"title"}
       pr="10px"
-      py="2px"
+      pl="40px"
+      py="8px"
       position="sticky"
       top="0px"
-      // bgColor="#020a20"
+      color="#9C88AA"
       bgColor="#020a20"
-      // borderBottom="0.5px solid #333333"
-      boxShadow="0px 1px 3px #333333"
+      // bgColor="#0d162b"
+      borderBottom="0.5px solid #333333"
+      // boxShadow="0px 1px 3px #333333"
     >
       <Stack direction="row">
         {/* Activity title */}
         <Text
           width="170px"
           overflow="hidden"
-          color="#9C88AA"
           fontWeight="bold"
           fontSize="14px"
           pr="5px"
@@ -259,7 +262,6 @@ const ActivityBox2Header = ({}: {}) => {
         {/* Pace */}
         <Text
           width="80px"
-          color="#9C88AA"
           fontWeight="bold"
           fontSize="14px"
           pr="5px"
@@ -271,7 +273,6 @@ const ActivityBox2Header = ({}: {}) => {
         {/* Distance*/}
         <Text
           width="80px"
-          color="#9C88AA"
           fontWeight="bold"
           fontSize="14px"
           pr="5px"
@@ -283,7 +284,6 @@ const ActivityBox2Header = ({}: {}) => {
         {/* Time */}
         <Text
           width="80px"
-          color="#9C88AA"
           fontWeight="bold"
           fontSize="14px"
           // mb="5px"
@@ -296,7 +296,6 @@ const ActivityBox2Header = ({}: {}) => {
         {/* Heart rate and suffer score */}
         <Text
           width="80px"
-          color="#9C88AA"
           fontWeight="bold"
           fontSize="14px"
           pr="5px"
@@ -306,7 +305,7 @@ const ActivityBox2Header = ({}: {}) => {
         </Text>
 
         {/* Suffer score */}
-        <Text width="60px" color="#9C88AA" fontWeight="bold" fontSize="14px">
+        <Text width="60px" fontWeight="bold" fontSize="14px">
           Effort
         </Text>
       </Stack>
