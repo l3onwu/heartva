@@ -11,7 +11,7 @@ const HRGraphPage = () => {
         flexWrap="wrap"
         maxH="calc(100vh - 80px)"
       >
-        {/* Right side */}
+        {/* HR Graph */}
         <Box width="100%" height="300px" px="40px" mb="20px">
           {/* Page heading */}
           {/* <Text color="#9C88AA" fontWeight="bold" fontSize="30px" mb="30px">
@@ -20,7 +20,7 @@ const HRGraphPage = () => {
           <HRGraph />
         </Box>
 
-        {/* Left side */}
+        {/* HR Table */}
         <Box
           height="calc(100vh - 380px)"
           width="100%"
