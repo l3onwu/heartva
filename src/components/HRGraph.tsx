@@ -60,9 +60,10 @@ export default function HRGraph() {
       },
     },
     plugins: {
-      // legend: {
-      //   position: "top" as const,
-      // },
+      legend: {
+        display: false,
+        position: "top" as const,
+      },
       // title: {
       //   display: true,
       //   text: "Chart.js Line Chart",
@@ -80,8 +81,8 @@ export default function HRGraph() {
       {
         label: "Heartrate",
         data: y,
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        borderColor: "#FF355D",
+        backgroundColor: "#FF355D",
         pointRadius: 1,
       },
       {
