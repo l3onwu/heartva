@@ -30,7 +30,7 @@ const Navbar = () => {
   return (
     <Flex
       width="100%"
-      height="55px"
+      height="40px"
       zIndex="10"
       align="center"
       bgColor="#020a20"
