@@ -141,7 +141,7 @@ const ActivityBox2 = ({
           overflow="hidden"
           // color="#9C88AA"
           color="gray"
-          fontWeight="bold"
+          // fontWeight="bold"
           fontSize="14px"
           pr="5px"
 
@@ -151,14 +151,7 @@ const ActivityBox2 = ({
         </Text>
 
         {/* Pace */}
-        <Text
-          width="80px"
-          color="gray"
-          fontSize="14px"
-          // mb="5px"
-          pr="5px"
-          // borderRight="0.5px solid #333333"
-        >
+        <Text width="80px" color="gray" fontSize="14px" pr="5px">
           {secondsToMinPace(
             calculatePaceFromDistanceAndTime(
               activityObject.distance,
@@ -169,49 +162,23 @@ const ActivityBox2 = ({
         </Text>
 
         {/* Distance*/}
-        <Text
-          width="80px"
-          color="gray"
-          fontSize="14px"
-          // mb="5px"
-          pr="5px"
-          // borderRight="0.5px solid #333333"
-        >
+        <Text width="80px" color="gray" fontSize="14px" pr="5px">
           {Math.round(activityObject?.distance / 10) / 100} km
         </Text>
 
         {/* Time */}
-        <Text
-          width="80px"
-          color="gray"
-          fontSize="14px"
-          // mb="5px"
-          pr="5px"
-          // borderRight="0.5px solid #333333"
-        >
+        <Text width="80px" color="gray" fontSize="14px" pr="5px">
           {Math.round(activityObject?.moving_time / 6) / 10} min
         </Text>
 
         {/* Heart rate and suffer score */}
-        <Text
-          width="80px"
-          color="gray"
-          fontSize="14px"
-          pr="5px"
-          // borderRight="0.5px solid #333333"
-        >
+        <Text width="80px" color="gray" fontSize="14px" pr="5px">
           {/* ❤️  */}
           {activityObject?.average_heartrate}
         </Text>
 
         {/* Suffer score */}
-        <Text
-          width="60px"
-          color="gray"
-          fontSize="14px"
-          // pr="5px"
-          // borderRight="0.5px solid #333333"
-        >
+        <Text width="60px" color="gray" fontSize="14px">
           {activityObject?.suffer_score}
         </Text>
       </Stack>
@@ -231,9 +198,7 @@ const ActivityBox2Header = ({}: {}) => {
       top="0px"
       color="#9C88AA"
       bgColor="#020a20"
-      // bgColor="#0d162b"
       borderBottom="0.5px solid #333333"
-      // boxShadow="0px 1px 3px #333333"
     >
       <Stack direction="row">
         {/* Activity title */}
@@ -243,53 +208,27 @@ const ActivityBox2Header = ({}: {}) => {
           fontWeight="bold"
           fontSize="14px"
           pr="5px"
-          // borderRight="0.5px solid #333333"
         >
           Title
         </Text>
 
         {/* Pace */}
-        <Text
-          width="80px"
-          fontWeight="bold"
-          fontSize="14px"
-          pr="5px"
-          // borderRight="0.5px solid #333333"
-        >
+        <Text width="80px" fontWeight="bold" fontSize="14px" pr="5px">
           Pace
         </Text>
 
         {/* Distance*/}
-        <Text
-          width="80px"
-          fontWeight="bold"
-          fontSize="14px"
-          pr="5px"
-          // borderRight="0.5px solid #333333"
-        >
+        <Text width="80px" fontWeight="bold" fontSize="14px" pr="5px">
           Distance
         </Text>
 
         {/* Time */}
-        <Text
-          width="80px"
-          fontWeight="bold"
-          fontSize="14px"
-          // mb="5px"
-          pr="5px"
-          // borderRight="0.5px solid #333333"
-        >
+        <Text width="80px" fontWeight="bold" fontSize="14px" pr="5px">
           Time
         </Text>
 
         {/* Heart rate and suffer score */}
-        <Text
-          width="80px"
-          fontWeight="bold"
-          fontSize="14px"
-          pr="5px"
-          // borderRight="0.5px solid #333333"
-        >
+        <Text width="80px" fontWeight="bold" fontSize="14px" pr="5px">
           Avg HR
         </Text>
 
