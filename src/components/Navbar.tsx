@@ -12,6 +12,8 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
 import localforage from "localforage";
 import { useGlobalContext } from "../lib/context";
+import { BiRun, BiMedal } from "react-icons/bi";
+import { BsGraphUp } from "react-icons/bs";
 
 const Navbar = () => {
   // State
@@ -44,7 +46,7 @@ const Navbar = () => {
         {/* Logo */}
         <Text
           className="logo-text"
-          mr="50px"
+          mr="35px"
           onClick={() => {
             navigate("/");
           }}
@@ -72,9 +74,24 @@ const Navbar = () => {
           >
             Graph
           </Button> */}
-          <button className="navButtonCool">Activities</button>
-          <button className="navButtonCool">Graph</button>
-          <button className="navButtonCool">Goals</button>
+          <button className="navButtonCool">
+            <span style={{ fontSize: "20px", marginRight: "5px" }}>
+              <BiRun />
+            </span>
+            Activities
+          </button>
+          <button className="navButtonCoolSelected">
+            <span style={{ fontSize: "20px", marginRight: "5px" }}>
+              <BsGraphUp />
+            </span>
+            Graph
+          </button>
+          <button className="navButtonCool">
+            <span style={{ fontSize: "20px", marginRight: "5px" }}>
+              <BiMedal />
+            </span>
+            Goals
+          </button>
 
           {/* Activities menu */}
           {/* <Menu>
@@ -135,14 +152,16 @@ const Navbar = () => {
       </Flex>
 
       {/* Right side */}
-      <Flex direction="column" align="center">
+      <Flex align="center">
         {/* <Text color="#666666" fontSize="12px" fontWeight="regular" mb="-10px">
           {userHook?.userObject?.athlete?.firstname}{" "}
           {userHook?.userObject?.athlete?.lastname}
         </Text> */}
         <Button
-          color="#AC96B9"
+          color="gray"
           size="sm"
+          fontFamily="Ubuntu"
+          fontWeight="500"
           style={{ backgroundColor: "transparent" }}
           _hover={{ color: "white" }}
           onClick={() => {
