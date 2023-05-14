@@ -23,17 +23,6 @@ const ActivityList = () => {
               />
             );
           })}
-          <Button
-            colorScheme="blue"
-            mt="20px"
-            ml="40px"
-            size="xs"
-            onClick={() => {
-              userHook?.setActivitiesPage(userHook?.activitiesPage + 1);
-            }}
-          >
-            Load more
-          </Button>
         </Box>
       )}
     </>
