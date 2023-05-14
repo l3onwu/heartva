@@ -21,12 +21,7 @@ const HRGraphPage = () => {
           mt="0px"
           mb="20px"
         >
-          <Heading
-            color="whitesmoke"
-            mr="40px"
-            fontSize="48px"
-            fontFamily="Gill Sans"
-          >
+          <Heading color="whitesmoke" mr="40px" fontSize="40px">
             HR Graph
           </Heading>
 
