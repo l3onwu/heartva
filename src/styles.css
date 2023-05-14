@@ -19,6 +19,23 @@
 }
 
 .logo-text:hover {
-  color: #ff0b3c;
+  color: #ffffff;
   transition: color 100ms ease-in;
+}
+
+.navButtonCool {
+  background-color: #0a1738;
+  color: whitesmoke;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 5px;
+}
+
+.navButtonCool:hover {
+  background-color: white;
+  /* background-color: #ff355d; */
+  /* background-color: #34a2eb; */
+  color: black;
 }

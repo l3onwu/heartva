@@ -30,7 +30,7 @@ const Navbar = () => {
   return (
     <Flex
       width="100%"
-      height="40px"
+      height="50px"
       zIndex="10"
       align="center"
       bgColor="#020a20"
@@ -62,6 +62,20 @@ const Navbar = () => {
           fontSize="14px"
         >
           {/* Navmenu Buttons */}
+          {/* <Button
+            variant={"unstyled"}
+            style={{
+              fontSize: "14px",
+              border: "1px solid #222222",
+              padding: "-10px 20px",
+            }}
+          >
+            Graph
+          </Button> */}
+          <button className="navButtonCool">Activities</button>
+          <button className="navButtonCool">Graph</button>
+          <button className="navButtonCool">Goals</button>
+
           {/* Activities menu */}
           {/* <Menu>
             <MenuButton
@@ -122,10 +136,10 @@ const Navbar = () => {
 
       {/* Right side */}
       <Flex direction="column" align="center">
-        <Text color="#666666" fontSize="12px" fontWeight="regular" mb="-10px">
+        {/* <Text color="#666666" fontSize="12px" fontWeight="regular" mb="-10px">
           {userHook?.userObject?.athlete?.firstname}{" "}
           {userHook?.userObject?.athlete?.lastname}
-        </Text>
+        </Text> */}
         <Button
           color="#AC96B9"
           size="sm"
