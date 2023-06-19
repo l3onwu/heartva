@@ -13,6 +13,7 @@ import "chartjs-adapter-luxon";
 
 import { Line } from "react-chartjs-2";
 import { useGlobalContext } from "../lib/context";
+import { AxesType } from "../views/HRGraphPage";
 
 ChartJS.register(
   CategoryScale,
@@ -25,8 +26,29 @@ ChartJS.register(
   TimeScale
 );
 
-export default function HRGraph({ chartKey }: { chartKey: any }) {
+export default function HRGraph({
+  chartKey,
+  axesOne,
+  axesTwo,
+  axesThree,
+}: {
+  chartKey: any;
+  axesOne: AxesType;
+  axesTwo: AxesType;
+  axesThree: AxesType;
+}) {
   const { userHook } = useGlobalContext();
+
+  // Data functions
+  let dateLabels = userHook?.activities
+    ?.filter((act) => {
+      return (
+        new Date(act?.start_date_local).getFullYear() === userHook?.statsYear
+      );
+    })
+    ?.map((act) => {
+      return new Date(act?.start_date_local);
+    });
 
   let paceData = userHook?.activities
     ?.filter((act) => {
@@ -40,28 +62,16 @@ export default function HRGraph({ chartKey }: { chartKey: any }) {
           100) *
         20
       );
-    })
-    ?.reverse();
+    });
 
-  let y = userHook?.activities
+  let distanceData = userHook?.activities
     ?.filter((act) => {
       return (
         new Date(act?.start_date_local).getFullYear() === userHook?.statsYear
       );
     })
-    ?.map((act) => {
-      return act?.average_heartrate;
-    })
-    ?.reverse();
-
-  let dateLabels = userHook?.activities
-    ?.filter((act) => {
-      return (
-        new Date(act?.start_date_local).getFullYear() === userHook?.statsYear
-      );
-    })
-    ?.map((act) => {
-      return new Date(act?.start_date_local);
+    .map((act) => {
+      return act?.distance / 100;
     });
 
   let hrData = userHook?.activities
@@ -74,6 +84,7 @@ export default function HRGraph({ chartKey }: { chartKey: any }) {
       return act?.average_heartrate;
     });
 
+  // Graph config
   const options = {
     // tension: 0.3,
     responsive: true,
@@ -110,26 +121,53 @@ export default function HRGraph({ chartKey }: { chartKey: any }) {
     },
   };
 
-  const data = {
-    labels: dateLabels,
-    datasets: [
-      {
-        label: "HR",
-        borderColor: "rgb(255, 0, 0)",
-        data: hrData,
-        fill: false,
-        pointRadius: 0,
-      },
-      {
-        label: "Pace",
-        borderColor: "rgb(0, 0, 255)",
-        data: paceData,
-        fill: false,
-        pointRadius: 0,
-      },
-    ],
+  // Dataset recipes
+  const hrDataSet = {
+    label: "HR",
+    borderColor: "rgb(255, 0, 0)",
+    data: hrData,
+    fill: false,
+    pointRadius: 0,
   };
 
+  const paceDataSet = {
+    label: "Pace",
+    borderColor: "rgb(0, 0, 255)",
+    data: paceData,
+    fill: false,
+    pointRadius: 0,
+  };
+
+  const distanceDataSet = {
+    label: "Distance",
+    borderColor: "rgb(0, 255, 0)",
+    data: distanceData,
+    fill: false,
+    pointRadius: 0,
+  };
+
+  // Dataset builder
+  const aggregateDataSet = () => {
+    const totalSet = [];
+    for (const ax of [axesOne, axesTwo, axesThree]) {
+      console.log(ax);
+      if (ax === "heartRate") {
+        totalSet.push(hrDataSet);
+      } else if (ax === "pace") {
+        totalSet.push(paceDataSet);
+      } else if (ax === "distance") {
+        totalSet.push(distanceDataSet);
+      }
+    }
+    return totalSet;
+  };
+
+  const allSets = aggregateDataSet();
+
+  const data = {
+    labels: dateLabels,
+    datasets: [...allSets],
+  };
   {
     // @ts-ignore
     return <Line options={options} data={data} key={chartKey} />;
