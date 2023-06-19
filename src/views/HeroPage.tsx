@@ -20,7 +20,7 @@ const HeroPage = () => {
           fontWeight="bold"
           borderRadius="5px"
           // TODO May have to replace localhost with server name? window.location.origin.getString() could work...
-          href={`https://www.strava.com/oauth/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&redirect_uri=https://heartva.vercel.app/token-exchange&scope=activity:read`}
+          href={`https://www.strava.com/oauth/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&redirect_uri=${process.env.REACT_APP_BASEURL}/token-exchange&scope=activity:read`}
         >
           Request Strava
         </Link>
