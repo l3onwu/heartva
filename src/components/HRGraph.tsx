@@ -25,7 +25,7 @@ ChartJS.register(
   TimeScale
 );
 
-export default function HRGraph() {
+export default function HRGraph({ chartKey }: { chartKey: any }) {
   const { userHook } = useGlobalContext();
 
   let paceData = userHook?.activities
@@ -132,6 +132,6 @@ export default function HRGraph() {
 
   {
     // @ts-ignore
-    return <Line options={options} data={data} />;
+    return <Line options={options} data={data} key={chartKey} />;
   }
 }

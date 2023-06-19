@@ -1,10 +1,12 @@
 import { Flex, Box, Text, Button, Stack, Select } from "@chakra-ui/react";
+import { useEffect, useRef, useState } from "react";
 import ActivityList from "../components/ActivityList";
 import HRGraph from "../components/HRGraph";
 import { useGlobalContext } from "../lib/context";
 
 const HRGraphPage = () => {
   const { userHook } = useGlobalContext();
+  const [chartKey, setChartKey] = useState(0); // Force re-render of chart, for nice loading
 
   return (
     <Box width="100%">
@@ -36,6 +38,7 @@ const HRGraphPage = () => {
               borderColor={"#444444"}
               onChange={(e) => {
                 userHook?.setStatsYear(parseInt(e.target.value));
+                setChartKey(chartKey + 1);
               }}
             >
               <option value={2023}>2023</option>
@@ -92,7 +95,7 @@ const HRGraphPage = () => {
           //  p={"10px"}
           // border={"0.5px solid #333333"} borderRadius={"5px"} padding={"8px"}
         >
-          <HRGraph />
+          <HRGraph chartKey={chartKey} />
         </Box>
       </Box>
 
