@@ -4,20 +4,20 @@ import ActivityList from "../components/ActivityList";
 import HRGraph from "../components/HRGraph";
 import { useGlobalContext } from "../lib/context";
 
-export type AxesType = "pace" | "heartRate" | "distance";
+export type AxesType = "pace" | "heartRate" | "distance" | "-";
 
 const HRGraphPage = () => {
   const { userHook } = useGlobalContext();
   const [chartKey, setChartKey] = useState(0); // Force re-render of chart, for nice loading
   const [axesOne, setAxesOne] = useState<AxesType>("heartRate");
   const [axesTwo, setAxesTwo] = useState<AxesType>("pace");
-  const [axesThree, setAxesThree] = useState<AxesType>("distance");
+  const [axesThree, setAxesThree] = useState<AxesType>("-");
 
   return (
     <Box width="100%">
-      <Box mb="20px">
+      <Box mb="24px">
         {/*Page heading */}
-        <Flex justify="space-between" mb="10px">
+        <Flex justify="space-between" mb="15px">
           <Flex direction={"row"} align={"center"}>
             <Text
               fontSize="20px"
