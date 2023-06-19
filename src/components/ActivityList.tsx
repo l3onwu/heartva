@@ -72,7 +72,7 @@ const ActivityBox = ({
         <Box
             py="8px"
             _hover={{backgroundColor: "#171f30", cursor: "pointer"}}
-            color="#986C8D"
+            color="gray"
             fontSize="12px"
         >
             <Stack direction="row">
@@ -143,9 +143,9 @@ const ActivityBoxHeader = ({}: {}) => {
             py="8px"
             position="sticky"
             top="0px"
-            color="#986C8D"
+            color="gray"
             bgColor="#020a20"
-            borderBottom="0.5px solid #7B215C"
+            borderBottom="0.5px solid #222222"
             fontSize="12px"
             fontWeight="bold"
         >
