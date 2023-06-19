@@ -2,6 +2,7 @@ import {
     Flex,
     Text,
     Button,
+    Stack,
 } from "@chakra-ui/react";
 import {useNavigate} from "react-router-dom";
 import localforage from "localforage";
@@ -26,7 +27,7 @@ const Navbar = () => {
             width="100%"
             height="50px"
             align="center"
-            marginBottom="15px"
+            marginBottom="10px"
             justify="space-between"
         >
             {/* Left side */}
@@ -45,7 +46,7 @@ const Navbar = () => {
             </Flex>
 
             {/* Right side */}
-            <Flex direction="row" align="center">
+            <Stack direction="row" align="baseline" justify={"baseline"}>
                 <Text color="#666666" fontSize="12px" fontWeight="regular" mb="-10px">
                     {userHook?.userObject?.athlete?.firstname}{" "}
                     {userHook?.userObject?.athlete?.lastname}
@@ -61,7 +62,7 @@ const Navbar = () => {
                 >
                     Sign out
                 </Button>
-            </Flex>
+            </Stack>
         </Flex>
     );
 };

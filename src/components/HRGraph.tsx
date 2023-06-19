@@ -52,6 +52,9 @@ export default function HRGraph() {
                     lineWidth: 0,
                     color: "transparent",
                 },
+                ticks: {
+                    display: false,
+                }
             },
             y: {
                 grid: {
@@ -86,6 +89,7 @@ export default function HRGraph() {
                 borderColor: "rgb(255, 99, 132)",
                 backgroundColor: "rgba(255, 99, 132, 0.5)",
                 pointRadius: 1,
+
             },
             {
                 label: "Pace",
