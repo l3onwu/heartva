@@ -128,6 +128,7 @@ export default function HRGraph({
     data: hrData,
     fill: false,
     pointRadius: 0,
+    borderWidth: 1.5,
   };
 
   const paceDataSet = {
@@ -136,6 +137,7 @@ export default function HRGraph({
     data: paceData,
     fill: false,
     pointRadius: 0,
+    borderWidth: 1.5,
   };
 
   const distanceDataSet = {
@@ -144,6 +146,7 @@ export default function HRGraph({
     data: distanceData,
     fill: false,
     pointRadius: 0,
+    borderWidth: 1.5,
   };
 
   // Dataset builder
