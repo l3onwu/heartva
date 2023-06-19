@@ -73,7 +73,7 @@ const ActivityBox = ({
         <Box
             py="8px"
             _hover={{backgroundColor: "#171f30", cursor: "pointer"}}
-            color="gray"
+            color="#986C8D"
             fontSize="12px"
         >
             <Stack direction="row">
@@ -145,6 +145,7 @@ const ActivityBox = ({
     );
 };
 
+
 const ActivityBoxHeader = ({}: {}) => {
     // TSX
     return (
@@ -153,9 +154,9 @@ const ActivityBoxHeader = ({}: {}) => {
             py="8px"
             position="sticky"
             top="0px"
-            color="gray"
+            color="#986C8D"
             bgColor="#020a20"
-            borderBottom="1px solid #222222"
+            borderBottom="0.5px solid #986C8D"
             fontSize="12px"
             fontWeight="bold"
         >
