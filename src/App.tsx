@@ -19,7 +19,7 @@ export const App = () => {
                     height="100vh"
                     className="background-gradient"
                 >
-                    <Box width="1000px">
+                    <Box maxWidth="1000px" width="80%">
                         {/* Navbar */}
                         {userHook?.userObject && <Navbar/>}
 
