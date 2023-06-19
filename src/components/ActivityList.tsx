@@ -51,6 +51,7 @@ const ActivityBox = ({
         distance: number,
         time: number
     ): number => {
+        if (distance === 0 || time === 0 ) return 0;
         // Rounds to
         return time / (distance / 1000);
     };
@@ -76,6 +77,15 @@ const ActivityBox = ({
             fontSize="12px"
         >
             <Stack direction="row">
+                {/* Activity date */}
+                <Text
+                    width="100px"
+                    overflow="hidden"
+                    pr="5px"
+                >
+                    {new Date(activityObject?.start_date_local).toLocaleDateString()}
+                </Text>
+
                 {/* Activity title */}
                 <Text
                     width="170px"
@@ -145,11 +155,20 @@ const ActivityBoxHeader = ({}: {}) => {
             top="0px"
             color="gray"
             bgColor="#020a20"
-            borderBottom="0.5px solid #222222"
+            borderBottom="1px solid #222222"
             fontSize="12px"
             fontWeight="bold"
         >
             <Stack direction="row">
+                {/* Activity date */}
+                <Text
+                    width="100px"
+                    overflow="hidden"
+                    pr="5px"
+                >
+                    Date
+                </Text>
+
                 {/* Activity title */}
                 <Text
                     width="170px"

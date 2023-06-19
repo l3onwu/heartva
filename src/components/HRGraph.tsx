@@ -56,7 +56,7 @@ export default function HRGraph() {
             y: {
                 grid: {
                     color: "#222222",
-                    lineWidth: 0.5,
+                    lineWidth: 1,
                     // color: "transparent",
                 },
             },
