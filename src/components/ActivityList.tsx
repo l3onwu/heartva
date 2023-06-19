@@ -125,7 +125,22 @@ const ActivityBox = ({
         </Text>
 
         {/* Suffer score */}
-        <Text width="60px">{activityObject?.suffer_score}</Text>
+        <Text width="60px" pr={"5px"}>{activityObject?.suffer_score}</Text>
+
+        {/* Elapsed time */}
+        <Text width="60px">{Math.round(activityObject?.elapsed_time / 60)}min</Text>
+
+        {/* Moving time */}
+        <Text width="60px">{Math.round(activityObject?.moving_time / 60)}min</Text>
+
+        {/* Gear */}
+        <Text width="80px">{activityObject?.gear_id}</Text>
+
+        {/* Sport type */}
+        <Text width="60px">{activityObject?.sport_type}</Text>
+
+        {/* Elevation */}
+        <Text width="60px">{activityObject?.total_elevation_gain}m</Text>
       </Stack>
     </Box>
   );
@@ -177,8 +192,24 @@ const ActivityBoxHeader = ({}: {}) => {
         </Text>
 
         {/* Suffer score */}
-        <Text width="60px">Effort</Text>
+        <Text width="60px" pr="5px">Effort</Text>
+
+        {/* Elapsed time */}
+        <Text width="60px" pr="5px">Elapsed time</Text>
+
+        {/* Moving time */}
+        <Text width="60px" pr="5px">Moving time</Text>
+
+        {/* Gear */}
+        <Text width="80px" pr="5px">Gear</Text>
+
+        {/* Sport type */}
+        <Text width="60px" pr="5px">Sport</Text>
+
+        {/* Elevation */}
+        <Text width="60px">Elevation</Text>
       </Stack>
     </Box>
   );
 };
+
