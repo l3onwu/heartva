@@ -2,6 +2,7 @@ import axios from "axios";
 import localforage from "localforage";
 import { useState, useEffect } from "react";
 import { ActivityShortType, UserType } from "./types";
+import { mockActivities } from "../mock/mockData";
 
 export interface UserHookType {
   firstLoad: boolean;
@@ -15,6 +16,8 @@ export interface UserHookType {
   activitiesLoading: boolean;
   activitiesPage: number;
   setActivitiesPage: Function;
+  statsYear: number;
+  setStatsYear: Function;
 }
 
 export default function useUserSettings() {
@@ -25,6 +28,7 @@ export default function useUserSettings() {
   const [activities, setActivities] = useState<ActivityShortType[]>([]);
   const [activitiesLoading, setActivitiesLoading] = useState(true);
   const [activitiesPage, setActivitiesPage] = useState<Number>(1);
+  const [statsYear, setStatsYear] = useState<Number>(new Date().getFullYear());
 
   // Refresh token
   useEffect(() => {
@@ -68,21 +72,32 @@ export default function useUserSettings() {
   // Get activites (brief) when user is loaded or 'load more' is pressed
   useEffect(() => {
     const getActivities = async () => {
-      let axiosRequestConfig = {
-        method: "get",
-        url: `https://www.strava.com/api/v3/athlete/activities?page=${activitiesPage}&per_page=25`,
-        headers: { Authorization: `Bearer ${userObject?.access_token}` },
-      };
-      try {
-        const { data } = await axios(axiosRequestConfig);
-        setActivities([...activities, ...data]);
+      // If env is dev, use mock data
+      if (process.env.REACT_APP_ENV === "DEV") {
+        const data = mockActivities;
+        // @ts-ignore
+        setActivities([...data]);
         setActivitiesLoading(false);
-      } catch (err) {
-        console.log(err);
-        setActivitiesLoading(false);
+      } else {
+        // If env is prod, use real data
+        let axiosRequestConfig = {
+          method: "get",
+          url: `https://www.strava.com/api/v3/athlete/activities?page=${activitiesPage}&per_page=25`,
+          headers: { Authorization: `Bearer ${userObject?.access_token}` },
+        };
+        try {
+          const { data } = await axios(axiosRequestConfig);
+          setActivities([...activities, ...data]);
+          setActivitiesLoading(false);
+        } catch (err) {
+          console.log(err);
+          setActivitiesLoading(false);
+        }
       }
     };
+
     if (userObject) {
+      // @ts-ignore
       getActivities();
     }
   }, [userObject, activitiesPage]);
@@ -99,5 +114,7 @@ export default function useUserSettings() {
     activitiesLoading,
     activitiesPage,
     setActivitiesPage,
+    statsYear,
+    setStatsYear,
   };
 }
