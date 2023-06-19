@@ -1,38 +1,34 @@
-import { Flex, Box, Text } from "@chakra-ui/react";
+import {Flex, Box, Text} from "@chakra-ui/react";
 import ActivityList from "../components/ActivityList";
 import HRGraph from "../components/HRGraph";
 
 const HRGraphPage = () => {
-  return (
-    <Box width="100%">
-      <Flex
-        width="100%"
-        justify="space-between"
-        flexWrap="wrap"
-        maxH="calc(100vh - 80px)"
-      >
-        {/* HR Graph */}
-        <Box width="100%" height="300px" px="40px" mb="20px">
-          {/* Page heading */}
-          {/* <Text color="#9C88AA" fontWeight="bold" fontSize="30px" mb="30px">
-            HR Graph
-          </Text> */}
-          <HRGraph />
-        </Box>
+    return (
+        <Box width="100%">
+            {/*Page heading */}
+            <Text fontSize="18px" color="#986C8D" mb={"10px"} fontWeight={"semibold"}>Trends for 2023</Text>
 
-        {/* HR Table */}
-        <Box
-          height="calc(100vh - 380px)"
-          width="100%"
-          overflow="scroll"
-          pb="20px"
-          borderTop="0.5px solid #333333"
-        >
-          <ActivityList />
+            {/* HR Graph */}
+            <Box height="250px" mb={"30px"}
+                 // border={"0.5px solid #333333"} borderRadius={"5px"} padding={"8px"}
+            >
+                <HRGraph/>
+            </Box>
+
+            {/*HR Text*/}
+            <Text fontSize="18px" color="#986C8D" mb={"10px"} fontWeight={"semibold"}>Activities</Text>
+
+            {/* HR Table */}
+            <Box
+                height="calc(100vh - 450px)"
+                width="100%"
+                overflow="scroll"
+                pb="20px"
+            >
+                <ActivityList/>
+            </Box>
         </Box>
-      </Flex>
-    </Box>
-  );
+    );
 };
 
 export default HRGraphPage;

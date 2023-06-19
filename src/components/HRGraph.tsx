@@ -53,6 +53,7 @@ export default function HRGraph() {
         },
       },
       y: {
+
         grid: {
           color: "#222222",
           // color: "transparent",
@@ -60,9 +61,10 @@ export default function HRGraph() {
       },
     },
     plugins: {
-      // legend: {
-      //   position: "top" as const,
-      // },
+      legend: {
+        display: false,
+        position: "bottom" as const,
+      },
       // title: {
       //   display: true,
       //   text: "Chart.js Line Chart",
