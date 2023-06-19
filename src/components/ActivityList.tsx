@@ -137,12 +137,12 @@ const ActivityBox = ({
         </Text>
 
         {/* Elapsed time */}
-        <Text width="60px">
+        <Text width="80px">
           {Math.round(activityObject?.elapsed_time / 60)}min
         </Text>
 
         {/* Moving time */}
-        <Text width="60px">
+        <Text width="80px">
           {Math.round(activityObject?.moving_time / 60)}min
         </Text>
 
@@ -169,7 +169,7 @@ const ActivityBoxHeader = ({}: {}) => {
       top="0px"
       color="gray"
       bgColor="#020a20"
-      borderBottom="0.5px solid gray"
+      borderBottom="0.5px solid #333333"
       fontSize="12px"
       fontWeight="bold"
     >
@@ -210,12 +210,12 @@ const ActivityBoxHeader = ({}: {}) => {
         </Text>
 
         {/* Elapsed time */}
-        <Text width="60px" pr="5px">
-          Elapsed time
+        <Text width="80px" pr="5px">
+          Elapsed
         </Text>
 
         {/* Moving time */}
-        <Text width="60px" pr="5px">
+        <Text width="80px" pr="5px">
           Moving time
         </Text>
 

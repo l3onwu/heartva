@@ -16,10 +16,10 @@ export const App = () => {
         <Flex
           justify="center"
           width="100%"
-          height="100vh"
+          minHeight="100vh"
           className="background-gradient"
         >
-          <Box width="95%">
+          <Box width="90%">
             {/* Navbar */}
             {userHook?.userObject && <Navbar />}
 
