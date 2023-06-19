@@ -15,26 +15,33 @@ const ActivityList = () => {
       ) : (
         <Box>
           <ActivityBoxHeader />
-          {userHook?.activities?.map((activityObject: ActivityShortType) => {
-            return (
-              <ActivityBox
-                activityObject={activityObject}
-                key={activityObject?.id}
-              />
-            );
-          })}
+          {userHook?.activities
+            ?.filter((activityObject) => {
+              return (
+                new Date(activityObject?.start_date_local).getFullYear() ===
+                userHook?.statsYear
+              );
+            })
+            ?.map((activityObject: ActivityShortType) => {
+              return (
+                <ActivityBox
+                  activityObject={activityObject}
+                  key={activityObject?.id}
+                />
+              );
+            })}
         </Box>
       )}
-      <Button
-        color="gray"
-        variant="unstyled"
-        size="xs"
-        onClick={() => {
-          userHook?.setActivitiesPage(userHook?.activitiesPage + 1);
-        }}
-      >
-        Load more
-      </Button>
+      {/*<Button*/}
+      {/*  color="gray"*/}
+      {/*  variant="unstyled"*/}
+      {/*  size="xs"*/}
+      {/*  onClick={() => {*/}
+      {/*    userHook?.setActivitiesPage(userHook?.activitiesPage + 1);*/}
+      {/*  }}*/}
+      {/*>*/}
+      {/*  Load more*/}
+      {/*</Button>*/}
     </>
   );
 };
@@ -125,13 +132,19 @@ const ActivityBox = ({
         </Text>
 
         {/* Suffer score */}
-        <Text width="60px" pr={"5px"}>{activityObject?.suffer_score}</Text>
+        <Text width="60px" pr={"5px"}>
+          {activityObject?.suffer_score}
+        </Text>
 
         {/* Elapsed time */}
-        <Text width="60px">{Math.round(activityObject?.elapsed_time / 60)}min</Text>
+        <Text width="60px">
+          {Math.round(activityObject?.elapsed_time / 60)}min
+        </Text>
 
         {/* Moving time */}
-        <Text width="60px">{Math.round(activityObject?.moving_time / 60)}min</Text>
+        <Text width="60px">
+          {Math.round(activityObject?.moving_time / 60)}min
+        </Text>
 
         {/* Gear */}
         <Text width="80px">{activityObject?.gear_id}</Text>
@@ -192,19 +205,29 @@ const ActivityBoxHeader = ({}: {}) => {
         </Text>
 
         {/* Suffer score */}
-        <Text width="60px" pr="5px">Effort</Text>
+        <Text width="60px" pr="5px">
+          Effort
+        </Text>
 
         {/* Elapsed time */}
-        <Text width="60px" pr="5px">Elapsed time</Text>
+        <Text width="60px" pr="5px">
+          Elapsed time
+        </Text>
 
         {/* Moving time */}
-        <Text width="60px" pr="5px">Moving time</Text>
+        <Text width="60px" pr="5px">
+          Moving time
+        </Text>
 
         {/* Gear */}
-        <Text width="80px" pr="5px">Gear</Text>
+        <Text width="80px" pr="5px">
+          Gear
+        </Text>
 
         {/* Sport type */}
-        <Text width="60px" pr="5px">Sport</Text>
+        <Text width="60px" pr="5px">
+          Sport
+        </Text>
 
         {/* Elevation */}
         <Text width="60px">Elevation</Text>
@@ -212,4 +235,3 @@ const ActivityBoxHeader = ({}: {}) => {
     </Box>
   );
 };
-
