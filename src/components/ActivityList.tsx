@@ -25,6 +25,16 @@ const ActivityList = () => {
                     })}
                 </Box>
             )}
+            <Button
+                color="gray"
+                variant="unstyled"
+                size="xs"
+                onClick={() => {
+                    userHook?.setActivitiesPage(userHook?.activitiesPage + 1);
+                }}
+            >
+                Load more
+            </Button>
         </>
     );
 };
@@ -73,7 +83,7 @@ const ActivityBox = ({
         <Box
             py="8px"
             _hover={{backgroundColor: "#171f30", cursor: "pointer"}}
-            color="#986C8D"
+            color="gray"
             fontSize="12px"
         >
             <Stack direction="row">
@@ -141,6 +151,7 @@ const ActivityBox = ({
                     {activityObject?.suffer_score}
                 </Text>
             </Stack>
+
         </Box>
     );
 };
@@ -154,9 +165,9 @@ const ActivityBoxHeader = ({}: {}) => {
             py="8px"
             position="sticky"
             top="0px"
-            color="#986C8D"
+            color="gray"
             bgColor="#020a20"
-            borderBottom="0.5px solid #986C8D"
+            borderBottom="0.5px solid gray"
             fontSize="12px"
             fontWeight="bold"
         >
