@@ -20,7 +20,7 @@ const HRGraphPage = () => {
         <Flex justify="space-between" mb="10px">
           <Flex direction={"row"} align={"center"}>
             <Text
-              fontSize="18px"
+              fontSize="20px"
               color="white"
               fontWeight={"semibold"}
               padding={"0px"}
@@ -117,7 +117,7 @@ const HRGraphPage = () => {
         </Box>
       </Box>
 
-      <Text fontSize="18px" color="white" fontWeight={"semibold"} mb="10px">
+      <Text fontSize="20px" color="white" fontWeight={"semibold"} mb="10px">
         Activities
       </Text>
 

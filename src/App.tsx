@@ -1,36 +1,36 @@
-import {ChakraProvider, Box, theme, Flex} from "@chakra-ui/react";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import { ChakraProvider, Box, theme, Flex } from "@chakra-ui/react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import {useGlobalContext} from "./lib/context";
+import { useGlobalContext } from "./lib/context";
 import Home from "./views/Home";
 import HRGraphPage from "./views/HRGraphPage";
 import TokenExchange from "./views/TokenExchange";
 
 export const App = () => {
-    // State
-    const {userHook} = useGlobalContext();
+  // State
+  const { userHook } = useGlobalContext();
 
-    return (
-        <ChakraProvider theme={theme}>
-            <BrowserRouter>
-                <Flex
-                    justify="center"
-                    width="100%"
-                    height="100vh"
-                    className="background-gradient"
-                >
-                    <Box maxWidth="1000px" width="80%">
-                        {/* Navbar */}
-                        {userHook?.userObject && <Navbar/>}
+  return (
+    <ChakraProvider theme={theme}>
+      <BrowserRouter>
+        <Flex
+          justify="center"
+          width="100%"
+          height="100vh"
+          className="background-gradient"
+        >
+          <Box width="95%">
+            {/* Navbar */}
+            {userHook?.userObject && <Navbar />}
 
-                        {/* Routes */}
-                        <Routes>
-                            <Route path="/token-exchange" element={<TokenExchange/>}/>
-                            <Route path="/" element={<Home/>}/>
-                        </Routes>
-                    </Box>
-                </Flex>
-            </BrowserRouter>
-        </ChakraProvider>
-    );
+            {/* Routes */}
+            <Routes>
+              <Route path="/token-exchange" element={<TokenExchange />} />
+              <Route path="/" element={<Home />} />
+            </Routes>
+          </Box>
+        </Flex>
+      </BrowserRouter>
+    </ChakraProvider>
+  );
 };

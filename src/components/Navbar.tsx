@@ -53,7 +53,7 @@ const Navbar = () => {
                 </Text>
                 <Button
                     color="#AC96B9"
-                    size="xs"
+                    size="sm"
                     style={{backgroundColor: "transparent"}}
                     _hover={{color: "white"}}
                     onClick={() => {
