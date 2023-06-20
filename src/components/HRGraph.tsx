@@ -124,7 +124,7 @@ export default function HRGraph({
     borderColor: "rgb(255, 0, 0)",
     data: hrData,
     fill: false,
-    pointRadius: 0,
+    pointRadius: 2,
     borderWidth: 1.5,
   };
 
@@ -133,7 +133,7 @@ export default function HRGraph({
     borderColor: "rgb(0, 0, 255)",
     data: paceData,
     fill: false,
-    pointRadius: 0,
+    pointRadius: 2,
     borderWidth: 1.5,
   };
 
@@ -142,7 +142,7 @@ export default function HRGraph({
     borderColor: "rgb(0, 255, 0)",
     data: distanceData,
     fill: false,
-    pointRadius: 0,
+    pointRadius: 2,
     borderWidth: 1.5,
   };
 
