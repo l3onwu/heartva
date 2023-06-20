@@ -33,10 +33,6 @@ export const filterButtonFactory = ({
         // key={Math.random() * 100}
       />
     );
-  } else if (filterObject.type === "distanceFilter") {
-    return;
-  } else if (filterObject.type === "dateFilter") {
-    return;
   } else if (filterObject.type === "paceFilter") {
     return (
       <FilterButtonPace

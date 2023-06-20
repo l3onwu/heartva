@@ -42,26 +42,22 @@ const ActivitiesHeader = ({
           let newFilterObject = {};
           if (e.target.value === "hrFilter") {
             newFilterObject = {
-              id: filterObjects[0] ? filterObjects[filterObjects.length - 1]?.id + 1 : 0,
+              id: filterObjects[0]
+                ? filterObjects[filterObjects.length - 1]?.id + 1
+                : 0,
               type: "hrFilter",
               data: [0, 100],
             };
           }
-          if (e.target.value === "dateFilter") {
-            newFilterObject = {
-              id: filterObjects[0] ? filterObjects[filterObjects.length - 1]?.id + 1 : 0,
-              type: "dateFilter",
-              data: ["date1", "date2"],
-            };
-          }
           if (e.target.value === "paceFilter") {
             newFilterObject = {
-              id: filterObjects[0] ? filterObjects[filterObjects.length - 1]?.id + 1 : 0,
+              id: filterObjects[0]
+                ? filterObjects[filterObjects.length - 1]?.id + 1
+                : 0,
               type: "paceFilter",
               data: [null, null],
             };
           }
-
           // @ts-ignore
           setFilterObjects([...filterObjects, newFilterObject]);
           setSelectedFilter("");
@@ -69,7 +65,6 @@ const ActivitiesHeader = ({
       >
         <option value={""}>Add filter</option>
         <option value={"hrFilter"}>HR</option>
-        <option value={"dateFilter"}>Date</option>
         <option value={"paceFilter"}>Pace</option>
       </Select>
 
