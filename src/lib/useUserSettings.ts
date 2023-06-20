@@ -2,7 +2,7 @@ import axios from "axios";
 import localforage from "localforage";
 import { useState, useEffect } from "react";
 import { ActivityShortType, UserType } from "./types";
-import { mockActivities } from "../mock/mockData";
+import { mockActivities } from "../mockData";
 
 export interface UserHookType {
   firstLoad: boolean;
@@ -16,8 +16,6 @@ export interface UserHookType {
   activitiesLoading: boolean;
   activitiesPage: number;
   setActivitiesPage: Function;
-  statsYear: number;
-  setStatsYear: Function;
 }
 
 export default function useUserSettings() {
@@ -25,10 +23,11 @@ export default function useUserSettings() {
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
   const [userLoading, setUserLoading] = useState<boolean>(true);
   const [userObject, setUserObject] = useState<UserType | null>(null);
+
   const [activities, setActivities] = useState<ActivityShortType[]>([]);
   const [activitiesLoading, setActivitiesLoading] = useState(true);
   const [activitiesPage, setActivitiesPage] = useState<Number>(1);
-  const [statsYear, setStatsYear] = useState<Number>(new Date().getFullYear());
+
 
   // Refresh token
   useEffect(() => {
@@ -102,6 +101,8 @@ export default function useUserSettings() {
     }
   }, [userObject, activitiesPage]);
 
+  // console.log(activities)
+
   return {
     firstLoad,
     setFirstLoad,
@@ -114,7 +115,5 @@ export default function useUserSettings() {
     activitiesLoading,
     activitiesPage,
     setActivitiesPage,
-    statsYear,
-    setStatsYear,
   };
 }

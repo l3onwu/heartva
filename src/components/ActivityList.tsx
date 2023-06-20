@@ -1,8 +1,15 @@
-import { Box, Text, Button, Spinner, Stack } from "@chakra-ui/react";
+import { Box, Text, Spinner, Stack } from "@chakra-ui/react";
 import { useGlobalContext } from "../lib/context";
 import { ActivityShortType } from "../lib/types";
+import {calculatePaceFromDistanceAndTime, clipText, secondsToMinPace} from "../lib/helpers";
 
-const ActivityList = () => {
+const ActivityList = ({
+  filteredActivities,
+  statsYear,
+}: {
+  filteredActivities: ActivityShortType[];
+  statsYear: number;
+}) => {
   const { userHook } = useGlobalContext();
 
   // TSX
@@ -15,11 +22,11 @@ const ActivityList = () => {
       ) : (
         <Box>
           <ActivityBoxHeader />
-          {userHook?.activities
+          {filteredActivities
             ?.filter((activityObject) => {
               return (
                 new Date(activityObject?.start_date_local).getFullYear() ===
-                userHook?.statsYear
+                statsYear
               );
             })
             ?.map((activityObject: ActivityShortType) => {
@@ -32,6 +39,8 @@ const ActivityList = () => {
             })}
         </Box>
       )}
+
+      {/* Load more button (for dev use) */}
       {/*<Button*/}
       {/*  color="gray"*/}
       {/*  variant="unstyled"*/}
@@ -53,38 +62,6 @@ const ActivityBox = ({
 }: {
   activityObject: ActivityShortType;
 }) => {
-  // Functions
-  // TODO Refactor these to helper functions
-  const clipText = (text: string, length: number): string => {
-    // If text is longer, use ...
-    let trailingDots = "";
-    if (text.length > length) {
-      trailingDots = "...";
-    }
-    return `${text.slice(0, length)}${trailingDots}`;
-  };
-
-  const calculatePaceFromDistanceAndTime = (
-    distance: number,
-    time: number
-  ): number => {
-    if (distance === 0 || time === 0) return 0;
-    // Rounds to
-    return time / (distance / 1000);
-  };
-
-  const secondsToMinPace = (secondsPace: number): string => {
-    // Get full minutes
-    const fullMin = Math.floor(secondsPace / 60);
-    // Get remainder seconds, rounded to 2dp
-    const remainingSeconds = Math.round(secondsPace % 60);
-    // Add 0 if seconds is single digit
-    let extraDigit = "";
-    if (remainingSeconds < 10) extraDigit = "0";
-    // Format numbers
-    return `${fullMin}.${extraDigit}${remainingSeconds}`;
-  };
-
   // TSX
   return (
     <Box

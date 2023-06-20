@@ -19,7 +19,7 @@ const Dashboard = () => {
       <Flex direction="row" justify="space-between" pb="100px">
         {/* Left side */}
         <Box width="50%">
-          <ActivityList />
+          {/*<ActivityList />*/}
         </Box>
 
         {/* Right sidebar */}

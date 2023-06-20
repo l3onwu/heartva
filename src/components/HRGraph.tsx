@@ -14,6 +14,7 @@ import "chartjs-adapter-luxon";
 import { Line } from "react-chartjs-2";
 import { useGlobalContext } from "../lib/context";
 import { AxesType } from "../views/HRGraphPage";
+import { ActivityShortType } from "../lib/types";
 
 ChartJS.register(
   CategoryScale,
@@ -31,30 +32,30 @@ export default function HRGraph({
   axesOne,
   axesTwo,
   axesThree,
+  filteredActivities,
+  statsYear,
 }: {
   chartKey: any;
   axesOne: AxesType;
   axesTwo: AxesType;
   axesThree: AxesType;
+  filteredActivities: ActivityShortType[];
+  statsYear: number;
 }) {
   const { userHook } = useGlobalContext();
 
   // Data functions
-  let dateLabels = userHook?.activities
+  let dateLabels = filteredActivities
     ?.filter((act) => {
-      return (
-        new Date(act?.start_date_local).getFullYear() === userHook?.statsYear
-      );
+      return new Date(act?.start_date_local).getFullYear() === statsYear;
     })
     ?.map((act) => {
       return new Date(act?.start_date_local);
     });
 
-  let paceData = userHook?.activities
+  let paceData = filteredActivities
     ?.filter((act) => {
-      return (
-        new Date(act?.start_date_local).getFullYear() === userHook?.statsYear
-      );
+      return new Date(act?.start_date_local).getFullYear() === statsYear;
     })
     .map((act) => {
       return (
@@ -64,21 +65,17 @@ export default function HRGraph({
       );
     });
 
-  let distanceData = userHook?.activities
+  let distanceData = filteredActivities
     ?.filter((act) => {
-      return (
-        new Date(act?.start_date_local).getFullYear() === userHook?.statsYear
-      );
+      return new Date(act?.start_date_local).getFullYear() === statsYear;
     })
     .map((act) => {
       return act?.distance / 100;
     });
 
-  let hrData = userHook?.activities
+  let hrData = filteredActivities
     ?.filter((act) => {
-      return (
-        new Date(act?.start_date_local).getFullYear() === userHook?.statsYear
-      );
+      return new Date(act?.start_date_local).getFullYear() === statsYear;
     })
     ?.map((act) => {
       return act?.average_heartrate;
@@ -98,8 +95,8 @@ export default function HRGraph({
             month: "MMM" as const,
           },
         },
-        min: new Date(userHook?.statsYear, 0, 1, 0, 0, 0),
-        max: new Date(userHook?.statsYear, 11, 30, 23, 59, 59),
+        min: new Date(statsYear, 0, 1, 0, 0, 0),
+        max: new Date(statsYear, 11, 30, 23, 59, 59),
       },
       y: {
         grid: {
@@ -153,7 +150,6 @@ export default function HRGraph({
   const aggregateDataSet = () => {
     const totalSet = [];
     for (const ax of [axesOne, axesTwo, axesThree]) {
-      console.log(ax);
       if (ax === "heartRate") {
         totalSet.push(hrDataSet);
       } else if (ax === "pace") {

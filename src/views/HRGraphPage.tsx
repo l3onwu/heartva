@@ -1,122 +1,85 @@
-import { Flex, Box, Text, Stack, Select, Button } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { Box } from "@chakra-ui/react";
+import { useState } from "react";
 import ActivityList from "../components/ActivityList";
 import HRGraph from "../components/HRGraph";
 import { useGlobalContext } from "../lib/context";
+import ActivitiesHeader from "../components/ActivitiesHeader";
+import GraphHeader from "../components/GraphHeader";
+import { calculatePaceFromDistanceAndTime } from "../lib/helpers";
 
 export type AxesType = "pace" | "heartRate" | "distance" | "-";
+export interface FilterObjectType {
+  id: number;
+  type: string;
+  data: any;
+}
 
 const HRGraphPage = () => {
+  // General state
   const { userHook } = useGlobalContext();
   const [chartKey, setChartKey] = useState(0); // Force re-render of chart, for nice loading
+  const [componentHeight, setComponentHeight] = useState(180);
+
+  // Graph state
   const [axesOne, setAxesOne] = useState<AxesType>("heartRate");
   const [axesTwo, setAxesTwo] = useState<AxesType>("pace");
   const [axesThree, setAxesThree] = useState<AxesType>("-");
-  const [componentHeight, setComponentHeight] = useState(180);
 
+  // Filter data state
+  const [statsYear, setStatsYear] = useState<number>(new Date().getFullYear());
+  const [selectedFilter, setSelectedFilter] = useState<string>("");
+  const [filterObjects, setFilterObjects] = useState<FilterObjectType[]>([]);
+  // console.log(filterObjects);
+
+  // Apply filters to activities
+  let filteredActivities = userHook?.activities.map((act) => {
+    return act;
+  });
+  // Loop over filters and apply specific filter functions
+  for (let i = 0; i < filterObjects.length; i++) {
+    if (filterObjects[i]?.type === "hrFilter") {
+      filteredActivities = filteredActivities.filter((act) => {
+        return (
+          act?.average_heartrate >= filterObjects[i]?.data[0] * 2 &&
+          act?.average_heartrate <= filterObjects[i]?.data[1] * 2
+        );
+      });
+    } else if (filterObjects[i]?.type === "paceFilter") {
+      filteredActivities = filteredActivities.filter((act) => {
+        const secondsPace = calculatePaceFromDistanceAndTime(
+          act?.distance,
+          act?.moving_time
+        );
+        return (
+          (secondsPace >= filterObjects[i]?.data[0] ||
+            filterObjects[i]?.data[0] === null) &&
+          (secondsPace <= filterObjects[i]?.data[1] ||
+            filterObjects[i]?.data[1] === null)
+        );
+      });
+    }
+  }
+
+  // TSX
   return (
     <Box width="100%">
-      <Box mb="24px" position={"sticky"} top={"20px"}>
-        {/*Page heading */}
-        <Flex justify="space-between" mb="15px">
-          <Flex direction={"row"} align={"center"}>
-            <Text
-              fontSize="20px"
-              color="white"
-              fontWeight={"semibold"}
-              padding={"0px"}
-              mr={"7px"}
-            >
-              Trends for
-            </Text>
-            <Select
-              size={"xs"}
-              fontSize="14px"
-              color="white"
-              fontWeight={"semibold"}
-              defaultValue={2023}
-              width={"fit-content"}
-              borderRadius={"5px"}
-              padding={"0px"}
-              borderColor={"#444444"}
-              mr={"20px"}
-              onChange={(e) => {
-                userHook?.setStatsYear(parseInt(e.target.value));
-                setChartKey(chartKey + 1);
-              }}
-            >
-              <option value={2023}>2023</option>
-              <option value={2022}>2022</option>
-              <option value={2018}>2018</option>
-            </Select>
-            <Button
-              size="xs"
-              variant={"unstyled"}
-              color={"white"}
-              onClick={() => {
-                setComponentHeight(componentHeight === 600 ? 180 : 600);
-              }}
-            >
-              Full
-            </Button>
-          </Flex>
-
-          {/*Filters*/}
-          <Stack direction={"row"} spacing={2}>
-            {/*Axes one*/}
-            <Select
-              size="xs"
-              variant="outline"
-              defaultValue={axesOne}
-              color={"#444444"}
-              borderColor={"#444444"}
-              onChange={(e) => {
-                // @ts-ignore
-                setAxesOne(e.target.value);
-              }}
-            >
-              <option value="distance">Distance</option>
-              <option value="pace">Pace</option>
-              <option value="heartRate">Heartrate</option>
-            </Select>
-
-            {/*Axes two*/}
-            <Select
-              size="xs"
-              variant="outline"
-              defaultValue={axesTwo}
-              color={"#444444"}
-              borderColor={"#444444"}
-              onChange={(e) => {
-                // @ts-ignore
-                setAxesTwo(e.target.value);
-              }}
-            >
-              <option value="-">-</option>
-              <option value="distance">Distance</option>
-              <option value="pace">Pace</option>
-              <option value="heartRate">Heartrate</option>
-            </Select>
-
-            {/*Axes three*/}
-            <Select
-              size="xs"
-              variant="outline"
-              defaultValue={axesThree}
-              color={"#444444"}
-              borderColor={"#444444"}
-              onChange={(e) => {
-                // @ts-ignore
-                setAxesThree(e.target.value);
-              }}
-            >
-              <option value="-">-</option>
-              <option value="distance">Distance</option>
-              <option value="pace">Pace</option>
-              <option value="heartRate">Heartrate</option>
-            </Select>
-          </Stack>
-        </Flex>
+      {/* Graph */}
+      <Box mb="24px">
+        {/* Graph header */}
+        <GraphHeader
+          chartKey={chartKey}
+          setChartKey={setChartKey}
+          componentHeight={componentHeight}
+          setComponentHeight={setComponentHeight}
+          axesOne={axesOne}
+          axesTwo={axesTwo}
+          axesThree={axesThree}
+          setAxesOne={setAxesOne}
+          setAxesTwo={setAxesTwo}
+          setAxesThree={setAxesThree}
+          statsYear={statsYear}
+          setStatsYear={setStatsYear}
+        />
 
         {/* HR Graph */}
         <Box
@@ -132,17 +95,25 @@ const HRGraphPage = () => {
             axesOne={axesOne}
             axesTwo={axesTwo}
             axesThree={axesThree}
+            filteredActivities={filteredActivities}
+            statsYear={statsYear}
           />
         </Box>
       </Box>
 
+      {/* Activities */}
+      {/* Conditionally render on minimized graph */}
       {componentHeight === 180 && (
         <Box>
-          <Text fontSize="20px" color="white" fontWeight={"semibold"} mb="10px">
-            Activities
-          </Text>
+          {/*Activities Header*/}
+          <ActivitiesHeader
+            selectedFilter={selectedFilter}
+            filterObjects={filterObjects}
+            setFilterObjects={setFilterObjects}
+            setSelectedFilter={setSelectedFilter}
+          />
 
-          {/* HR Table */}
+          {/* Activities List */}
           <Box
             height="calc(100vh - 370px)"
             width="100%"
@@ -150,7 +121,10 @@ const HRGraphPage = () => {
             pb="20px"
             px="5px"
           >
-            <ActivityList />
+            <ActivityList
+              filteredActivities={filteredActivities}
+              statsYear={statsYear}
+            />
           </Box>
         </Box>
       )}
