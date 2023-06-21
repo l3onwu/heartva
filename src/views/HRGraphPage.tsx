@@ -14,6 +14,14 @@ export interface FilterObjectType {
   data: any;
 }
 
+export interface MegaFilterType {
+  id: number;
+  pace: any;
+  hr: any;
+  distance: any;
+  sport: string;
+}
+
 const HRGraphPage = () => {
   // General state
   const { userHook } = useGlobalContext();
@@ -27,39 +35,41 @@ const HRGraphPage = () => {
 
   // Filter data state
   const [statsYear, setStatsYear] = useState<number>(new Date().getFullYear());
-  const [selectedFilter, setSelectedFilter] = useState<string>("");
-  const [filterObjects, setFilterObjects] = useState<FilterObjectType[]>([]);
-  // console.log(filterObjects);
+  const [megaFilter, setMegaFilter] = useState<MegaFilterType>({
+    id: 0,
+    pace: [null, null],
+    hr: [null, null],
+    distance: [null, null],
+    sport: "Run",
+  });
 
   // Apply filters to activities
   // Begin by filtering by year
   let filteredActivities = userHook?.activities.filter((act) => {
     return new Date(act?.start_date_local).getFullYear() === statsYear;
   });
-  // Loop over filters and apply specific filter functions
-  for (let i = 0; i < filterObjects.length; i++) {
-    if (filterObjects[i]?.type === "hrFilter") {
-      filteredActivities = filteredActivities.filter((act) => {
-        return (
-          act?.average_heartrate >= filterObjects[i]?.data[0] * 2 &&
-          act?.average_heartrate <= filterObjects[i]?.data[1] * 2
-        );
-      });
-    } else if (filterObjects[i]?.type === "paceFilter") {
-      filteredActivities = filteredActivities.filter((act) => {
-        const secondsPace = calculatePaceFromDistanceAndTime(
-          act?.distance,
-          act?.moving_time
-        );
-        return (
-          (secondsPace >= filterObjects[i]?.data[0] ||
-            filterObjects[i]?.data[0] === null) &&
-          (secondsPace <= filterObjects[i]?.data[1] ||
-            filterObjects[i]?.data[1] === null)
-        );
-      });
-    }
-  }
+
+  // Filter pace
+  filteredActivities = filteredActivities.filter((act) => {
+    const secondsPace = calculatePaceFromDistanceAndTime(
+      act?.distance,
+      act?.moving_time
+    );
+    return (
+      (secondsPace >= megaFilter?.pace[0] || megaFilter?.pace[0] === null) &&
+      (secondsPace <= megaFilter?.pace[1] || megaFilter?.pace[1] === null)
+    );
+  });
+
+  // Filter hr
+  filteredActivities = filteredActivities.filter((act) => {
+    return (
+      (act?.average_heartrate >= megaFilter?.hr[0] ||
+        megaFilter?.hr[0] === null) &&
+      (act?.average_heartrate <= megaFilter?.hr[1] ||
+        megaFilter?.hr[1] === null)
+    );
+  });
 
   // TSX
   return (
@@ -108,10 +118,8 @@ const HRGraphPage = () => {
         <Box>
           {/*Activities Header*/}
           <ActivitiesHeader
-            selectedFilter={selectedFilter}
-            filterObjects={filterObjects}
-            setFilterObjects={setFilterObjects}
-            setSelectedFilter={setSelectedFilter}
+            megaFilter={megaFilter}
+            setMegaFilter={setMegaFilter}
           />
 
           {/* Activities List */}

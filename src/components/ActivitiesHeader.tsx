@@ -1,82 +1,158 @@
-import { filterButtonFactory } from "./FilterButtonFactory";
-import { FilterObjectType } from "../views/HRGraphPage";
-import { Stack, Text, Select } from "@chakra-ui/react";
+import { FilterObjectType, MegaFilterType } from "../views/HRGraphPage";
+import {
+  Stack,
+  Text,
+  Flex,
+  PopoverBody,
+  PopoverContent,
+  Popover,
+  PopoverTrigger,
+  PopoverArrow,
+  Input,
+  Box,
+  useDisclosure,
+} from "@chakra-ui/react";
+import { IoMdOptions } from "react-icons/io";
 
 const ActivitiesHeader = ({
-  selectedFilter,
-  filterObjects,
-  setFilterObjects,
-  setSelectedFilter,
+  megaFilter,
+  setMegaFilter,
 }: {
-  selectedFilter: string;
-  filterObjects: FilterObjectType[];
-  setFilterObjects: React.Dispatch<React.SetStateAction<FilterObjectType[]>>;
-  setSelectedFilter: React.Dispatch<React.SetStateAction<string>>;
+  megaFilter: MegaFilterType;
+  setMegaFilter: any;
 }) => {
+  const { isOpen, onToggle, onClose } = useDisclosure();
+
+  // TSX
   return (
-    <Stack
+    <Flex
       direction={"row"}
-      spacing={4}
+      justify={"space-between"}
       mb={"10px"}
-      align={"baseline"}
+      align={"center"}
       width={"100%"}
       overflow={"scroll"}
     >
-      <Text fontSize="20px" color="white" fontWeight={"semibold"} mb="10px">
+      {/*Activities heading*/}
+      <Text
+        fontSize="20px"
+        color="white"
+        fontWeight={"semibold"}
+        mb="10px"
+        mr={"10px"}
+      >
         Activities
       </Text>
 
-      {/*Filter buttons*/}
-      {/*<Select*/}
-      {/*  size={"xs"}*/}
-      {/*  fontSize="14px"*/}
-      {/*  color="white"*/}
-      {/*  fontWeight={"semibold"}*/}
-      {/*  value={selectedFilter}*/}
-      {/*  width={"fit-content"}*/}
-      {/*  borderRadius={"5px"}*/}
-      {/*  padding={"0px"}*/}
-      {/*  borderColor={"#444444"}*/}
-      {/*  mr={"20px"}*/}
-      {/*  onChange={(e) => {*/}
-      {/*    let newFilterObject = {};*/}
-      {/*    if (e.target.value === "hrFilter") {*/}
-      {/*      newFilterObject = {*/}
-      {/*        id: filterObjects[0]*/}
-      {/*          ? filterObjects[filterObjects.length - 1]?.id + 1*/}
-      {/*          : 0,*/}
-      {/*        type: "hrFilter",*/}
-      {/*        data: [0, 100],*/}
-      {/*      };*/}
-      {/*    }*/}
-      {/*    if (e.target.value === "paceFilter") {*/}
-      {/*      newFilterObject = {*/}
-      {/*        id: filterObjects[0]*/}
-      {/*          ? filterObjects[filterObjects.length - 1]?.id + 1*/}
-      {/*          : 0,*/}
-      {/*        type: "paceFilter",*/}
-      {/*        data: [null, null],*/}
-      {/*      };*/}
-      {/*    }*/}
-      {/*    // @ts-ignore*/}
-      {/*    setFilterObjects([...filterObjects, newFilterObject]);*/}
-      {/*    setSelectedFilter("");*/}
-      {/*  }}*/}
-      {/*>*/}
-      {/*  <option value={""}>Add filter</option>*/}
-      {/*  <option value={"hrFilter"}>HR</option>*/}
-      {/*  <option value={"paceFilter"}>Pace</option>*/}
-      {/*</Select>*/}
+      {/*Filter popover*/}
+      <Popover
+        placement={"bottom-end"}
+        isOpen={isOpen}
+        onClose={onClose}
+        returnFocusOnClose={false}
+      >
+        {/*Button*/}
+        <PopoverTrigger>
+          <Box
+            aria-label="Settings"
+            color={"gray"}
+            width={"fit-content"}
+            onClick={onToggle}
+            bgColor={isOpen ? "#0c1733" : "transparent"}
+            padding={"5px"}
+            borderRadius={"5px"}
+            animation={"background-color 0.2s"}
+            _hover={{ cursor: "pointer", bgColor: "#0c1733" }}
+            position={"relative"}
+            top={"-4px"}
+          >
+            <IoMdOptions size={"18px"} />
+          </Box>
+        </PopoverTrigger>
 
-      {/*/!*Map filter objects into own components*!/*/}
-      {/*{filterObjects.map((filterObject: FilterObjectType) => {*/}
-      {/*  return filterButtonFactory({*/}
-      {/*    filterObject,*/}
-      {/*    filterObjects,*/}
-      {/*    setFilterObjects,*/}
-      {/*  });*/}
-      {/*})}*/}
-    </Stack>
+        {/*Content*/}
+        <PopoverContent
+          width={"250px"}
+          height={"250px"}
+          overflow={"scroll"}
+          borderRadius={"5px"}
+        >
+          <PopoverArrow />
+          <PopoverBody>
+            <Stack direction={"column"}>
+              {/*Top text*/}
+              <Text fontSize={"11px"}>HR options (seconds/km)</Text>
+
+              {/*HR*/}
+              <Stack direction={"row"}>
+                <Text fontSize={"12px"}>Min</Text>
+                <Input
+                  size={"sm"}
+                  value={megaFilter?.hr[0]}
+                  onChange={(e) => {
+                    setMegaFilter({
+                      ...megaFilter,
+                      hr: [parseInt(e.target.value) || null, megaFilter?.hr[1]],
+                    });
+                  }}
+                />
+              </Stack>
+              <Stack direction={"row"}>
+                <Text fontSize={"12px"}>Max</Text>
+                <Input
+                  size={"sm"}
+                  value={megaFilter?.hr[1]}
+                  onChange={(e) => {
+                    setMegaFilter({
+                      ...megaFilter,
+                      hr: [megaFilter?.hr[0], parseInt(e.target.value) || null],
+                    });
+                  }}
+                />
+              </Stack>
+
+              {/*HR*/}
+              {/*Top text*/}
+              <Text fontSize={"11px"}>Pace options (seconds/km)</Text>
+
+              {/*Min/Max*/}
+              <Stack direction={"row"}>
+                <Text fontSize={"12px"}>Min</Text>
+                <Input
+                  size={"sm"}
+                  value={megaFilter?.pace[0]}
+                  onChange={(e) => {
+                    setMegaFilter({
+                      ...megaFilter,
+                      pace: [
+                        parseInt(e.target.value) || null,
+                        megaFilter?.pace[1],
+                      ],
+                    });
+                  }}
+                />
+              </Stack>
+              <Stack direction={"row"}>
+                <Text fontSize={"12px"}>Max</Text>
+                <Input
+                  size={"sm"}
+                  value={megaFilter?.pace[1]}
+                  onChange={(e) => {
+                    setMegaFilter({
+                      ...megaFilter,
+                      pace: [
+                        megaFilter?.pace[0],
+                        parseInt(e.target.value) || null,
+                      ],
+                    });
+                  }}
+                />
+              </Stack>
+            </Stack>
+          </PopoverBody>
+        </PopoverContent>
+      </Popover>
+    </Flex>
   );
 };
 
