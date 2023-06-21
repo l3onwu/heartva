@@ -27,55 +27,55 @@ const ActivitiesHeader = ({
       </Text>
 
       {/*Filter buttons*/}
-      <Select
-        size={"xs"}
-        fontSize="14px"
-        color="white"
-        fontWeight={"semibold"}
-        value={selectedFilter}
-        width={"fit-content"}
-        borderRadius={"5px"}
-        padding={"0px"}
-        borderColor={"#444444"}
-        mr={"20px"}
-        onChange={(e) => {
-          let newFilterObject = {};
-          if (e.target.value === "hrFilter") {
-            newFilterObject = {
-              id: filterObjects[0]
-                ? filterObjects[filterObjects.length - 1]?.id + 1
-                : 0,
-              type: "hrFilter",
-              data: [0, 100],
-            };
-          }
-          if (e.target.value === "paceFilter") {
-            newFilterObject = {
-              id: filterObjects[0]
-                ? filterObjects[filterObjects.length - 1]?.id + 1
-                : 0,
-              type: "paceFilter",
-              data: [null, null],
-            };
-          }
-          // @ts-ignore
-          setFilterObjects([...filterObjects, newFilterObject]);
-          setSelectedFilter("");
-        }}
-      >
-        <option value={""}>Add filter</option>
-        <option value={"hrFilter"}>HR</option>
-        <option value={"paceFilter"}>Pace</option>
-      </Select>
+      {/*<Select*/}
+      {/*  size={"xs"}*/}
+      {/*  fontSize="14px"*/}
+      {/*  color="white"*/}
+      {/*  fontWeight={"semibold"}*/}
+      {/*  value={selectedFilter}*/}
+      {/*  width={"fit-content"}*/}
+      {/*  borderRadius={"5px"}*/}
+      {/*  padding={"0px"}*/}
+      {/*  borderColor={"#444444"}*/}
+      {/*  mr={"20px"}*/}
+      {/*  onChange={(e) => {*/}
+      {/*    let newFilterObject = {};*/}
+      {/*    if (e.target.value === "hrFilter") {*/}
+      {/*      newFilterObject = {*/}
+      {/*        id: filterObjects[0]*/}
+      {/*          ? filterObjects[filterObjects.length - 1]?.id + 1*/}
+      {/*          : 0,*/}
+      {/*        type: "hrFilter",*/}
+      {/*        data: [0, 100],*/}
+      {/*      };*/}
+      {/*    }*/}
+      {/*    if (e.target.value === "paceFilter") {*/}
+      {/*      newFilterObject = {*/}
+      {/*        id: filterObjects[0]*/}
+      {/*          ? filterObjects[filterObjects.length - 1]?.id + 1*/}
+      {/*          : 0,*/}
+      {/*        type: "paceFilter",*/}
+      {/*        data: [null, null],*/}
+      {/*      };*/}
+      {/*    }*/}
+      {/*    // @ts-ignore*/}
+      {/*    setFilterObjects([...filterObjects, newFilterObject]);*/}
+      {/*    setSelectedFilter("");*/}
+      {/*  }}*/}
+      {/*>*/}
+      {/*  <option value={""}>Add filter</option>*/}
+      {/*  <option value={"hrFilter"}>HR</option>*/}
+      {/*  <option value={"paceFilter"}>Pace</option>*/}
+      {/*</Select>*/}
 
-      {/*Map filter objects into own components*/}
-      {filterObjects.map((filterObject: FilterObjectType) => {
-        return filterButtonFactory({
-          filterObject,
-          filterObjects,
-          setFilterObjects,
-        });
-      })}
+      {/*/!*Map filter objects into own components*!/*/}
+      {/*{filterObjects.map((filterObject: FilterObjectType) => {*/}
+      {/*  return filterButtonFactory({*/}
+      {/*    filterObject,*/}
+      {/*    filterObjects,*/}
+      {/*    setFilterObjects,*/}
+      {/*  });*/}
+      {/*})}*/}
     </Stack>
   );
 };

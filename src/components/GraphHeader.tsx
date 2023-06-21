@@ -1,4 +1,5 @@
-import { Flex, Text, Stack, Select, Button } from "@chakra-ui/react";
+import { Flex, Text, Stack, Select, Box } from "@chakra-ui/react";
+import { FiMaximize2 } from "react-icons/fi";
 
 const GraphHeader = ({
   chartKey,
@@ -63,20 +64,10 @@ const GraphHeader = ({
           <option value={2019}>2019</option>
           <option value={2018}>2018</option>
         </Select>
-        <Button
-          size="xs"
-          variant={"unstyled"}
-          color={"white"}
-          onClick={() => {
-            setComponentHeight(componentHeight === 600 ? 180 : 600);
-          }}
-        >
-          Full
-        </Button>
       </Flex>
 
       {/*Graph axes chooser*/}
-      <Stack direction={"row"} spacing={2}>
+      <Stack direction={"row"} spacing={2} align={"center"}>
         {/*Axes one*/}
         <Select
           size="xs"
@@ -126,6 +117,23 @@ const GraphHeader = ({
           <option value="pace">Pace</option>
           <option value="heartRate">Heartrate</option>
         </Select>
+
+        <Box
+          aria-label="Settings"
+          color={"gray"}
+          width={"fit-content"}
+          // bgColor={"#444444"}
+          bgColor={componentHeight === 600 ? "#0c1733" : "transparent"}
+          padding={"5px"}
+          borderRadius={"5px"}
+          onClick={() => {
+            setComponentHeight(componentHeight === 600 ? 180 : 600);
+          }}
+          animation={"background-color 0.2s"}
+          _hover={{ cursor: "pointer", bgColor: "#0c1733" }}
+        >
+          <FiMaximize2 size={"18px"} />
+        </Box>
       </Stack>
     </Flex>
   );
