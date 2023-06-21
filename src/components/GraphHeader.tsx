@@ -1,5 +1,5 @@
 import { Flex, Text, Stack, Select, Box } from "@chakra-ui/react";
-import { FiMaximize2 } from "react-icons/fi";
+import { FiMaximize2, FiMinimize2 } from "react-icons/fi";
 
 const GraphHeader = ({
   chartKey,
@@ -51,7 +51,7 @@ const GraphHeader = ({
           borderRadius={"5px"}
           padding={"0px"}
           borderColor={"#444444"}
-          mr={"20px"}
+          mr={"10px"}
           onChange={(e) => {
             setStatsYear(parseInt(e.target.value));
             setChartKey(chartKey + 1);
@@ -64,6 +64,28 @@ const GraphHeader = ({
           <option value={2019}>2019</option>
           <option value={2018}>2018</option>
         </Select>
+
+        {/*Maximize graph button*/}
+        <Box
+          aria-label="Settings"
+          color={"gray"}
+          width={"fit-content"}
+          // bgColor={"#444444"}
+          bgColor={componentHeight === 600 ? "#0c1733" : "transparent"}
+          padding={"5px"}
+          borderRadius={"5px"}
+          onClick={() => {
+            setComponentHeight(componentHeight === 600 ? 180 : 600);
+          }}
+          animation={"background-color 0.2s"}
+          _hover={{ cursor: "pointer", bgColor: "#0c1733" }}
+        >
+          {componentHeight === 600 ? (
+            <FiMinimize2 size={"18px"} />
+          ) : (
+            <FiMaximize2 size={"18px"} />
+          )}
+        </Box>
       </Flex>
 
       {/*Graph axes chooser*/}
@@ -117,23 +139,6 @@ const GraphHeader = ({
           <option value="pace">Pace</option>
           <option value="heartRate">Heartrate</option>
         </Select>
-
-        <Box
-          aria-label="Settings"
-          color={"gray"}
-          width={"fit-content"}
-          // bgColor={"#444444"}
-          bgColor={componentHeight === 600 ? "#0c1733" : "transparent"}
-          padding={"5px"}
-          borderRadius={"5px"}
-          onClick={() => {
-            setComponentHeight(componentHeight === 600 ? 180 : 600);
-          }}
-          animation={"background-color 0.2s"}
-          _hover={{ cursor: "pointer", bgColor: "#0c1733" }}
-        >
-          <FiMaximize2 size={"18px"} />
-        </Box>
       </Stack>
     </Flex>
   );
