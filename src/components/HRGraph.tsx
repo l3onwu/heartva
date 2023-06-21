@@ -1,5 +1,6 @@
 import {
   Chart as ChartJS,
+  Interaction,
   CategoryScale,
   LinearScale,
   PointElement,
@@ -11,10 +12,17 @@ import {
 } from "chart.js";
 import "chartjs-adapter-luxon";
 
+// @ts-ignore
+import { CrosshairPlugin, Interpolate } from "chartjs-plugin-crosshair";
+
 import { Line } from "react-chartjs-2";
 import { useGlobalContext } from "../lib/context";
 import { AxesType } from "../views/HRGraphPage";
 import { ActivityShortType } from "../lib/types";
+import {
+  calculatePaceFromDistanceAndTime,
+  secondsToMinPace,
+} from "../lib/helpers";
 
 ChartJS.register(
   CategoryScale,
@@ -24,8 +32,12 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  TimeScale
+  TimeScale,
+  CrosshairPlugin
 );
+
+// @ts-ignore
+Interaction.modes.interpolate = Interpolate;
 
 export default function HRGraph({
   chartKey,
@@ -45,41 +57,25 @@ export default function HRGraph({
   const { userHook } = useGlobalContext();
 
   // Data functions
-  let dateLabels = filteredActivities
-    ?.filter((act) => {
-      return new Date(act?.start_date_local).getFullYear() === statsYear;
-    })
-    ?.map((act) => {
-      return new Date(act?.start_date_local);
-    });
+  let dateLabels = filteredActivities?.map((act) => {
+    return new Date(act?.start_date_local);
+  });
 
-  let paceData = filteredActivities
-    ?.filter((act) => {
-      return new Date(act?.start_date_local).getFullYear() === statsYear;
-    })
-    .map((act) => {
-      return (
-        (Math.round((act?.moving_time / (act?.distance / 1000) / 60) * 100) /
-          100) *
-        20
-      );
-    });
+  let paceData = filteredActivities.map((act) => {
+    return (
+      (Math.round((act?.moving_time / (act?.distance / 1000) / 60) * 100) /
+        100) *
+      20
+    );
+  });
 
-  let distanceData = filteredActivities
-    ?.filter((act) => {
-      return new Date(act?.start_date_local).getFullYear() === statsYear;
-    })
-    .map((act) => {
-      return act?.distance / 100;
-    });
+  let distanceData = filteredActivities.map((act) => {
+    return act?.distance / 100;
+  });
 
-  let hrData = filteredActivities
-    ?.filter((act) => {
-      return new Date(act?.start_date_local).getFullYear() === statsYear;
-    })
-    ?.map((act) => {
-      return act?.average_heartrate;
-    });
+  let hrData = filteredActivities?.map((act) => {
+    return act?.average_heartrate;
+  });
 
   // Graph config
   const options = {
@@ -106,10 +102,65 @@ export default function HRGraph({
         },
       },
     },
+    hover: {
+      intersect: false,
+    },
     plugins: {
       legend: {
         display: false,
         position: "bottom" as const,
+      },
+      tooltip: {
+        // mode: "interpolate",
+        intersect: false,
+        position: "nearest",
+        borderWidth: 1,
+        borderColor: "white",
+        backgroundColor: "rgba(255,255,255,1)",
+        titleColor: "black",
+        bodyColor: "black",
+        cornerRadius: 0,
+        caretSize: 0,
+        padding: 10,
+        // xAlign: "left",
+        // yAlign:"bottom",
+        displayColors: false,
+        callbacks: {
+          title: function (tooltipItem: any) {
+            const activityObject = filteredActivities[tooltipItem[0].dataIndex];
+            const getName = activityObject.name;
+            const dateLabel = new Date(
+                activityObject?.start_date_local
+            ).toLocaleDateString();
+            return getName + " | " + dateLabel
+          },
+          label: function (tooltipItem: any) {
+            const activityObject = filteredActivities[tooltipItem.dataIndex];
+            const hrLabel = activityObject?.average_heartrate + " bpm";
+            const distance =
+              filteredActivities[tooltipItem.dataIndex]?.distance;
+            const time = filteredActivities[tooltipItem.dataIndex]?.moving_time;
+            const paceLabel =
+              secondsToMinPace(
+                calculatePaceFromDistanceAndTime(distance, time)
+              ) + "/km";
+            const distanceLabel = Math.round(distance / 10) / 100 + " km";
+            const distPaceLabel = distanceLabel + " @ " + paceLabel;
+            return [ distPaceLabel, hrLabel];
+          },
+        },
+      },
+      crosshair: {
+        line: {
+          color: "rgba(255, 255, 255, 1)",
+          width: 0.5,
+        },
+        // sync: {
+        //     enabled: true,
+        // },
+        snap: {
+          enabled: true,
+        },
       },
       // title: {
       //   display: true,

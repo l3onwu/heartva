@@ -32,8 +32,9 @@ const HRGraphPage = () => {
   // console.log(filterObjects);
 
   // Apply filters to activities
-  let filteredActivities = userHook?.activities.map((act) => {
-    return act;
+  // Begin by filtering by year
+  let filteredActivities = userHook?.activities.filter((act) => {
+    return new Date(act?.start_date_local).getFullYear() === statsYear;
   });
   // Loop over filters and apply specific filter functions
   for (let i = 0; i < filterObjects.length; i++) {
