@@ -52,7 +52,7 @@ const Navbar = () => {
                     {userHook?.userObject?.athlete?.lastname}
                 </Text>
                 <Button
-                    color="#AC96B9"
+                    color="grey"
                     size="sm"
                     style={{backgroundColor: "transparent"}}
                     _hover={{color: "white"}}
