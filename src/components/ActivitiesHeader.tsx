@@ -32,6 +32,7 @@ const ActivitiesHeader = ({
       align={"center"}
       width={"100%"}
       overflow={"scroll"}
+      className={"hide-scrollbars"}
     >
       {/*Activities heading*/}
       <Text
