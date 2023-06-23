@@ -71,7 +71,9 @@ const HRGraphPage = () => {
   // Apply filters to activities
   // Begin by filtering by year
   let filteredActivities = userHook?.activities.filter((act) => {
-    return new Date(act?.start_date_local).getFullYear() === userHook?.statsYear;
+    return (
+      new Date(act?.start_date_local).getFullYear() === userHook?.statsYear
+    );
   });
 
   // Filter pace
@@ -128,6 +130,13 @@ const HRGraphPage = () => {
           border="1px solid #333333"
           borderRadius="10px"
           _hover={{ cursor: "pointer", borderColor: "#727272" }}
+          onClick={() => {
+            if (componentHeight === 180) {
+              setComponentHeight(600);
+            } else {
+              setComponentHeight(180);
+            }
+          }}
         >
           <HRGraph
             chartKey={chartKey}
