@@ -31,18 +31,24 @@ export default function useUserSettings() {
     if (userObject) {
       let now = new Date();
       let nowSeconds = now.getTime() / 1000;
-      // Check if token is expired, then refresh
+      // Check if token is expired. If so, copy the athlete data, and refresh
       if (userObject?.expires_at < nowSeconds) {
         const refreshToken = async () => {
           let axiosRequestConfig = {
             method: "post",
             url: `https://www.strava.com/oauth/token?client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}&grant_type=refresh_token&refresh_token=${userObject?.refresh_token}`,
           };
+
+          // Save athlete data
+          const athleteData = userObject?.athlete;
+
+          // Refresh token
           try {
             const { data: userData } = await axios(axiosRequestConfig);
-            setUserObject(userData);
+            const updatedUserObject = { ...userData, athlete: athleteData };
+            setUserObject(updatedUserObject);
             // Also save to localforage
-            localforage.setItem("userObject", userData);
+            localforage.setItem("userObject", updatedUserObject);
           } catch (err) {
             console.log(err);
           }
@@ -70,7 +76,7 @@ export default function useUserSettings() {
     // TODO consider making this a manual button, or only gets done once per day
     const updateActivities = async () => {
       // Get date of latest activity from firebase
-      // TODO it may be more efficient to store this with user object
+      // TODO it may be more efficient to store the latest activity date with user object, save a query
       const latestQuery = db
         .collection("activities")
         .where("athlete.id", "==", userObject?.athlete?.id)
