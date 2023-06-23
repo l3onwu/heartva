@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { db } from "./firebase";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import axios from "axios";
-import { mockActivities, mockAthlete } from "../mockData";
+import { mockActivities, mockAthlete } from "../mockData2";
 import { toast } from "react-hot-toast";
 
 export interface DownloadHookType {
