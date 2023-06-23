@@ -21,7 +21,7 @@ const Navbar = () => {
       width="100%"
       height="70px"
       align="center"
-      marginBottom="10px"
+      marginBottom="6px"
       justify="space-between"
     >
       {/* Left side */}
