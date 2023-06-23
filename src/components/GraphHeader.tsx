@@ -95,8 +95,9 @@ const GraphHeader = ({
           size="xs"
           variant="outline"
           defaultValue={axesOne}
-          color={"#444444"}
-          borderColor={"#444444"}
+          color={"#333333"}
+          border={"1px solid #333333"}
+          borderRadius={"5px"}
           onChange={(e) => {
             setAxesOne(e.target.value);
           }}
@@ -111,8 +112,9 @@ const GraphHeader = ({
           size="xs"
           variant="outline"
           defaultValue={axesTwo}
-          color={"#444444"}
-          borderColor={"#444444"}
+          color={"#333333"}
+          border={"1px solid #333333"}
+          borderRadius={"5px"}
           onChange={(e) => {
             setAxesTwo(e.target.value);
           }}
@@ -128,8 +130,9 @@ const GraphHeader = ({
           size="xs"
           variant="outline"
           defaultValue={axesThree}
-          color={"#444444"}
-          borderColor={"#444444"}
+          color={"#333333"}
+          border={"1px solid #333333"}
+          borderRadius={"5px"}
           onChange={(e) => {
             setAxesThree(e.target.value);
           }}
