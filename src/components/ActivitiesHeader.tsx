@@ -11,6 +11,7 @@ import {
   Input,
   Box,
   useDisclosure,
+  Button,
 } from "@chakra-ui/react";
 import { IoMdOptions } from "react-icons/io";
 
@@ -54,21 +55,21 @@ const ActivitiesHeader = ({
       >
         {/*Button*/}
         <PopoverTrigger>
-          <Box
+          <Button
+            size={"sm"}
             aria-label="Settings"
             color={"gray"}
             width={"fit-content"}
             onClick={onToggle}
             bgColor={isOpen ? "#0c1733" : "transparent"}
-            padding={"5px"}
+            padding={"4px"}
             borderRadius={"5px"}
             animation={"background-color 0.2s"}
             _hover={{ cursor: "pointer", bgColor: "#0c1733" }}
             position={"relative"}
-            top={"-4px"}
           >
             <IoMdOptions size={"18px"} />
-          </Box>
+          </Button>
         </PopoverTrigger>
 
         {/*Content*/}
@@ -82,7 +83,9 @@ const ActivitiesHeader = ({
           <PopoverBody>
             <Stack direction={"column"}>
               {/*Top text*/}
-              <Text fontSize={"11px"}>HR options (seconds/km)</Text>
+              <Text fontSize={"14px"} fontWeight={"600"}>
+                HR options (seconds/km)
+              </Text>
 
               {/*HR*/}
               <Stack direction={"row"}>
@@ -114,7 +117,9 @@ const ActivitiesHeader = ({
 
               {/*HR*/}
               {/*Top text*/}
-              <Text fontSize={"11px"}>Pace options (seconds/km)</Text>
+              <Text fontSize={"14px"} fontWeight={"600"}>
+                Pace options (seconds/km)
+              </Text>
 
               {/*Min/Max*/}
               <Stack direction={"row"}>
