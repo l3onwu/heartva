@@ -56,7 +56,9 @@ const GraphHeader = ({
             setStatsYear(parseInt(e.target.value));
             setChartKey(chartKey + 1);
           }}
+          _hover={{ cursor: "pointer", borderColor: "white",  }}
         >
+          {/*TODO: Make this dynamically span to user's first activity year*/}
           <option value={2023}>2023</option>
           <option value={2022}>2022</option>
           <option value={2021}>2021</option>
@@ -101,6 +103,11 @@ const GraphHeader = ({
           onChange={(e) => {
             setAxesOne(e.target.value);
           }}
+          _hover={{
+            cursor: "pointer",
+            borderColor: "#727272",
+            color: "#727272",
+          }}
         >
           <option value="distance">Distance</option>
           <option value="pace">Pace</option>
@@ -117,6 +124,11 @@ const GraphHeader = ({
           borderRadius={"5px"}
           onChange={(e) => {
             setAxesTwo(e.target.value);
+          }}
+          _hover={{
+            cursor: "pointer",
+            borderColor: "#727272",
+            color: "#727272",
           }}
         >
           <option value="-">-</option>
@@ -135,6 +147,11 @@ const GraphHeader = ({
           borderRadius={"5px"}
           onChange={(e) => {
             setAxesThree(e.target.value);
+          }}
+          _hover={{
+            cursor: "pointer",
+            borderColor: "#727272",
+            color: "#727272",
           }}
         >
           <option value="-">-</option>

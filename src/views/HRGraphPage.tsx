@@ -127,6 +127,7 @@ const HRGraphPage = () => {
           p={"20px"}
           border="1px solid #333333"
           borderRadius="10px"
+          _hover={{ cursor: "pointer", borderColor: "#727272" }}
         >
           <HRGraph
             chartKey={chartKey}
@@ -159,6 +160,7 @@ const HRGraphPage = () => {
             px="20px"
             border="1px solid #333333"
             borderRadius="10px"
+            _hover={{ cursor: "pointer", borderColor: "#727272" }}
           >
             <ActivityList
               filteredActivities={filteredActivities}

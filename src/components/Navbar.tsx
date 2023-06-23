@@ -43,19 +43,20 @@ const Navbar = () => {
       <Stack direction="row" align="center" justify={"baseline"}>
         {/*Name and profile*/}
         <Stack
-            direction={"row"}
-            align="center"
-            spacing={"5px"}
-            border={"1px solid #333333"}
-            borderRadius={"5px"}
-            py={"5px"}
-            px={"10px"}
+          direction={"row"}
+          align="center"
+          spacing={"5px"}
+          border={"1px solid #333333"}
+          borderRadius={"5px"}
+          py={"5px"}
+          px={"10px"}
+          _hover={{ cursor: "pointer", borderColor: "#727272" }}
         >
           <Box mr={"10px"}>
             <img
-                src={userHook?.userObject?.athlete?.profile}
-                alt="Profile"
-                style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+              src={userHook?.userObject?.athlete?.profile}
+              alt="Profile"
+              style={{ width: "30px", height: "30px", borderRadius: "50%" }}
             />
           </Box>
           <Text color="white" fontSize="12px" fontWeight="600">

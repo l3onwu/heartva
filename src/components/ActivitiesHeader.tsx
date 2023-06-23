@@ -84,7 +84,7 @@ const ActivitiesHeader = ({
             <Stack direction={"column"}>
               {/*Top text*/}
               <Text fontSize={"14px"} fontWeight={"600"}>
-                HR options (bpm)
+                HR filter (bpm)
               </Text>
 
               {/*HR*/}
@@ -118,7 +118,7 @@ const ActivitiesHeader = ({
               {/*HR*/}
               {/*Top text*/}
               <Text fontSize={"14px"} fontWeight={"600"}>
-                Pace options (seconds/km)
+                Pace filter (seconds/km)
               </Text>
 
               {/*Min/Max*/}
