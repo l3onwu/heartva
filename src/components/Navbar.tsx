@@ -18,7 +18,6 @@ const Navbar = () => {
         localforage.setItem("userObject", null);
         userHook?.setUserObject(null);
         userHook?.setActivities([]);
-        userHook?.setActivitiesPage(1);
     };
 
     // TSX

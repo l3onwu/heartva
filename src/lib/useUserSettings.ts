@@ -15,8 +15,6 @@ export interface UserHookType {
   activities: ActivityShortType[];
   setActivities: Function;
   activitiesLoading: boolean;
-  activitiesPage: number;
-  setActivitiesPage: Function;
 }
 
 export default function useUserSettings() {
@@ -27,7 +25,6 @@ export default function useUserSettings() {
 
   const [activities, setActivities] = useState<ActivityShortType[]>([]);
   const [activitiesLoading, setActivitiesLoading] = useState(true);
-  const [activitiesPage, setActivitiesPage] = useState<Number>(1);
 
   // Refresh token
   useEffect(() => {
@@ -68,8 +65,59 @@ export default function useUserSettings() {
     getUser();
   }, []);
 
-  // Get activites (brief) when user is loaded or 'load more' is pressed
+  // Update activities, then get on load
   useEffect(() => {
+    // TODO consider making this a manual button, or only gets done once per day
+    const updateActivities = async () => {
+      // Get date of latest activity from firebase
+      // TODO it may be more efficient to store this with user object
+      const latestQuery = db
+        .collection("activities")
+        .where("athlete.id", "==", userObject?.athlete?.id)
+        .orderBy("start_date", "desc")
+        .limit(1);
+      const latestActivity = await latestQuery.get();
+      const latestActivityDate = latestActivity.docs[0].data().start_date;
+      // console.log(latestActivityDate)
+
+      // Then retrieve latest activities from Strava
+      const newActivities = [];
+      let activitiesPage = 1;
+      let notDone = true;
+      while (notDone) {
+        // Keep making requests until we find activity with earlier date
+        let axiosRequestConfig = {
+          method: "get",
+          url: `https://www.strava.com/api/v3/athlete/activities?page=${activitiesPage}&per_page=${10}`,
+          headers: {
+            Authorization: `Bearer ${userObject?.access_token}`,
+          },
+        };
+        const { data } = await axios(axiosRequestConfig);
+
+        // Loop over retrieved activities. If the activity is after the latest activity, add it to the list. If not, break the loop.
+        for (let activity of data) {
+          const activityDate = new Date(activity.start_date);
+          const compareDate = new Date(latestActivityDate);
+          if (activityDate > compareDate) {
+            newActivities.push(activity);
+          } else {
+            notDone = false;
+            break;
+          }
+        }
+        activitiesPage++;
+      }
+
+      // Then add new activities to firestore
+      const batch = db.batch();
+      for (let activity of newActivities) {
+        const docRef = db.collection("activities").doc(activity.id.toString());
+        batch.set(docRef, activity);
+      }
+      await batch.commit();
+    };
+
     const getActivities = async () => {
       // If env is dev, use mock data
       if (process.env.REACT_APP_ENV === "DEV") {
@@ -80,8 +128,8 @@ export default function useUserSettings() {
       } else {
         // If env is prod, use real data
         if (!userObject?.athlete) return;
-        console.log(userObject);
 
+        // Now RETRIEVE activities
         db.collection("activities")
           .where("athlete.id", "==", userObject?.athlete?.id)
           // .where('start_date_local', '>=', new firebase.firestore.Timestamp(specifiedYear, 1, 1, 0, 0, 0))
@@ -100,11 +148,16 @@ export default function useUserSettings() {
       }
     };
 
+    const combineActivities = async () => {
+      // TODO consider making this a manual button, or only gets done once per day
+      // await updateActivities();
+      await getActivities();
+    };
+
     if (userObject) {
-      // @ts-ignore
-      getActivities();
+      combineActivities();
     }
-  }, [userObject, activitiesPage]);
+  }, [userObject]);
 
   // console.log(activities)
 
@@ -118,7 +171,5 @@ export default function useUserSettings() {
     activities,
     setActivities,
     activitiesLoading,
-    activitiesPage,
-    setActivitiesPage,
   };
 }

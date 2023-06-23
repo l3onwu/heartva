@@ -170,9 +170,10 @@ export default function useInitialDownload(
 
         getUserData();
       } else {
-        // 1a If user id exists, and downloadDate is a value, FINISH, move to RECENT DATA DOWNLOAD
-        // TODO Add athlete to localforage
+        // 1a If user id exists, and downloadDate is a value, FINISH
         console.log("username exists");
+
+
       }
     }
   }, [usernameLoading]);
