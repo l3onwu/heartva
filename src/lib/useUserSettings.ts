@@ -15,16 +15,20 @@ export interface UserHookType {
   activities: ActivityShortType[];
   setActivities: Function;
   activitiesLoading: boolean;
+  statsYear: number;
+  setStatsYear: Function;
 }
 
 export default function useUserSettings() {
   // State
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
+  const [firstUpdate, setFirstUpdate] = useState<boolean>(true);
   const [userLoading, setUserLoading] = useState<boolean>(true);
   const [userObject, setUserObject] = useState<UserType | null>(null);
 
   const [activities, setActivities] = useState<ActivityShortType[]>([]);
   const [activitiesLoading, setActivitiesLoading] = useState(true);
+  const [statsYear, setStatsYear] = useState<number>(new Date().getFullYear());
 
   // Refresh token
   useEffect(() => {
@@ -75,6 +79,15 @@ export default function useUserSettings() {
   useEffect(() => {
     // TODO consider making this a manual button, or only gets done once per day
     const updateActivities = async () => {
+      // Skip if not first update
+      if (!firstUpdate) {
+        return;
+      }
+      // Skip if year is not current year
+      if (statsYear !== new Date().getFullYear()) {
+        return;
+      }
+
       // Get date of latest activity from firebase
       // TODO it may be more efficient to store the latest activity date with user object, save a query
       const latestQuery = db
@@ -122,9 +135,11 @@ export default function useUserSettings() {
         batch.set(docRef, activity);
       }
       await batch.commit();
+      setFirstUpdate(false);
     };
 
     const getActivities = async () => {
+      setActivitiesLoading(true);
       // If env is dev, use mock data
       if (process.env.REACT_APP_ENV === "DEV") {
         const data = mockActivities;
@@ -135,11 +150,11 @@ export default function useUserSettings() {
         // If env is prod, use real data
         if (!userObject?.athlete) return;
 
-        // Now RETRIEVE activities
+        // Now RETRIEVE activities by set year
         db.collection("activities")
           .where("athlete.id", "==", userObject?.athlete?.id)
-          // .where('start_date_local', '>=', new firebase.firestore.Timestamp(specifiedYear, 1, 1, 0, 0, 0))
-          // .where('start_date_local', '<', new firebase.firestore.Timestamp(specifiedYear + 1, 1, 1, 0, 0, 0));
+          .where("start_date", ">=", statsYear.toString())
+          .where("start_date", "<", (statsYear + 1).toString())
           .orderBy("start_date", "desc")
           .get()
           .then((querySnapshot) => {
@@ -156,14 +171,15 @@ export default function useUserSettings() {
 
     const combineActivities = async () => {
       // TODO consider making this a manual button, or only gets done once per day
-      // await updateActivities();
+      setActivitiesLoading(true);
+      await updateActivities();
       await getActivities();
     };
 
     if (userObject) {
       combineActivities();
     }
-  }, [userObject]);
+  }, [userObject, statsYear]);
 
   // console.log(activities)
 
@@ -177,5 +193,7 @@ export default function useUserSettings() {
     activities,
     setActivities,
     activitiesLoading,
+    statsYear,
+    setStatsYear,
   };
 }

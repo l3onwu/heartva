@@ -59,7 +59,7 @@ const HRGraphPage = () => {
   );
 
   // Filter data state
-  const [statsYear, setStatsYear] = useState<number>(new Date().getFullYear());
+  // const [statsYear, setStatsYear] = useState<number>(new Date().getFullYear());
   const [megaFilter, setMegaFilter] = useState<MegaFilterType>({
     id: 0,
     pace: [null, null],
@@ -71,7 +71,7 @@ const HRGraphPage = () => {
   // Apply filters to activities
   // Begin by filtering by year
   let filteredActivities = userHook?.activities.filter((act) => {
-    return new Date(act?.start_date_local).getFullYear() === statsYear;
+    return new Date(act?.start_date_local).getFullYear() === userHook?.statsYear;
   });
 
   // Filter pace
@@ -113,8 +113,8 @@ const HRGraphPage = () => {
           setAxesOne={setAxesOne}
           setAxesTwo={setAxesTwo}
           setAxesThree={setAxesThree}
-          statsYear={statsYear}
-          setStatsYear={setStatsYear}
+          statsYear={userHook?.statsYear}
+          setStatsYear={userHook?.setStatsYear}
         />
 
         {/* HR Graph */}
@@ -134,7 +134,7 @@ const HRGraphPage = () => {
             axesTwo={axesTwo}
             axesThree={axesThree}
             filteredActivities={filteredActivities}
-            statsYear={statsYear}
+            statsYear={userHook?.statsYear}
           />
         </Box>
       </Box>
@@ -162,7 +162,7 @@ const HRGraphPage = () => {
           >
             <ActivityList
               filteredActivities={filteredActivities}
-              statsYear={statsYear}
+              statsYear={userHook?.statsYear}
             />
           </Box>
         </Box>
