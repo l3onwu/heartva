@@ -2,7 +2,7 @@ import axios from "axios";
 import localforage from "localforage";
 import { useState, useEffect } from "react";
 import { ActivityShortType, UserType } from "./types";
-import { mockActivities } from "../mockData";
+import { mockActivities } from "../mockData2";
 import { db } from "./firebase";
 
 export interface UserHookType {
