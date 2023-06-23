@@ -28,7 +28,7 @@ const ActivitiesHeader = ({
     <Flex
       direction={"row"}
       justify={"space-between"}
-      mb={"10px"}
+      mb={"6px"}
       align={"center"}
       width={"100%"}
       overflow={"scroll"}
@@ -89,7 +89,7 @@ const ActivitiesHeader = ({
                 <Text fontSize={"12px"}>Min</Text>
                 <Input
                   size={"sm"}
-                  value={megaFilter?.hr[0]}
+                  value={megaFilter?.hr[0] || ""}
                   onChange={(e) => {
                     setMegaFilter({
                       ...megaFilter,
@@ -102,7 +102,7 @@ const ActivitiesHeader = ({
                 <Text fontSize={"12px"}>Max</Text>
                 <Input
                   size={"sm"}
-                  value={megaFilter?.hr[1]}
+                  value={megaFilter?.hr[1] || ""}
                   onChange={(e) => {
                     setMegaFilter({
                       ...megaFilter,
@@ -121,7 +121,7 @@ const ActivitiesHeader = ({
                 <Text fontSize={"12px"}>Min</Text>
                 <Input
                   size={"sm"}
-                  value={megaFilter?.pace[0]}
+                  value={megaFilter?.pace[0] || ""}
                   onChange={(e) => {
                     setMegaFilter({
                       ...megaFilter,
@@ -137,7 +137,7 @@ const ActivitiesHeader = ({
                 <Text fontSize={"12px"}>Max</Text>
                 <Input
                   size={"sm"}
-                  value={megaFilter?.pace[1]}
+                  value={megaFilter?.pace[1] || ""}
                   onChange={(e) => {
                     setMegaFilter({
                       ...megaFilter,

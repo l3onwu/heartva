@@ -16,7 +16,7 @@ const ActivityList = ({
   return (
     <>
       {userHook?.activitiesLoading ? (
-        <Box>
+        <Box pt={"20px"}>
           <Spinner color="pink" size="lg" />
         </Box>
       ) : (
@@ -141,7 +141,7 @@ const ActivityBoxHeader = ({}: {}) => {
   return (
     <Box
       key={"title"}
-      py="8px"
+      py="10px"
       position="sticky"
       top="0px"
       color="gray"
