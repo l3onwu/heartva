@@ -152,7 +152,7 @@ const HRGraphPage = () => {
           {/* Activities List */}
           <Box
             className={"hide-scrollbars"}
-            height="calc(100vh - 390px)"
+            height="calc(100vh - 410px)"
             width="100%"
             overflow="scroll"
             pb="20px"

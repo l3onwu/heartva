@@ -1,69 +1,83 @@
-import {
-    Flex,
-    Text,
-    Button,
-    Stack,
-} from "@chakra-ui/react";
-import {useNavigate} from "react-router-dom";
+import { Flex, Text, Button, Stack, Box } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import localforage from "localforage";
-import {useGlobalContext} from "../lib/context";
+import { useGlobalContext } from "../lib/context";
 
 const Navbar = () => {
-    // State
-    const navigate = useNavigate();
-    const {userHook} = useGlobalContext();
+  // State
+  const navigate = useNavigate();
+  const { userHook } = useGlobalContext();
 
-    // Functions
-    const signOutStrava = () => {
-        localforage.setItem("userObject", null);
-        userHook?.setUserObject(null);
-        userHook?.setActivities([]);
-    };
+  // Functions
+  const signOutStrava = () => {
+    localforage.setItem("userObject", null);
+    userHook?.setUserObject(null);
+    userHook?.setActivities([]);
+  };
 
-    // TSX
-    return (
-        <Flex
-            width="100%"
-            height="50px"
-            align="center"
-            marginBottom="10px"
-            justify="space-between"
+  // TSX
+  return (
+    <Flex
+      width="100%"
+      height="70px"
+      align="center"
+      marginBottom="10px"
+      justify="space-between"
+    >
+      {/* Left side */}
+      <Flex direction="row" align="center">
+        {/* Logo */}
+        <Text
+          className="logo-text"
+          mr="30px"
+          onClick={() => {
+            navigate("/");
+          }}
+          _hover={{ cursor: "pointer" }}
         >
-            {/* Left side */}
-            <Flex direction="row" align="center">
-                {/* Logo */}
-                <Text
-                    className="logo-text"
-                    mr="50px"
-                    onClick={() => {
-                        navigate("/");
-                    }}
-                    _hover={{cursor: "pointer"}}
-                >
-                    HEARTVA
-                </Text>
-            </Flex>
+          HEARTVA
+        </Text>
+      </Flex>
 
-            {/* Right side */}
-            <Stack direction="row" align="baseline" justify={"baseline"}>
-                <Text color="#666666" fontSize="12px" fontWeight="regular" mb="-10px">
-                    {userHook?.userObject?.athlete?.firstname}{" "}
-                    {userHook?.userObject?.athlete?.lastname}
-                </Text>
-                <Button
-                    color="grey"
-                    size="sm"
-                    style={{backgroundColor: "transparent"}}
-                    _hover={{color: "white"}}
-                    onClick={() => {
-                        signOutStrava();
-                    }}
-                >
-                    Sign out
-                </Button>
-            </Stack>
-        </Flex>
-    );
+      {/* Right side */}
+      <Stack direction="row" align="center" justify={"baseline"}>
+        {/*Name and profile*/}
+        <Stack
+            direction={"row"}
+            align="center"
+            spacing={"5px"}
+            border={"1px solid #333333"}
+            borderRadius={"5px"}
+            py={"5px"}
+            px={"10px"}
+        >
+          <Box mr={"10px"}>
+            <img
+                src={userHook?.userObject?.athlete?.profile}
+                alt="Profile"
+                style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+            />
+          </Box>
+          <Text color="white" fontSize="12px" fontWeight="600">
+            {userHook?.userObject?.athlete?.firstname}{" "}
+            {userHook?.userObject?.athlete?.lastname}
+          </Text>
+        </Stack>
+
+        <Button
+          color="grey"
+          size="sm"
+          style={{ backgroundColor: "transparent", fontWeight: "500" }}
+          _hover={{ color: "white" }}
+          onClick={() => {
+            signOutStrava();
+          }}
+        >
+          Sign out
+        </Button>
+      </Stack>
+    </Flex>
+  );
 };
 
 export default Navbar;
