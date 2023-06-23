@@ -84,7 +84,7 @@ const ActivitiesHeader = ({
             <Stack direction={"column"}>
               {/*Top text*/}
               <Text fontSize={"14px"} fontWeight={"600"}>
-                HR options (seconds/km)
+                HR options (bpm)
               </Text>
 
               {/*HR*/}
