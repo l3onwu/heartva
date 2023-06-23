@@ -5,9 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d82a0612-ed34-4437-886d-ce606f5b61af" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/lib/firebase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/useInitialDownload.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ActivitiesHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ActivitiesHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ActivityList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ActivityList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/useUserSettings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/useUserSettings.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/HRGraphPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/HRGraphPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,46 +35,84 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;horizontal-graph&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/leonwu/Code/Github/heartva&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/opt/homebrew/lib/node_modules/prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/leonwu/Code/Github/heartva/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "download-data",
+    "last_opened_file_path": "/Users/leonwu/Code/Github/heartva",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "/opt/homebrew/lib/node_modules/prettier",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "ts.external.directory.path": "/Users/leonwu/Code/Github/heartva/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
+        <option value="ChromiumRemoteDebugType" />
+        <option value="NodeJSConfigurationType" />
+        <option value="ShConfigurationType" />
         <option value="js.build_tools.npm" />
       </set>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="npm.start dev download">
+    <configuration name="start dev download" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <arguments value="$FilePath$" />
+      <node-interpreter value="project" />
+      <envs>
+        <env name="REACT_APP_ENV" value="DEV" />
+        <env name="REACT_APP_DOWNLOAD" value="TRUE" />
+      </envs>
+      <method v="2" />
+    </configuration>
+    <configuration name="start dev noDownload" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <arguments value="$FilePath$" />
+      <node-interpreter value="project" />
+      <envs>
+        <env name="REACT_APP_ENV" value="DEV" />
+        <env name="REACT_APP_DOWNLOAD" value="FALSE" />
+      </envs>
+      <method v="2" />
+    </configuration>
+    <configuration name="start prod" type="js.build_tools.npm" temporary="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
         <script value="start" />
       </scripts>
       <node-interpreter value="project" />
-      <envs />
+      <envs>
+        <env name="REACT_APP_ENV" value="PROD" />
+      </envs>
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="npm.start dev download" />
+      <item itemvalue="npm.start dev noDownload" />
+      <item itemvalue="npm.start prod" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.start" />
+        <item itemvalue="npm.start prod" />
       </list>
     </recent_temporary>
   </component>

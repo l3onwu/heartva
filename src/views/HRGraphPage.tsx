@@ -1,11 +1,28 @@
-import { Box } from "@chakra-ui/react";
-import { useState } from "react";
+import {
+  Box,
+  Text,
+  Button,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Stack,
+  useDisclosure,
+  Progress,
+} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import ActivityList from "../components/ActivityList";
 import HRGraph from "../components/HRGraph";
 import { useGlobalContext } from "../lib/context";
 import ActivitiesHeader from "../components/ActivitiesHeader";
 import GraphHeader from "../components/GraphHeader";
 import { calculatePaceFromDistanceAndTime } from "../lib/helpers";
+import useInitialDownload, {
+  DownloadHookType,
+} from "../lib/useInitialDownload";
 
 export type AxesType = "pace" | "heartRate" | "distance" | "-";
 export interface FilterObjectType {
@@ -32,6 +49,14 @@ const HRGraphPage = () => {
   const [axesOne, setAxesOne] = useState<AxesType>("heartRate");
   const [axesTwo, setAxesTwo] = useState<AxesType>("pace");
   const [axesThree, setAxesThree] = useState<AxesType>("-");
+
+  // Initial download modal
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [modalOpen, setModalOpen] = useState(false);
+  const downloadHook: DownloadHookType = useInitialDownload(
+    userHook,
+    setModalOpen
+  );
 
   // Filter data state
   const [statsYear, setStatsYear] = useState<number>(new Date().getFullYear());
@@ -75,7 +100,7 @@ const HRGraphPage = () => {
   return (
     <Box width="100%">
       {/* Graph */}
-      <Box mb="24px">
+      <Box mb="30px">
         {/* Graph header */}
         <GraphHeader
           chartKey={chartKey}
@@ -99,7 +124,9 @@ const HRGraphPage = () => {
             transition: "height 150ms ease-in-out",
           }}
           width={"100%"}
-          mb={"00px"}
+          p={"20px"}
+          border="1px solid #333333"
+          borderRadius="10px"
         >
           <HRGraph
             chartKey={chartKey}
@@ -125,11 +152,13 @@ const HRGraphPage = () => {
           {/* Activities List */}
           <Box
             className={"hide-scrollbars"}
-            height="calc(100vh - 370px)"
+            height="calc(100vh - 390px)"
             width="100%"
             overflow="scroll"
             pb="20px"
-            px="5px"
+            px="20px"
+            border="1px solid #333333"
+            borderRadius="10px"
           >
             <ActivityList
               filteredActivities={filteredActivities}
@@ -138,6 +167,52 @@ const HRGraphPage = () => {
           </Box>
         </Box>
       )}
+
+      {/* Modal */}
+      <Modal isOpen={modalOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Downloading data</ModalHeader>
+          {/*<ModalCloseButton />*/}
+          <ModalBody>
+            <Stack>
+              <Stack mb={"20px"}>
+                <Text>Downloading user info</Text>
+                <Progress
+                  hasStripe
+                  value={downloadHook?.modalUserLoadProgress}
+                />
+
+                <Text>Downloading activities info</Text>
+                <Progress
+                  hasStripe
+                  value={downloadHook?.modalActivityLoadProgress}
+                />
+              </Stack>
+              <Button
+                isLoading={downloadHook?.modalActivityLoadProgress !== 100}
+                loadingText="Loading data"
+                colorScheme="teal"
+                variant="outline"
+                onClick={() => {
+                  setModalOpen(false);
+                }}
+              >
+                {downloadHook?.modalActivityLoadProgress === 100
+                  ? "Finish"
+                  : "Finalizing"}
+              </Button>
+            </Stack>
+          </ModalBody>
+
+          <ModalFooter>
+            {/*<Button colorScheme='blue' mr={3} onClick={onClose}>*/}
+            {/*  Close*/}
+            {/*</Button>*/}
+            {/*<Button variant='ghost'>Secondary Action</Button>*/}
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 };
