@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { useGlobalContext } from "./lib/context";
 import Home from "./views/Home";
-import HRGraphPage from "./views/HRGraphPage";
+import { Toaster } from "react-hot-toast";
 import TokenExchange from "./views/TokenExchange";
 
 export const App = () => {
@@ -19,6 +19,7 @@ export const App = () => {
           minHeight="100vh"
           className="background-gradient"
         >
+          <Toaster/>
           <Box width="90%">
             {/* Navbar */}
             {userHook?.userObject && <Navbar />}
