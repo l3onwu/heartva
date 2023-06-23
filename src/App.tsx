@@ -1,9 +1,9 @@
-import { ChakraProvider, Box, theme } from "@chakra-ui/react";
+import { ChakraProvider, Box, theme, Flex } from "@chakra-ui/react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { useGlobalContext } from "./lib/context";
 import Home from "./views/Home";
-import HRGraphPage from "./views/HRGraphPage";
+import { Toaster } from "react-hot-toast";
 import TokenExchange from "./views/TokenExchange";
 
 export const App = () => {
@@ -13,23 +13,24 @@ export const App = () => {
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
-        <Box
+        <Flex
+          justify="center"
           width="100%"
-          height="100vh"
+          minHeight="100vh"
           className="background-gradient"
-          overflow="scroll"
         >
-          {/* Navbar */}
-          {userHook?.userObject && <Navbar />}
+          <Toaster/>
+          <Box width="90%">
+            {/* Navbar */}
+            {userHook?.userObject && <Navbar />}
 
-          <Box width="100%" mt="55px">
             {/* Routes */}
             <Routes>
               <Route path="/token-exchange" element={<TokenExchange />} />
               <Route path="/" element={<Home />} />
             </Routes>
           </Box>
-        </Box>
+        </Flex>
       </BrowserRouter>
     </ChakraProvider>
   );

@@ -1,14 +1,4 @@
-import {
-  Flex,
-  Text,
-  Stack,
-  Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-} from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
+import { Flex, Text, Button, Stack, Box } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import localforage from "localforage";
 import { useGlobalContext } from "../lib/context";
@@ -25,20 +15,15 @@ const Navbar = () => {
     localforage.setItem("userObject", null);
     userHook?.setUserObject(null);
     userHook?.setActivities([]);
-    userHook?.setActivitiesPage(1);
   };
 
   // TSX
   return (
     <Flex
       width="100%"
-      height="50px"
-      zIndex="10"
+      height="70px"
       align="center"
-      bgColor="#020a20"
-      px="40px"
-      position="fixed"
-      borderBottom="0.5px solid #333333"
+      marginBottom="6px"
       justify="space-between"
     >
       {/* Left side */}
@@ -46,7 +31,7 @@ const Navbar = () => {
         {/* Logo */}
         <Text
           className="logo-text"
-          mr="35px"
+          mr="30px"
           onClick={() => {
             navigate("/");
           }}
@@ -54,115 +39,38 @@ const Navbar = () => {
         >
           HEARTVA
         </Text>
-
-        {/* Navmenu Container */}
-        <Stack
-          direction="row"
-          // spacing="-10px"
-          align="center"
-          color="#AC96B9"
-          fontSize="14px"
-        >
-          {/* Navmenu Buttons */}
-          {/* <Button
-            variant={"unstyled"}
-            style={{
-              fontSize: "14px",
-              border: "1px solid #222222",
-              padding: "-10px 20px",
-            }}
-          >
-            Graph
-          </Button> */}
-          <button className="navButtonCool">
-            <span style={{ fontSize: "20px", marginRight: "5px" }}>
-              <BiRun />
-            </span>
-            Activities
-          </button>
-          <button className="navButtonCoolSelected">
-            <span style={{ fontSize: "20px", marginRight: "5px" }}>
-              <BsGraphUp />
-            </span>
-            Graph
-          </button>
-          <button className="navButtonCool">
-            <span style={{ fontSize: "20px", marginRight: "5px" }}>
-              <BiMedal />
-            </span>
-            Goals
-          </button>
-
-          {/* Activities menu */}
-          {/* <Menu>
-            <MenuButton
-              as={Button}
-              rightIcon={<ChevronDownIcon />}
-              fontSize="14px"
-              fontWeight="bold"
-              size="xs"
-              // colorScheme="facebook"
-              style={{ backgroundColor: "transparent" }}
-              // border="1px solid #9C88AA"
-            >
-              Activites
-            </MenuButton>
-            <MenuList bgColor="#020a20" borderColor="gray">
-              <MenuItem
-                bgColor="#020a20"
-                _hover={{ backgroundColor: "#39142D" }}
-              >
-                The Database
-              </MenuItem>
-              <MenuItem
-                bgColor="#020a20"
-                _hover={{ backgroundColor: "#39142D" }}
-              >
-                Map
-              </MenuItem>
-            </MenuList>
-          </Menu> */}
-
-          {/* Data menu */}
-          {/* <Menu>
-            <MenuButton
-              as={Button}
-              rightIcon={<ChevronDownIcon />}
-              fontSize="14px"
-              fontWeight="bold"
-              size="xs"
-              // border="1px solid #9C88AA"
-              style={{ backgroundColor: "transparent" }}
-            >
-              Data
-            </MenuButton>
-            <MenuList bgColor="#020a20" borderColor="gray">
-              <MenuItem
-                bgColor="#020a20"
-                _hover={{ backgroundColor: "#39142D" }}
-                onClick={() => {
-                  navigate("/hrgraph");
-                }}
-              >
-                HR Graph
-              </MenuItem>
-            </MenuList>
-          </Menu> */}
-        </Stack>
       </Flex>
 
       {/* Right side */}
-      <Flex align="center">
-        {/* <Text color="#666666" fontSize="12px" fontWeight="regular" mb="-10px">
-          {userHook?.userObject?.athlete?.firstname}{" "}
-          {userHook?.userObject?.athlete?.lastname}
-        </Text> */}
+      <Stack direction="row" align="center" justify={"baseline"}>
+        {/*Name and profile*/}
+        <Stack
+          direction={"row"}
+          align="center"
+          spacing={"5px"}
+          border={"1px solid #333333"}
+          borderRadius={"5px"}
+          py={"5px"}
+          px={"10px"}
+          _hover={{ cursor: "pointer", borderColor: "#727272" }}
+        >
+          <Box mr={"10px"}>
+            <img
+              src={userHook?.userObject?.athlete?.profile}
+              alt="Profile"
+              style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+            />
+          </Box>
+          <Text color="white" fontSize="12px" fontWeight="600">
+            {userHook?.userObject?.athlete?.firstname}{" "}
+            {userHook?.userObject?.athlete?.lastname}
+          </Text>
+        </Stack>
+
         <Button
-          color="gray"
+          color="grey"
           size="sm"
-          fontFamily="Ubuntu"
-          fontWeight="500"
-          style={{ backgroundColor: "transparent" }}
+          style={{ backgroundColor: "transparent", fontWeight: "500" }}
           _hover={{ color: "white" }}
           onClick={() => {
             signOutStrava();
@@ -170,7 +78,7 @@ const Navbar = () => {
         >
           Sign out
         </Button>
-      </Flex>
+      </Stack>
     </Flex>
   );
 };

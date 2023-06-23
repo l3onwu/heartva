@@ -18,6 +18,8 @@
 .env.development.local
 .env.test.local
 .env.production.local
+/src/mock
+mockData.ts
 
 npm-debug.log*
 yarn-debug.log*

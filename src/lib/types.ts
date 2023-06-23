@@ -26,4 +26,7 @@ export interface ActivityShortType {
   visibility: string;
   private: boolean;
   suffer_score: number;
+  total_elevation_gain: number;
+  type: string;
+  sport_type: string;
 }

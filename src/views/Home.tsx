@@ -10,7 +10,7 @@ const Home = () => {
 
   // TSX
   return (
-    <Flex width="100%" height="calc(100vh - 100px)">
+    <Flex width="100%">
       {userHook?.userObject == null ? <HeroPage /> : <HRGraphPage />}
     </Flex>
   );

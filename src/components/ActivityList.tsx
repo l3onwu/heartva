@@ -1,30 +1,60 @@
-import { Box, Text, Button, Spinner, Stack } from "@chakra-ui/react";
+import { Box, Text, Spinner, Stack } from "@chakra-ui/react";
 import { useGlobalContext } from "../lib/context";
 import { ActivityShortType } from "../lib/types";
+import {
+  calculatePaceFromDistanceAndTime,
+  clipText,
+  secondsToMinPace,
+} from "../lib/helpers";
 
-const ActivityList = () => {
+const ActivityList = ({
+  filteredActivities,
+  statsYear,
+}: {
+  filteredActivities: ActivityShortType[];
+  statsYear: number;
+}) => {
   const { userHook } = useGlobalContext();
 
   // TSX
   return (
     <>
       {userHook?.activitiesLoading ? (
-        <Box pt="20px" pl="40px">
+        <Box pt={"20px"}>
           <Spinner color="pink" size="lg" />
         </Box>
       ) : (
-        <Box width="100%" borderRight="0.5px solid #333333">
-          <ActivityBox2Header />
-          {userHook?.activities?.map((activityObject: ActivityShortType) => {
-            return (
-              <ActivityBox2
-                activityObject={activityObject}
-                key={activityObject?.id}
-              />
-            );
-          })}
+        <Box>
+          <ActivityBoxHeader />
+          {filteredActivities
+            ?.filter((activityObject) => {
+              return (
+                new Date(activityObject?.start_date_local).getFullYear() ===
+                statsYear
+              );
+            })
+            ?.map((activityObject: ActivityShortType) => {
+              return (
+                <ActivityBox
+                  activityObject={activityObject}
+                  key={activityObject?.id}
+                />
+              );
+            })}
         </Box>
       )}
+
+      {/* Load more button (for dev use) */}
+      {/*<Button*/}
+      {/*  color="gray"*/}
+      {/*  variant="unstyled"*/}
+      {/*  size="xs"*/}
+      {/*  onClick={() => {*/}
+      {/*    userHook?.setActivitiesPage(userHook?.activitiesPage + 1);*/}
+      {/*  }}*/}
+      {/*>*/}
+      {/*  Load more*/}
+      {/*</Button>*/}
     </>
   );
 };
@@ -39,119 +69,25 @@ const ActivityBox = ({
   // TSX
   return (
     <Box
-      key={activityObject?.id}
-      px="10px"
-      borderBottom="0.5px solid #333333"
-      pt="10px"
-      pb="20px"
-      transition="background-color 100ms ease-in"
-    >
-      {/* Activity title */}
-      <Text color="#9C88AA" fontWeight="bold" fontSize="16px" mb="5px">
-        {activityObject?.name}{" "}
-      </Text>
-
-      {/* Distance, pace, time */}
-      <Text
-        color="gray"
-        // fontWeight="bold"
-        fontSize="14px"
-        mb="5px"
-      >
-        {Math.round(activityObject?.distance / 10) / 100} km -{" "}
-        {Math.round(
-          (activityObject?.moving_time /
-            (activityObject?.distance / 1000) /
-            60) *
-            100
-        ) / 100}{" "}
-        min/km - {Math.round(activityObject?.moving_time / 6) / 10} min
-      </Text>
-
-      {/* Heart rate and suffer score */}
-      <Text color="gray" fontSize="14px">
-        <span style={{ fontWeight: "normal" }}>
-          ❤️ {activityObject?.average_heartrate}
-        </span>{" "}
-        -
-        <span
-          style={{
-            padding: 3,
-            // fontWeight: "bold",
-            color: "gray",
-          }}
-        >
-          {activityObject?.suffer_score}
-        </span>
-        RE
-      </Text>
-    </Box>
-  );
-};
-
-const ActivityBox2 = ({
-  activityObject,
-}: {
-  activityObject: ActivityShortType;
-}) => {
-  // Functions
-  // TODO Refactor these to helper functions
-  const clipText = (text: string, length: number): string => {
-    // If text is longer, use ...
-    let trailingDots = "";
-    if (text.length > length) {
-      trailingDots = "...";
-    }
-    return `${text.slice(0, length)}${trailingDots}`;
-  };
-
-  const calculatePaceFromDistanceAndTime = (
-    distance: number,
-    time: number
-  ): number => {
-    // Rounds to
-    return time / (distance / 1000);
-  };
-
-  const secondsToMinPace = (secondsPace: number): string => {
-    // Get full minutes
-    const fullMin = Math.floor(secondsPace / 60);
-    // Get remainder seconds, rounded to 2dp
-    const remainingSeconds = Math.round(secondsPace % 60);
-    // Add 0 if seconds is single digit
-    let extraDigit = "";
-    if (remainingSeconds < 10) extraDigit = "0";
-    // Format numbers
-    return `${fullMin}.${extraDigit}${remainingSeconds}`;
-  };
-
-  // TSX
-  return (
-    <Box
-      pr="10px"
       py="8px"
-      pl="40px"
-      // borderBottom="0.5px solid #333333"
       _hover={{ backgroundColor: "#171f30", cursor: "pointer" }}
+      color="gray"
+      fontSize="12px"
     >
       <Stack direction="row">
-        {/* Activity title */}
-        <Text
-          width="170px"
-          overflow="hidden"
-          // color="#9C88AA"
-          color="gray"
-          // fontWeight="bold"
-          fontSize="14px"
-          pr="5px"
+        {/* Activity date */}
+        <Text width="100px" overflow="hidden" pr="5px">
+          {new Date(activityObject?.start_date_local).toLocaleDateString()}
+        </Text>
 
-          // borderRight="0.5px solid #333333"
-        >
+        {/* Activity title */}
+        <Text width="170px" overflow="hidden" pr="5px">
           {clipText(activityObject?.name, 18)}
         </Text>
 
         {/* Pace */}
-        <Text width="80px" color="gray" fontSize="14px" pr="5px">
+
+        <Text width="80px" pr="5px">
           {secondsToMinPace(
             calculatePaceFromDistanceAndTime(
               activityObject.distance,
@@ -162,80 +98,129 @@ const ActivityBox2 = ({
         </Text>
 
         {/* Distance*/}
-        <Text width="80px" color="gray" fontSize="14px" pr="5px">
+
+        <Text width="80px" pr="5px">
           {Math.round(activityObject?.distance / 10) / 100} km
         </Text>
 
         {/* Time */}
-        <Text width="80px" color="gray" fontSize="14px" pr="5px">
+
+        <Text width="80px" pr="5px">
           {Math.round(activityObject?.moving_time / 6) / 10} min
         </Text>
 
         {/* Heart rate and suffer score */}
-        <Text width="80px" color="gray" fontSize="14px" pr="5px">
+
+        <Text width="80px" pr="5px">
           {/* ❤️  */}
           {activityObject?.average_heartrate}
         </Text>
 
         {/* Suffer score */}
-        <Text width="60px" color="gray" fontSize="14px">
+        <Text width="60px" pr={"5px"}>
           {activityObject?.suffer_score}
         </Text>
+
+        {/* Elapsed time */}
+        <Text width="80px">
+          {Math.round(activityObject?.elapsed_time / 60)}min
+        </Text>
+
+        {/* Moving time */}
+        <Text width="80px">
+          {Math.round(activityObject?.moving_time / 60)}min
+        </Text>
+
+        {/* Gear */}
+        <Text width="80px">{activityObject?.gear_id}</Text>
+
+        {/* Sport type */}
+        <Text width="60px">{activityObject?.sport_type}</Text>
+
+        {/* Elevation */}
+        <Text width="60px">{activityObject?.total_elevation_gain}m</Text>
       </Stack>
     </Box>
   );
 };
 
-const ActivityBox2Header = ({}: {}) => {
+const ActivityBoxHeader = ({}: {}) => {
   // TSX
   return (
     <Box
       key={"title"}
-      pr="10px"
-      pl="40px"
-      py="8px"
+      py="10px"
       position="sticky"
       top="0px"
-      color="#9C88AA"
+      color="gray"
       bgColor="#020a20"
       borderBottom="0.5px solid #333333"
+      fontSize="12px"
+      fontWeight="bold"
     >
       <Stack direction="row">
+        {/* Activity date */}
+        <Text width="100px" overflow="hidden" pr="5px">
+          Date
+        </Text>
+
         {/* Activity title */}
-        <Text
-          width="170px"
-          overflow="hidden"
-          fontWeight="bold"
-          fontSize="14px"
-          pr="5px"
-        >
+
+        <Text width="170px" overflow="hidden" pr="5px">
           Title
         </Text>
 
         {/* Pace */}
-        <Text width="80px" fontWeight="bold" fontSize="14px" pr="5px">
+
+        <Text width="80px" pr="5px">
           Pace
         </Text>
 
         {/* Distance*/}
-        <Text width="80px" fontWeight="bold" fontSize="14px" pr="5px">
+
+        <Text width="80px" pr="5px">
           Distance
         </Text>
 
         {/* Time */}
-        <Text width="80px" fontWeight="bold" fontSize="14px" pr="5px">
+
+        <Text width="80px" pr="5px">
           Time
         </Text>
 
         {/* Heart rate and suffer score */}
-        <Text width="80px" fontWeight="bold" fontSize="14px" pr="5px">
+
+        <Text width="80px" pr="5px">
           Avg HR
         </Text>
 
         {/* Suffer score */}
-        <Text width="60px" fontWeight="bold" fontSize="14px">
+        <Text width="60px" pr="5px">
           Effort
         </Text>
+
+        {/* Elapsed time */}
+        <Text width="80px" pr="5px">
+          Elapsed
+        </Text>
+
+        {/* Moving time */}
+        <Text width="80px" pr="5px">
+          Moving time
+        </Text>
+
+        {/* Gear */}
+        <Text width="80px" pr="5px">
+          Gear
+        </Text>
+
+        {/* Sport type */}
+        <Text width="60px" pr="5px">
+          Sport
+        </Text>
+
+        {/* Elevation */}
+        <Text width="60px">Elevation</Text>
       </Stack>
     </Box>
   );
