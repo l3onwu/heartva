@@ -130,6 +130,13 @@ const HRGraphPage = () => {
           border="1px solid #333333"
           borderRadius="10px"
           _hover={{ cursor: "pointer", borderColor: "#727272" }}
+          onClick={() => {
+            if (componentHeight === 180) {
+              setComponentHeight(600);
+            } else {
+              setComponentHeight(180);
+            }
+          }}
         >
           <HRGraph
             chartKey={chartKey}
