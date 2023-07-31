@@ -1,4 +1,4 @@
-import { Flex, Text, Stack, Select, Box } from "@chakra-ui/react";
+import { Flex, Text, Stack, Select, Box, Checkbox } from "@chakra-ui/react";
 import { FiMaximize2, FiMinimize2 } from "react-icons/fi";
 
 const GraphHeader = ({
@@ -56,7 +56,7 @@ const GraphHeader = ({
             setStatsYear(parseInt(e.target.value));
             setChartKey(chartKey + 1);
           }}
-          _hover={{ cursor: "pointer", borderColor: "white",  }}
+          _hover={{ cursor: "pointer", borderColor: "white" }}
         >
           {/*TODO: Make this dynamically span to user's first activity year*/}
           <option value={2023}>2023</option>
@@ -91,74 +91,49 @@ const GraphHeader = ({
       </Flex>
 
       {/*Graph axes chooser*/}
-      <Stack direction={"row"} spacing={2} align={"center"}>
-        {/*Axes one*/}
-        <Select
-          size="xs"
-          variant="outline"
-          defaultValue={axesOne}
-          color={"#333333"}
-          border={"1px solid #333333"}
-          borderRadius={"5px"}
+      <Stack direction={"row"} spacing={2} align={"center"} color={"gray"}>
+        <Checkbox
+          size="sm"
+          colorScheme="gray"
+          defaultChecked
+          value={"Heartrate"}
           onChange={(e) => {
-            setAxesOne(e.target.value);
-          }}
-          _hover={{
-            cursor: "pointer",
-            borderColor: "#727272",
-            color: "#727272",
+            if (axesOne === "heartRate") {
+              setAxesOne(null);
+            } else {
+              setAxesOne("heartRate");
+            }
           }}
         >
-          <option value="distance">Distance</option>
-          <option value="pace">Pace</option>
-          <option value="heartRate">Heartrate</option>
-        </Select>
-
-        {/*Axes two*/}
-        <Select
-          size="xs"
-          variant="outline"
-          defaultValue={axesTwo}
-          color={"#333333"}
-          border={"1px solid #333333"}
-          borderRadius={"5px"}
+          Heartrate
+        </Checkbox>
+        <Checkbox
+          size="sm"
+          colorScheme="gray"
+          defaultChecked
           onChange={(e) => {
-            setAxesTwo(e.target.value);
-          }}
-          _hover={{
-            cursor: "pointer",
-            borderColor: "#727272",
-            color: "#727272",
+            if (axesTwo === "pace") {
+              setAxesTwo(null);
+            } else {
+              setAxesTwo("pace");
+            }
           }}
         >
-          <option value="-">-</option>
-          <option value="distance">Distance</option>
-          <option value="pace">Pace</option>
-          <option value="heartRate">Heartrate</option>
-        </Select>
-
-        {/*Axes three*/}
-        <Select
-          size="xs"
-          variant="outline"
-          defaultValue={axesThree}
-          color={"#333333"}
-          border={"1px solid #333333"}
-          borderRadius={"5px"}
+          Pace
+        </Checkbox>
+        <Checkbox
+          size="sm"
+          colorScheme="gray"
           onChange={(e) => {
-            setAxesThree(e.target.value);
-          }}
-          _hover={{
-            cursor: "pointer",
-            borderColor: "#727272",
-            color: "#727272",
+            if (axesThree === "distance") {
+              setAxesThree(null);
+            } else {
+              setAxesThree("distance");
+            }
           }}
         >
-          <option value="-">-</option>
-          <option value="distance">Distance</option>
-          <option value="pace">Pace</option>
-          <option value="heartRate">Heartrate</option>
-        </Select>
+          Distance
+        </Checkbox>
       </Stack>
     </Flex>
   );
