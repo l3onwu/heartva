@@ -1,5 +1,6 @@
 import { Flex, Text, Stack, Select, Box, Checkbox } from "@chakra-ui/react";
 import { FiMaximize2, FiMinimize2 } from "react-icons/fi";
+import { useGlobalContext } from "../lib/context";
 
 const GraphHeader = ({
   chartKey,
@@ -28,6 +29,23 @@ const GraphHeader = ({
   setAxesThree: any;
   setStatsYear: any;
 }) => {
+  // Functions
+  const { userHook } = useGlobalContext();
+
+  // Dynamically generate user's activity years
+  const getActivityYears = () => {
+    const userCreatedAt = userHook?.userObject?.athlete?.created_at;
+    const earliestActivityYear = new Date(userCreatedAt).getFullYear();
+    const currentYear = new Date().getFullYear();
+    let years = [];
+    for (let i = earliestActivityYear; i <= currentYear; i++) {
+      years.push(i);
+    }
+    return years?.reverse();
+  };
+  const activityYears = getActivityYears();
+
+  // TSX
   return (
     <Flex justify="space-between" mb="15px">
       {/*Header + year*/}
@@ -58,13 +76,10 @@ const GraphHeader = ({
           }}
           _hover={{ cursor: "pointer", borderColor: "white" }}
         >
-          {/*TODO: Make this dynamically span to user's first activity year*/}
-          <option value={2023}>2023</option>
-          <option value={2022}>2022</option>
-          <option value={2021}>2021</option>
-          <option value={2020}>2020</option>
-          <option value={2019}>2019</option>
-          <option value={2018}>2018</option>
+          {/*Dynamically span to user's first activity year*/}
+          {activityYears?.map((year) => (
+            <option value={year}>{year}</option>
+          ))}
         </Select>
 
         {/*Maximize graph button*/}
