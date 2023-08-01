@@ -72,87 +72,141 @@ const ActivitiesHeader = ({
           </Button>
         </PopoverTrigger>
 
-        {/*Content*/}
-        <PopoverContent
-          width={"250px"}
-          height={"250px"}
-          overflow={"scroll"}
-          borderRadius={"5px"}
-        >
+        {/*Contents*/}
+        <PopoverContent borderRadius={"5px"} pb={"15px"}>
           <PopoverArrow />
           <PopoverBody>
-            <Stack direction={"column"}>
+            <Stack direction={"column"} spacing={"14px"}>
+              {/*HR filter*/}
+              <Stack direction={"column"}>
+                {/*Top text*/}
+                <Text fontSize={"14px"} fontWeight={"600"}>
+                  HR filter (bpm)
+                </Text>
+
+                {/*Min/Max*/}
+                <Stack direction={"row"}>
+                  <Stack direction={"row"}>
+                    <Text fontSize={"12px"}>Min</Text>
+                    <Input
+                      size={"xs"}
+                      value={megaFilter?.hr[0] || ""}
+                      onChange={(e) => {
+                        setMegaFilter({
+                          ...megaFilter,
+                          hr: [
+                            parseInt(e.target.value) || null,
+                            megaFilter?.hr[1],
+                          ],
+                        });
+                      }}
+                    />
+                  </Stack>
+                  <Stack direction={"row"}>
+                    <Text fontSize={"12px"}>Max</Text>
+                    <Input
+                      size={"xs"}
+                      value={megaFilter?.hr[1] || ""}
+                      onChange={(e) => {
+                        setMegaFilter({
+                          ...megaFilter,
+                          hr: [
+                            megaFilter?.hr[0],
+                            parseInt(e.target.value) || null,
+                          ],
+                        });
+                      }}
+                    />
+                  </Stack>
+                </Stack>
+              </Stack>
+
+              {/*Pace filter*/}
               {/*Top text*/}
-              <Text fontSize={"14px"} fontWeight={"600"}>
-                HR filter (bpm)
-              </Text>
+              <Stack direction={"column"}>
+                <Text fontSize={"14px"} fontWeight={"600"}>
+                  Pace filter (seconds/km)
+                </Text>
 
-              {/*HR*/}
-              <Stack direction={"row"}>
-                <Text fontSize={"12px"}>Min</Text>
-                <Input
-                  size={"sm"}
-                  value={megaFilter?.hr[0] || ""}
-                  onChange={(e) => {
-                    setMegaFilter({
-                      ...megaFilter,
-                      hr: [parseInt(e.target.value) || null, megaFilter?.hr[1]],
-                    });
-                  }}
-                />
-              </Stack>
-              <Stack direction={"row"}>
-                <Text fontSize={"12px"}>Max</Text>
-                <Input
-                  size={"sm"}
-                  value={megaFilter?.hr[1] || ""}
-                  onChange={(e) => {
-                    setMegaFilter({
-                      ...megaFilter,
-                      hr: [megaFilter?.hr[0], parseInt(e.target.value) || null],
-                    });
-                  }}
-                />
+                {/*Min/Max*/}
+                <Stack direction={"row"}>
+                  <Stack direction={"row"}>
+                    <Text fontSize={"12px"}>Min</Text>
+                    <Input
+                      size={"xs"}
+                      value={megaFilter?.pace[0] || ""}
+                      onChange={(e) => {
+                        setMegaFilter({
+                          ...megaFilter,
+                          pace: [
+                            parseInt(e.target.value) || null,
+                            megaFilter?.pace[1],
+                          ],
+                        });
+                      }}
+                    />
+                  </Stack>
+                  <Stack direction={"row"}>
+                    <Text fontSize={"12px"}>Max</Text>
+                    <Input
+                      size={"xs"}
+                      value={megaFilter?.pace[1] || ""}
+                      onChange={(e) => {
+                        setMegaFilter({
+                          ...megaFilter,
+                          pace: [
+                            megaFilter?.pace[0],
+                            parseInt(e.target.value) || null,
+                          ],
+                        });
+                      }}
+                    />
+                  </Stack>
+                </Stack>
               </Stack>
 
-              {/*HR*/}
-              {/*Top text*/}
-              <Text fontSize={"14px"} fontWeight={"600"}>
-                Pace filter (seconds/km)
-              </Text>
+              {/*Distance filter*/}
+              <Stack direction={"column"}>
+                {/*Top text*/}
+                <Text fontSize={"14px"} fontWeight={"600"}>
+                  Distance filter (km)
+                </Text>
 
-              {/*Min/Max*/}
-              <Stack direction={"row"}>
-                <Text fontSize={"12px"}>Min</Text>
-                <Input
-                  size={"sm"}
-                  value={megaFilter?.pace[0] || ""}
-                  onChange={(e) => {
-                    setMegaFilter({
-                      ...megaFilter,
-                      pace: [
-                        parseInt(e.target.value) || null,
-                        megaFilter?.pace[1],
-                      ],
-                    });
-                  }}
-                />
-              </Stack>
-              <Stack direction={"row"}>
-                <Text fontSize={"12px"}>Max</Text>
-                <Input
-                  size={"sm"}
-                  value={megaFilter?.pace[1] || ""}
-                  onChange={(e) => {
-                    setMegaFilter({
-                      ...megaFilter,
-                      pace: [
-                        megaFilter?.pace[0],
-                        parseInt(e.target.value) || null,
-                      ],
-                    });
-                  }}
-                />
+                {/*Min/Max*/}
+                <Stack direction={"row"}>
+                  <Stack direction={"row"}>
+                    <Text fontSize={"12px"}>Min</Text>
+                    <Input
+                      size={"xs"}
+                      value={megaFilter?.distance[0] || ""}
+                      onChange={(e) => {
+                        setMegaFilter({
+                          ...megaFilter,
+                          distance: [
+                            parseInt(e.target.value) || null,
+                            megaFilter?.distance[1],
+                          ],
+                        });
+                      }}
+                    />
+                  </Stack>
+                  <Stack direction={"row"}>
+                    <Text fontSize={"12px"}>Max</Text>
+                    <Input
+                      size={"xs"}
+                      value={megaFilter?.distance[1] || ""}
+                      onChange={(e) => {
+                        setMegaFilter({
+                          ...megaFilter,
+                          distance: [
+                            megaFilter?.distance[0],
+                            parseInt(e.target.value) || null,
+                          ],
+                        });
+                      }}
+                    />
+                  </Stack>
+                </Stack>
               </Stack>
             </Stack>
           </PopoverBody>

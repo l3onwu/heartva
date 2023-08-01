@@ -98,6 +98,16 @@ const HRGraphPage = () => {
     );
   });
 
+  // Filter distance
+  filteredActivities = filteredActivities.filter((act) => {
+    return (
+      (act?.distance / 1000 >= megaFilter?.distance[0] ||
+        megaFilter?.distance[0] === null) &&
+      (act?.distance / 1000 <= megaFilter?.distance[1] ||
+        megaFilter?.distance[1] === null)
+    );
+  });
+
   // TSX
   return (
     <Box width="100%">
