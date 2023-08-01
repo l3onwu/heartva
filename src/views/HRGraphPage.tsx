@@ -167,6 +167,7 @@ const HRGraphPage = () => {
           <ActivitiesHeader
             megaFilter={megaFilter}
             setMegaFilter={setMegaFilter}
+            numberActivities={filteredActivities?.length}
           />
 
           {/* Activities List */}

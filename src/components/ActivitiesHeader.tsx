@@ -18,9 +18,11 @@ import { IoMdOptions } from "react-icons/io";
 const ActivitiesHeader = ({
   megaFilter,
   setMegaFilter,
+  numberActivities,
 }: {
   megaFilter: MegaFilterType;
   setMegaFilter: any;
+  numberActivities: number;
 }) => {
   const { isOpen, onToggle, onClose } = useDisclosure();
 
@@ -43,7 +45,7 @@ const ActivitiesHeader = ({
         mb="10px"
         mr={"10px"}
       >
-        Activities
+        Activities ({numberActivities})
       </Text>
 
       {/*Filter popover*/}
