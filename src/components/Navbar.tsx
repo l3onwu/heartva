@@ -42,43 +42,67 @@ const Navbar = () => {
       </Flex>
 
       {/* Right side */}
-      <Stack direction="row" align="center" justify={"baseline"}>
-        {/*Name and profile*/}
-        <Stack
-          direction={"row"}
-          align="center"
-          spacing={"5px"}
-          border={"1px solid #333333"}
-          borderRadius={"5px"}
-          py={"5px"}
-          px={"10px"}
-          _hover={{ cursor: "pointer", borderColor: "#727272" }}
-        >
-          <Box mr={"10px"}>
-            <img
-              src={userHook?.userObject?.athlete?.profile}
-              alt="Profile"
-              style={{ width: "30px", height: "30px", borderRadius: "50%" }}
-            />
-          </Box>
-          <Text color="white" fontSize="12px" fontWeight="600">
-            {userHook?.userObject?.athlete?.firstname}{" "}
-            {userHook?.userObject?.athlete?.lastname}
-          </Text>
+      {userHook?.demoMode ? (
+        <Stack direction="row" align="center" justify={"baseline"}>
+          <Stack direction="row" align="center" justify={"baseline"}>
+            <Text color="white" fontSize="12px" fontWeight="600">
+              Demo Mode
+            </Text>
+            <Text color="white" fontSize="12px" fontWeight="400">
+              | Athlete: Leon Wu
+            </Text>
+          </Stack>
+          <Button
+            color="grey"
+            size="sm"
+            style={{ backgroundColor: "transparent", fontWeight: "500" }}
+            _hover={{ color: "white" }}
+            onClick={() => {
+              userHook?.setDemoMode(false);
+            }}
+          >
+            Back home
+          </Button>
         </Stack>
+      ) : (
+        <Stack direction="row" align="center" justify={"baseline"}>
+          {/*Name and profile*/}
+          <Stack
+            direction={"row"}
+            align="center"
+            spacing={"5px"}
+            border={"1px solid #333333"}
+            borderRadius={"5px"}
+            py={"5px"}
+            px={"10px"}
+            _hover={{ cursor: "pointer", borderColor: "#727272" }}
+          >
+            <Box mr={"10px"}>
+              <img
+                src={userHook?.userObject?.athlete?.profile}
+                alt="Profile"
+                style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+              />
+            </Box>
+            <Text color="white" fontSize="12px" fontWeight="600">
+              {userHook?.userObject?.athlete?.firstname}{" "}
+              {userHook?.userObject?.athlete?.lastname}
+            </Text>
+          </Stack>
 
-        <Button
-          color="grey"
-          size="sm"
-          style={{ backgroundColor: "transparent", fontWeight: "500" }}
-          _hover={{ color: "white" }}
-          onClick={() => {
-            signOutStrava();
-          }}
-        >
-          Sign out
-        </Button>
-      </Stack>
+          <Button
+            color="grey"
+            size="sm"
+            style={{ backgroundColor: "transparent", fontWeight: "500" }}
+            _hover={{ color: "white" }}
+            onClick={() => {
+              signOutStrava();
+            }}
+          >
+            Sign out
+          </Button>
+        </Stack>
+      )}
     </Flex>
   );
 };

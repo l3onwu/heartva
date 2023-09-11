@@ -12,6 +12,8 @@ export interface UserHookType {
   setUserLoading: Function;
   userObject: UserType;
   setUserObject: Function;
+  demoMode: boolean;
+  setDemoMode: Function;
   activities: ActivityShortType[];
   setActivities: Function;
   activitiesLoading: boolean;
@@ -25,9 +27,10 @@ export default function useUserSettings() {
   const [firstUpdate, setFirstUpdate] = useState<boolean>(true);
   const [userLoading, setUserLoading] = useState<boolean>(true);
   const [userObject, setUserObject] = useState<UserType | null>(null);
+  const [demoMode, setDemoMode] = useState<boolean>(false);
 
   const [activities, setActivities] = useState<ActivityShortType[]>([]);
-  const [activitiesLoading, setActivitiesLoading] = useState(true);
+  const [activitiesLoading, setActivitiesLoading] = useState(false);
   const [statsYear, setStatsYear] = useState<number>(new Date().getFullYear());
 
   // Refresh token
@@ -148,11 +151,16 @@ export default function useUserSettings() {
         setActivitiesLoading(false);
       } else {
         // If env is prod, use real data
-        if (!userObject?.athlete) return;
+        // Ensure user object or in demo mode
+        if (!userObject?.athlete && !demoMode) return;
+        const athleteDemoReal = demoMode
+          ? // @ts-ignore
+            parseInt(process.env.REACT_APP_IDOL_ID)
+          : userObject?.athlete?.id;
 
         // Now RETRIEVE activities by set year
         db.collection("activities")
-          .where("athlete.id", "==", userObject?.athlete?.id)
+          .where("athlete.id", "==", athleteDemoReal)
           .where("start_date", ">=", statsYear.toString())
           .where("start_date", "<", (statsYear + 1).toString())
           .orderBy("start_date", "desc")
@@ -178,8 +186,11 @@ export default function useUserSettings() {
 
     if (userObject) {
       combineActivities();
+    } else if (demoMode) {
+      setActivitiesLoading(true);
+      getActivities();
     }
-  }, [userObject, statsYear]);
+  }, [userObject, statsYear, demoMode]);
 
   // console.log(activities)
 
@@ -190,6 +201,8 @@ export default function useUserSettings() {
     setUserLoading,
     userObject,
     setUserObject,
+    demoMode,
+    setDemoMode,
     activities,
     setActivities,
     activitiesLoading,

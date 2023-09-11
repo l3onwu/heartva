@@ -22,7 +22,7 @@ export const App = () => {
           <Toaster/>
           <Box width="90%">
             {/* Navbar */}
-            {userHook?.userObject && <Navbar />}
+            {(userHook?.userObject || userHook?.demoMode) && <Navbar />}
 
             {/* Routes */}
             <Routes>

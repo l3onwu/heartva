@@ -78,7 +78,7 @@ export default function useInitialDownload(
 
       // If user id does not exist, or downloadDate is not a value, begin download data sequence
       // Get athlete stats
-      if (!usernameValue && !usernameLoading && !usernameError) {
+      if (!usernameValue && !usernameLoading && !usernameError && !userHook?.demoMode) {
         setModalOpen(true);
         // 2 Download user data
         const getUserData = async () => {

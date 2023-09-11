@@ -34,7 +34,9 @@ const GraphHeader = ({
 
   // Dynamically generate user's activity years
   const getActivityYears = () => {
-    const userCreatedAt = userHook?.userObject?.athlete?.created_at;
+    const userCreatedAt = userHook?.demoMode
+      ? process.env.REACT_APP_CREATED_AT
+      : userHook?.userObject?.athlete?.created_at;
     const earliestActivityYear = new Date(userCreatedAt).getFullYear();
     const currentYear = new Date().getFullYear();
     let years = [];
