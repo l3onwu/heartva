@@ -33,7 +33,7 @@ const HeroPage = () => {
             fontWeight="bold"
             borderRadius="5px"
             onClick={() => userHook?.setDemoMode(true)}
-            _hover={{}}
+            _hover={{backgroundColor: "#fa4c75"}}
           >
             View demo
           </Link>
