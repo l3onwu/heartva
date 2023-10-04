@@ -76,6 +76,12 @@ const HRGraphPage = () => {
     );
   });
 
+  // Filter by activity type
+  // TODO: Allow selecting of activity types
+  filteredActivities = filteredActivities.filter((act) => {
+    return act?.sport_type === "Run";
+  });
+
   // Filter pace
   filteredActivities = filteredActivities.filter((act) => {
     const secondsPace = calculatePaceFromDistanceAndTime(
