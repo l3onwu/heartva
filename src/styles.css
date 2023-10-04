@@ -27,6 +27,6 @@ html {
 }
 
 .logo-text:hover {
-  color: #ffffff;
-  transition: color 100ms ease-in;
+  /*color: #ffffff;*/
+  /*transition: color 100ms ease-in;*/
 }
