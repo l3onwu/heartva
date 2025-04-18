@@ -29,7 +29,7 @@ const HeroPage = () => {
             color="white"
             py="5px"
             px="10px"
-            mb="12px"
+            mb="25px"
             fontWeight="bold"
             borderRadius="5px"
             onClick={() => {
@@ -49,10 +49,11 @@ const HeroPage = () => {
             px="10px"
             fontWeight="bold"
             borderRadius="5px"
-            href={`https://www.strava.com/oauth/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&redirect_uri=${process.env.REACT_APP_BASEURL}/token-exchange&scope=activity:read`}
+            textAlign={"center"}
+            // href={`https://www.strava.com/oauth/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&redirect_uri=${process.env.REACT_APP_BASEURL}/token-exchange&scope=activity:read`}
             _hover={{ color: "whitesmoke" }}
           >
-            Or visualize your own workouts
+            Visualising own workouts disabled due to Strava API changes
           </Link>
         </Flex>
       </Flex>
