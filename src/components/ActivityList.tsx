@@ -1,4 +1,4 @@
-import { Box, Text, Spinner, Stack } from "@chakra-ui/react";
+import { Box, Text, Spinner, Stack, Flex } from "@chakra-ui/react";
 import { useGlobalContext } from "../lib/context";
 import { ActivityShortType } from "../lib/types";
 import {
@@ -74,15 +74,15 @@ const ActivityBox = ({
       color="gray"
       fontSize="12px"
     >
-      <Stack direction="row">
+      <Flex flexDirection="row" justifyContent={"space-between"}>
         {/* Activity date */}
         <Text width="100px" overflow="hidden" pr="5px">
           {new Date(activityObject?.start_date_local).toLocaleDateString()}
         </Text>
 
         {/* Activity title */}
-        <Text width="170px" overflow="hidden" pr="5px">
-          {clipText(activityObject?.name, 18)}
+        <Text width="250px" overflow="hidden" pr="5px">
+          {clipText(activityObject?.name, 35)}
         </Text>
 
         {/* Pace */}
@@ -127,19 +127,19 @@ const ActivityBox = ({
         </Text>
 
         {/* Moving time */}
-        <Text width="80px">
+        {/* <Text width="80px">
           {Math.round(activityObject?.moving_time / 60)}min
-        </Text>
+        </Text> */}
 
         {/* Gear */}
-        <Text width="80px">{activityObject?.gear_id}</Text>
+        {/* <Text width="80px">{activityObject?.gear_id}</Text> */}
 
         {/* Sport type */}
         <Text width="60px">{activityObject?.sport_type}</Text>
 
         {/* Elevation */}
         <Text width="60px">{activityObject?.total_elevation_gain}m</Text>
-      </Stack>
+      </Flex>
     </Box>
   );
 };
@@ -158,7 +158,7 @@ const ActivityBoxHeader = ({}: {}) => {
       fontSize="12px"
       fontWeight="bold"
     >
-      <Stack direction="row">
+      <Flex flexDirection="row" justifyContent={"space-between"}>
         {/* Activity date */}
         <Text width="100px" overflow="hidden" pr="5px">
           Date
@@ -166,7 +166,7 @@ const ActivityBoxHeader = ({}: {}) => {
 
         {/* Activity title */}
 
-        <Text width="170px" overflow="hidden" pr="5px">
+        <Text width="250px" overflow="hidden" pr="5px">
           Title
         </Text>
 
@@ -205,14 +205,14 @@ const ActivityBoxHeader = ({}: {}) => {
         </Text>
 
         {/* Moving time */}
-        <Text width="80px" pr="5px">
+        {/* <Text width="80px" pr="5px">
           Moving time
-        </Text>
+        </Text> */}
 
         {/* Gear */}
-        <Text width="80px" pr="5px">
+        {/* <Text width="80px" pr="5px">
           Gear
-        </Text>
+        </Text> */}
 
         {/* Sport type */}
         <Text width="60px" pr="5px">
@@ -221,7 +221,7 @@ const ActivityBoxHeader = ({}: {}) => {
 
         {/* Elevation */}
         <Text width="60px">Elevation</Text>
-      </Stack>
+      </Flex>
     </Box>
   );
 };
