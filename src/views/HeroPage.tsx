@@ -32,8 +32,11 @@ const HeroPage = () => {
             mb="12px"
             fontWeight="bold"
             borderRadius="5px"
-            onClick={() => userHook?.setDemoMode(true)}
-            _hover={{backgroundColor: "#fa4c75"}}
+            onClick={() => {
+              userHook?.setDemoMode(true);
+              userHook?.setStatsYear(2023);
+            }}
+            _hover={{ backgroundColor: "#fa4c75" }}
           >
             View demo
           </Link>
